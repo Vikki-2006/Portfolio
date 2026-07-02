@@ -1,0 +1,89 @@
+import { Briefcase, Calendar, CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+interface InternshipDetails {
+  role: string;
+  company: string;
+  duration: string;
+  points: string[];
+}
+
+const internshipData: InternshipDetails = {
+  role: 'Full Stack Development Intern',
+  company: 'VDart Academy',
+  duration: 'June 2025 - July 2025',
+  points: [
+    'Developed full-stack web application components using React and FastAPI following industry practices.',
+    'Integrated REST APIs with backend services and structured relational databases for scalable data access.',
+    'Applied agile workflows, code reviews, and collaborative development practices with mentors.'
+  ]
+};
+
+export default function Experience() {
+  return (
+    <section id="experience" className="py-20 bg-transparent relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <div className="max-w-3xl mb-16 text-left">
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-violet-400">Professional Path</h2>
+          <p className="mt-2 text-3xl font-bold text-white sm:text-4xl">Internship Experience</p>
+          <div className="w-16 h-1 bg-gradient-to-r from-violet-600 to-red-500 rounded-full mt-4"></div>
+        </div>
+
+        {/* Timeline Container */}
+        <div className="relative max-w-3xl mx-auto lg:mx-0">
+          
+          {/* Vertical Path Line */}
+          <div className="absolute left-4 top-2 bottom-2 w-0.5 timeline-line opacity-30"></div>
+
+          {/* Timeline Node */}
+          <div className="relative pl-12 pb-4">
+            
+            {/* Timeline Node Icon Pin */}
+            <div className="absolute left-0 top-1.5 w-8.5 h-8.5 rounded-full bg-zinc-950 border-2 border-violet-500 flex items-center justify-center text-violet-500 shadow-md shadow-violet-500/20 z-10">
+              <Briefcase className="w-4 h-4" />
+            </div>
+
+            {/* Internship Card */}
+            <motion.div 
+              initial={{ opacity: 0, x: -15 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="glass-panel rounded-2xl p-6 sm:p-8 border border-zinc-900 shadow-lg relative overflow-hidden"
+            >
+              {/* Subtle background glow */}
+              <div className="absolute -top-16 -right-16 w-32 h-32 bg-red-500/5 rounded-full blur-2xl pointer-events-none"></div>
+
+              {/* Role & Duration Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-zinc-900 pb-4 mb-6">
+                <div>
+                  <h3 className="text-xl font-bold text-white tracking-wide">{internshipData.role}</h3>
+                  <p className="text-gradient font-bold text-base mt-1">{internshipData.company}</p>
+                </div>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-semibold text-zinc-400 self-start sm:self-center">
+                  <Calendar className="w-3.5 h-3.5 text-zinc-500" />
+                  {internshipData.duration}
+                </div>
+              </div>
+
+              {/* Bullet Points */}
+              <ul className="space-y-4 text-zinc-400 text-sm sm:text-base leading-relaxed">
+                {internshipData.points.map((point, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-violet-500 mt-0.5 flex-shrink-0" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+
+            </motion.div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+}
