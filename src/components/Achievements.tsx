@@ -1,12 +1,15 @@
-import { Trophy, Code2, Award, Sparkles } from 'lucide-react';
+import { Trophy } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface Achievement {
   id: string;
   title: string;
   platform: string;
-  icon: React.ComponentType<{ className?: string }>;
+  subtitle?: string;
+  icon: string | React.ComponentType<{ className?: string }>;
   bullets: string[];
+  link?: string;
+  logoHoverStyles?: string;
 }
 
 const achievementsData: Achievement[] = [
@@ -14,33 +17,41 @@ const achievementsData: Achievement[] = [
     id: 'lc',
     title: 'LeetCode Problem Solving',
     platform: 'LeetCode',
-    icon: Code2,
+    icon: '/logos/leetcode.png',
     bullets: [
-      'Solved 150+ coding problems focusing on key algorithmic structures.',
-      'Developed strong skills in Dynamic Programming, Graph Traversal Algorithms, Tree Structures, Backtracking, and Binary Search.'
-    ]
+      'Solved 300+ algorithmic and data structure problems.',
+      'Strong proficiency in Data Structures, Algorithms, Dynamic Programming, Graphs, Trees, Binary Search, and Backtracking.',
+      'Consistently improve problem-solving skills through competitive programming and daily practice.'
+    ],
+    link: 'https://leetcode.com/u/Vikki-2006/',
+    logoHoverStyles: 'group-hover:scale-[1.05] group-hover:bg-[#FFA116]/10 group-hover:border-[#FFA116]/20 group-hover:shadow-[0_0_12px_rgba(255,161,22,0.3)]'
   },
   {
     id: 'cc',
-    title: 'Competitive Contest Records',
+    title: 'CodeChef Competitive Programming',
     platform: 'CodeChef',
-    icon: Award,
+    icon: '/logos/codechef.png',
     bullets: [
-      'Attained a high DSA Skill Rating of 1702.',
-      'Achieved an official Contest Rating of 1453 (Division 3).',
-      'Earned 2★ Rating classification and passed the Python Skill Test at 2★.'
-    ]
+      'CodeChef Rating: 1616 (Division 2, ★★★ 3-Star)',
+      'Highest Rating: 1616',
+      'DSA Rating: 2023',
+      'Active Competitive Programmer'
+    ],
+    link: 'https://www.codechef.com/users/vikki2006',
+    logoHoverStyles: 'group-hover:scale-[1.05] group-hover:bg-[#D48D3B]/10 group-hover:border-[#D48D3B]/20 group-hover:shadow-[0_0_12px_rgba(212,141,59,0.3)]'
   },
   {
     id: 'hr',
     title: 'Language Skill Stars',
     platform: 'HackerRank',
-    icon: Sparkles,
+    icon: '/logos/hackerrank.png',
     bullets: [
       'Earned 5★ Gold Badge in Python.',
       'Achieved 4★ Silver Badge in C++.',
       'Secured 4★ Badge in general Problem Solving and 2★ Badge in C.'
-    ]
+    ],
+    link: 'https://www.hackerrank.com/profile/Vikki_2006',
+    logoHoverStyles: 'group-hover:scale-[1.05] group-hover:bg-[#2EC866]/10 group-hover:border-[#2EC866]/20 group-hover:shadow-[0_0_12px_rgba(46,200,102,0.3)]'
   },
   {
     id: 'ha',
@@ -50,7 +61,8 @@ const achievementsData: Achievement[] = [
     bullets: [
       'Won appreciation and formal recognition for technical projects at the TEXPERIA 2026 Hackathon.',
       'Developed and pitch-demonstrated solutions alongside dynamic team structures.'
-    ]
+    ],
+    logoHoverStyles: 'group-hover:scale-[1.05] group-hover:bg-violet-600/10 group-hover:border-violet-500/20 group-hover:shadow-[0_0_12px_rgba(139,92,246,0.3)]'
   }
 ];
 
@@ -60,14 +72,13 @@ export default function Achievements() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 text-left">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-violet-400">Milestones</h2>
-          <p className="mt-2 text-3xl font-bold text-white sm:text-4xl">Achievements & Competitive Records</p>
-          <div className="w-16 h-1 bg-gradient-to-r from-violet-600 to-red-500 rounded-full mt-4"></div>
+        <div className="max-w-3xl mb-12 text-left">
+          <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)]">Milestones</h2>
+          <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl tracking-tight">Achievements & Competitive Records</p>
+          <div className="section-underline"></div>
         </div>
 
-        {/* Achievements Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {achievementsData.map((item, index) => {
             const Icon = item.icon;
             return (
@@ -77,39 +88,90 @@ export default function Achievements() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="glass-panel rounded-2xl p-6 sm:p-8 border border-zinc-900 shadow-md relative overflow-hidden group hover:border-zinc-800 transition-all duration-300"
+                className="glass-panel portfolio-card rounded-2xl p-4.5 sm:p-5 border border-zinc-800 shadow-md relative overflow-hidden group hover:border-zinc-800 transition-all duration-300 flex flex-col justify-start h-full"
               >
                 {/* Background soft color glow */}
                 <div className="absolute -top-16 -right-16 w-32 h-32 bg-violet-600/5 rounded-full blur-2xl pointer-events-none transition-all group-hover:bg-violet-600/10"></div>
                 
-                <div className="flex items-start gap-4">
-                  {/* Platform Icon */}
-                  <div className="p-3 rounded-xl bg-zinc-900 border border-zinc-800 text-violet-500 group-hover:text-white group-hover:bg-gradient-to-br group-hover:from-violet-600 group-hover:to-red-500 group-hover:border-transparent transition-all duration-300">
-                    <Icon className="w-6 h-6" />
-                  </div>
+                <div className="flex items-start gap-4 relative z-10 h-full w-full">
+                  {/* Platform Icon Container */}
+                  {item.link ? (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`w-11 h-11 rounded-xl bg-zinc-900 border border-zinc-800 transition-all duration-300 flex-shrink-0 cursor-pointer flex items-center justify-center ${item.logoHoverStyles || 'group-hover:scale-[1.05]'}`}
+                    >
+                      {typeof Icon === 'string' ? (
+                        <img 
+                          src={Icon} 
+                          alt={`${item.platform} Logo`} 
+                          className="w-[26px] h-[26px] object-contain select-none" 
+                        />
+                      ) : (
+                        <Icon className="w-6 h-6 text-violet-500" />
+                      )}
+                    </a>
+                  ) : (
+                    <div className={`w-11 h-11 rounded-xl bg-zinc-900 border border-zinc-800 transition-all duration-300 flex-shrink-0 flex items-center justify-center ${item.logoHoverStyles || 'group-hover:scale-[1.05]'}`}>
+                      {typeof Icon === 'string' ? (
+                        <img 
+                          src={Icon} 
+                          alt={`${item.platform} Logo`} 
+                          className="w-[26px] h-[26px] object-contain select-none" 
+                        />
+                      ) : (
+                        <Icon className="w-6 h-6 text-violet-500" />
+                      )}
+                    </div>
+                  )}
 
-                  <div className="space-y-4 flex-grow">
+                  <div className="flex-grow flex flex-col justify-between h-full">
                     <div>
                       {/* Platform label */}
-                      <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">{item.platform}</span>
+                      <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider block">{item.platform}</span>
                       {/* Achievement title */}
-                      <h3 className="text-lg font-bold text-white tracking-wide mt-1 group-hover:text-violet-400 transition-colors">
-                        {item.title}
-                      </h3>
+                      {item.link ? (
+                        <a 
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[17px] font-bold text-zinc-100 tracking-wide mt-0.5 group-hover:text-[var(--purple)] transition-colors hover:underline block"
+                        >
+                          {item.title}
+                        </a>
+                      ) : (
+                        <h3 className="text-[17px] font-bold text-zinc-100 tracking-wide mt-0.5 block">
+                          {item.title}
+                        </h3>
+                      )}
                     </div>
 
                     {/* Description bullet points */}
-                    <ul className="space-y-3 text-zinc-400 text-xs sm:text-sm leading-relaxed border-t border-zinc-900 pt-4">
+                    <ul className="space-y-2 text-zinc-300 text-xs sm:text-[13px] leading-relaxed border-t border-zinc-800 pt-3 mt-3 font-medium">
                       {item.bullets.map((bullet, bIndex) => (
-                        <li key={bIndex} className="flex items-start gap-2.5">
+                        <li key={bIndex} className="flex items-start gap-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-violet-500 mt-1.5 flex-shrink-0"></span>
                           <span>{bullet}</span>
                         </li>
                       ))}
                     </ul>
+
+                    {/* View Profile Button at the bottom */}
+                    {item.link && (
+                      <div className="mt-4 pt-3 border-t border-zinc-800/60 flex items-center justify-end">
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[11px] font-bold text-[var(--purple)] hover:text-[var(--pink)] hover:underline transition-colors flex items-center gap-1"
+                        >
+                          View Profile ↗
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </div>
-
               </motion.div>
             );
           })}

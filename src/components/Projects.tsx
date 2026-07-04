@@ -187,9 +187,9 @@ export default function Projects() {
         
         {/* Section Header */}
         <div className="max-w-3xl mb-16 text-left">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-violet-400">My Creations</h2>
-          <p className="mt-2 text-3xl font-bold text-white sm:text-4xl">Featured Projects</p>
-          <div className="w-16 h-1 bg-gradient-to-r from-violet-600 to-red-500 rounded-full mt-4"></div>
+          <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)]">My Creations</h2>
+          <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl tracking-tight">Featured Projects</p>
+          <div className="section-underline"></div>
         </div>
 
         {/* Projects Grid */}
@@ -201,7 +201,7 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="glass-panel rounded-2xl overflow-hidden border border-zinc-900 flex flex-col justify-between shadow-lg relative group transition-all"
+              className="glass-panel portfolio-card rounded-2xl overflow-hidden border border-zinc-800 flex flex-col justify-between shadow-lg relative group transition-all"
             >
               
               <div>
@@ -213,12 +213,12 @@ export default function Projects() {
                   <span className="text-[10px] font-bold text-violet-500 uppercase tracking-widest block mb-2">{project.category}</span>
                   
                   {/* Project Title */}
-                  <h3 className="text-lg font-bold text-white leading-snug group-hover:text-violet-400 transition-colors duration-300">
+                  <h3 className="text-lg font-bold text-zinc-100 leading-snug group-hover:text-violet-400 transition-colors duration-300">
                     {project.title}
                   </h3>
 
                   {/* Bullet points description */}
-                  <ul className="mt-4 space-y-2 text-zinc-400 text-xs sm:text-sm leading-relaxed border-t border-zinc-900/80 pt-4">
+                  <ul className="mt-4 space-y-2 text-zinc-300 text-xs sm:text-sm leading-relaxed border-t border-zinc-800/80 pt-4 font-medium">
                     {project.description.map((bullet, bIndex) => (
                       <li key={bIndex} className="flex items-start gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-violet-600 mt-1.5 flex-shrink-0"></span>
@@ -237,7 +237,7 @@ export default function Projects() {
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-[10px] font-semibold text-zinc-400"
+                      className="px-2 py-1 rounded bg-[var(--tag-bg)] border border-[var(--tag-border)] text-[10px] font-bold text-[var(--tag-text)]"
                     >
                       {tag}
                     </span>
@@ -250,9 +250,9 @@ export default function Projects() {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl border border-zinc-800 bg-zinc-900/30 text-xs font-semibold text-zinc-300 hover:bg-zinc-900 hover:text-white transition-all hover:scale-[1.02]"
+                    className="portfolio-btn-secondary flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl border border-zinc-800 bg-zinc-900/30 text-xs font-semibold text-zinc-300 hover:bg-zinc-900 hover:text-white transition-all hover:scale-[1.02]"
                   >
-                    <GithubIcon className="w-4 h-4" />
+                    <GithubIcon className="w-4.5 h-4.5" />
                     Codebase
                   </a>
                   
@@ -261,7 +261,7 @@ export default function Projects() {
                       href={project.demoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-violet-600 to-red-500 shadow-md shadow-violet-600/5 hover:scale-[1.02] transition-all"
+                      className="portfolio-btn-primary flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-violet-600 to-red-500 shadow-md shadow-violet-600/5 hover:scale-[1.02] transition-all"
                     >
                       <ExternalLink className="w-4 h-4" />
                       Live Demo
@@ -269,10 +269,10 @@ export default function Projects() {
                   ) : (
                     <button
                       disabled
-                      className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl border border-zinc-900/40 bg-zinc-950 text-xs font-semibold text-zinc-600 cursor-not-allowed select-none"
+                      className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--tag-bg)] text-xs font-semibold text-zinc-500 cursor-not-allowed select-none"
                       title="Live deployment is not active"
                     >
-                      <ExternalLink className="w-4 h-4 text-zinc-700" />
+                      <ExternalLink className="w-4 h-4 text-zinc-500" />
                       Live Demo
                     </button>
                   )}

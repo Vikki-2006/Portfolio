@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 interface TechItem {
   name: string;
@@ -203,6 +204,8 @@ const skillsData: SkillCategory[] = [
 ];
 
 function SkillCard({ category }: { category: SkillCategory }) {
+  const { theme } = useTheme();
+
   // Bypassing React rendering cycles for mouse-follow movements by writing directly to CSS custom properties
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -213,12 +216,9 @@ function SkillCard({ category }: { category: SkillCategory }) {
   };
 
   return (
-    <motion.div
+    <div
       onMouseMove={handleMouseMove}
-      whileHover={{ y: -6, scale: 1.005 }}
-      animate={{ y: 0, scale: 1 }}
-      transition={{ duration: 0.18, ease: [0.25, 1, 0.5, 1] }}
-      className="relative p-[2px] rounded-[24px] transition-all duration-300 select-none cursor-pointer h-full group bg-[rgba(255,255,255,0.08)] hover:bg-gradient-to-br hover:from-[#7C3AED] hover:to-[#EC4899] hover:active-gradient-border hover:shadow-[0_12px_40px_rgba(0,0,0,0.35),0_0_35px_rgba(124,58,237,0.18)]"
+      className="portfolio-card relative p-[2px] rounded-[24px] select-none cursor-pointer h-full group bg-[rgba(255,255,255,0.08)] hover:bg-gradient-to-br hover:from-[#7C3AED] hover:to-[#EC4899] hover:active-gradient-border hover:shadow-[0_12px_40px_rgba(0,0,0,0.35),0_0_35px_rgba(124,58,237,0.18)]"
       style={{
         willChange: "transform, box-shadow",
         backfaceVisibility: "hidden"
@@ -237,19 +237,21 @@ function SkillCard({ category }: { category: SkillCategory }) {
 
       {/* Inner Card Container: Matches the requested dark glass backdrop exactly with NO background changes on active */}
       <div 
-        className="relative rounded-[22.5px] backdrop-blur-2xl p-6 sm:p-8 h-full flex flex-col justify-between z-10 overflow-hidden transition-all duration-300 border border-white/5 bg-[rgba(18,18,24,0.78)] hover:bg-[rgba(24,24,32,0.82)]"
+        className="relative rounded-[22.5px] backdrop-blur-2xl p-6 sm:p-8 h-full flex flex-col justify-between z-10 overflow-hidden transition-all duration-300 border border-[var(--border-color)] bg-[var(--card-bg)] hover:bg-[var(--card-hover-bg)]"
       >
         
         {/* Mouse Follow Glow Overlay - GPU rendered using CSS custom properties */}
         <div 
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0"
           style={{
-            background: `radial-gradient(300px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), ${category.glowColor}, transparent 80%)`
+            background: theme === 'dark'
+              ? `radial-gradient(300px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), ${category.glowColor}, transparent 80%)`
+              : `radial-gradient(300px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(124, 58, 237, 0.04), transparent 80%)`
           }}
         />
 
         {/* Abstract floating particles inside card */}
-        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-30 group-hover:opacity-60 transition-opacity duration-300">
+        <div className={`absolute inset-0 pointer-events-none z-0 overflow-hidden transition-opacity duration-300 ${theme === 'dark' ? 'opacity-30 group-hover:opacity-60' : 'opacity-[0.08] group-hover:opacity-[0.15]'}`}>
           <motion.div 
             animate={{
               y: [0, -12, 0],
@@ -257,7 +259,7 @@ function SkillCard({ category }: { category: SkillCategory }) {
               opacity: [0.15, 0.45, 0.15]
             }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-[25%] left-[35%] w-1.5 h-1.5 rounded-full bg-violet-400 blur-[0.5px]"
+            className={`absolute top-[25%] left-[35%] w-1.5 h-1.5 rounded-full blur-[0.5px] ${theme === 'dark' ? 'bg-violet-400' : 'bg-zinc-400'}`}
           />
           <motion.div 
             animate={{
@@ -266,7 +268,7 @@ function SkillCard({ category }: { category: SkillCategory }) {
               opacity: [0.1, 0.4, 0.1]
             }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            className="absolute bottom-[35%] right-[25%] w-[2px] h-[2px] rounded-full bg-pink-400 blur-[0.5px]"
+            className={`absolute bottom-[35%] right-[25%] w-[2px] h-[2px] rounded-full blur-[0.5px] ${theme === 'dark' ? 'bg-pink-400' : 'bg-zinc-400'}`}
           />
           <motion.div 
             animate={{
@@ -275,7 +277,7 @@ function SkillCard({ category }: { category: SkillCategory }) {
               opacity: [0.2, 0.5, 0.2]
             }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute top-[65%] left-[20%] w-1.5 h-1.5 rounded-full bg-indigo-400 blur-[0.5px]"
+            className={`absolute top-[65%] left-[20%] w-1.5 h-1.5 rounded-full blur-[0.5px] ${theme === 'dark' ? 'bg-indigo-400' : 'bg-zinc-400'}`}
           />
         </div>
 
@@ -288,13 +290,13 @@ function SkillCard({ category }: { category: SkillCategory }) {
             <div className="flex items-center gap-4.5">
               <div className="w-[4px] h-11 rounded-full bg-gradient-to-b from-violet-500 to-pink-500 flex-shrink-0" />
               <div>
-                <h3 className="text-lg sm:text-xl font-bold text-white leading-tight font-sans">{category.title}</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-zinc-100 leading-tight font-sans">{category.title}</h3>
                 <p className="text-zinc-500 text-xs mt-1.5 uppercase tracking-wider font-semibold font-sans">{category.subtitle}</p>
               </div>
             </div>
 
             {/* Right: Quick Tech Logo Strip with Official Colors */}
-            <div className="flex items-center gap-1.5 flex-wrap bg-zinc-900/60 p-1.5 rounded-lg border border-white/5">
+            <div className="flex items-center gap-1.5 flex-wrap bg-[var(--tag-bg)] p-1.5 rounded-lg border border-[var(--border-color)]">
               {category.items.map((tech, techIndex) => {
                 const TechIcon = tech.icon;
                 return (
@@ -325,7 +327,7 @@ function SkillCard({ category }: { category: SkillCategory }) {
                   key={techIndex}
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/5 bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white text-xs font-semibold select-none cursor-default transition-all duration-300 hover:border-violet-500/20 hover:bg-violet-500/5 hover:shadow-[0_0_12px_rgba(139,92,246,0.12)] font-sans"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--tag-border)] bg-[var(--tag-bg)] text-[var(--tag-text)] hover:bg-[var(--tag-hover-bg)] hover:text-[var(--tag-hover-text)] hover:border-[var(--tag-hover-border)] hover:shadow-[var(--tag-hover-shadow)] text-xs font-semibold select-none cursor-default transition-all duration-300 font-sans"
                 >
                   <TechIcon 
                     className="w-3.5 h-3.5 filter saturate-[1.1]" 
@@ -339,7 +341,7 @@ function SkillCard({ category }: { category: SkillCategory }) {
         </div>
 
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -354,9 +356,9 @@ export default function Skills() {
         
         {/* Section Header */}
         <div className="max-w-3xl mb-16 text-left">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-violet-400 font-sans">MY SKILLS</h2>
-          <p className="mt-2 text-3xl font-bold text-white sm:text-4xl font-sans">Technologies I Work With</p>
-          <div className="w-16 h-1 bg-gradient-to-r from-violet-600 to-red-500 rounded-full mt-4"></div>
+          <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)] font-sans">MY SKILLS</h2>
+          <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl font-sans tracking-tight">Technologies I Work With</p>
+          <div className="section-underline"></div>
         </div>
 
         {/* 2x2 Grid Layout - Equal heights, spacious gaps */}

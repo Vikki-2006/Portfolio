@@ -2,6 +2,7 @@ import { FileText, ArrowRight } from 'lucide-react';
 import profile from '@/assets/profile.png';
 import { motion } from 'framer-motion';
 import { type ReactNode } from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 const GithubIcon = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
@@ -24,7 +25,7 @@ const LeetCodeIcon = () => (
 
 const CodeChefIcon = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
-    <path d="M21 11.235V12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.09 0 4.01.71 5.54 1.9l1.415-1.415C16.89 2.01 14.54 1 12 1 5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11c0-.77-.08-1.52-.232-2.245L21 11.235z"/>
+    <path d="M21 11.235V12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.09 0 4.01.71 5.54 1.9l1.415-1.415C16.89 2.01 14.54 1 12 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11c0-.77-.08-1.52-.232-2.245L21 11.235z"/>
     <path d="M18.5 7.5c-.828 0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5 1.5-.672 1.5-1.5-.672-1.5-1.5-1.5zm-6.5-4c-2.485 0-4.5 2.015-4.5 4.5s2.015 4.5 4.5 4.5 4.5-2.015 4.5-4.5-2.015-4.5-4.5-4.5z"/>
   </svg>
 );
@@ -48,12 +49,12 @@ const SocialLink = ({ href, icon, title }: SocialLinkProps) => {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-11 h-11 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-zinc-400 hover:text-white flex items-center justify-center transition-all duration-300 hover:scale-[1.05] hover:border-violet-500/30 hover:bg-violet-500/10 hover:shadow-[0_0_15px_rgba(139,92,246,0.2)]"
+        className="social-icon-btn flex items-center justify-center transition-all duration-300 cursor-pointer relative"
       >
         {icon}
       </a>
       {/* Tooltip */}
-      <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 text-[11px] font-semibold text-zinc-200 bg-zinc-950/90 border border-white/10 backdrop-blur-md rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-xl scale-95 group-hover:scale-100 origin-bottom">
+      <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 text-[11px] font-semibold text-zinc-100 bg-zinc-950/90 border border-zinc-800 backdrop-blur-md rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-xl scale-95 group-hover:scale-100 origin-bottom">
         {title}
       </span>
     </div>
@@ -80,24 +81,33 @@ const describeArc = (x: number, y: number, radius: number, startAngle: number, e
 };
 
 export default function Hero() {
+  const { theme } = useTheme();
+
   return (
     <section id="home" className="relative min-h-screen pt-32 pb-20 flex items-center justify-center bg-transparent">
       
       <div className="max-w-[1450px] mx-auto px-6 sm:px-8 lg:px-12 w-full relative z-10">
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center justify-between">
           
-          {/* Left Column: Text & Links (Written first in DOM so it is on top on mobile, and left on desktop) */}
-          <div className="w-full lg:w-[50%] flex flex-col items-center lg:items-start text-center lg:text-left">
+          {/* Left Column: Text & Links */}
+          <div className="w-full lg:w-[52%] flex flex-col items-center lg:items-start text-center lg:text-left">
             
-            {/* Main Heading */}
+            {/* Redesigned Hero Heading matching Sujith G portfolio Visual Hierarchy */}
             <motion.h1 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.0 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight sm:tracking-tighter leading-[1.1] mb-2"
+              className="mb-3 text-center lg:text-left flex flex-col w-full items-center lg:items-start"
             >
-              Hi, I'm <br />
-              <span className="bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 bg-clip-text text-transparent block mt-2 py-1 whitespace-nowrap">VIGNESHWARAN S</span>
+              <div className="flex flex-col items-center lg:items-start select-none mb-[7px]">
+                <span className="font-generalsans-semibold text-zinc-100 text-[26px] sm:text-[32px] lg:text-[38px] leading-none tracking-[-0.02em]">
+                  Hi, I'm
+                </span>
+                <div className="w-[48px] h-[3px] bg-gradient-to-r from-violet-500 to-pink-500 rounded-full mt-2"></div>
+              </div>
+              <span className="font-milker bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 bg-clip-text text-transparent text-[21px] sm:text-[36px] lg:text-[53px] leading-[1.05] py-0.5 whitespace-nowrap block select-all tracking-normal">
+                VIGNESHWARAN S
+              </span>
             </motion.h1>
 
             {/* Sub-Badges / Skills (Muted gray) */}
@@ -105,12 +115,12 @@ export default function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-2 mt-4 text-zinc-500 font-medium text-sm sm:text-base"
+              className="flex flex-wrap justify-center lg:justify-start gap-2 mt-4 text-zinc-400 font-semibold text-sm sm:text-base"
             >
               <span>Software Engineer</span>
-              <span className="text-zinc-700">•</span>
+              <span className="text-zinc-500">•</span>
               <span>Full Stack Developer</span>
-              <span className="text-zinc-700">•</span>
+              <span className="text-zinc-500">•</span>
               <span>Backend Developer</span>
             </motion.div>
 
@@ -119,7 +129,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-8 text-zinc-400 text-base sm:text-lg leading-relaxed max-w-xl"
+              className="mt-8 text-zinc-300 text-base sm:text-lg leading-relaxed max-w-xl font-medium"
             >
               Passionate Full Stack Developer focused on building scalable, high-quality web applications using Python, React, FastAPI, and SQL. Strong foundation in software engineering, data structures, algorithms, and problem solving, with a commitment to writing clean, efficient, and maintainable code. Currently seeking Software Engineer Internship and Full-Time opportunities.
             </motion.p>
@@ -133,19 +143,19 @@ export default function Hero() {
             >
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-white bg-gradient-to-r from-violet-600 to-pink-500 hover:-translate-y-[3px] hover:shadow-[0_8px_30px_rgba(139,92,246,0.35)] active:scale-[0.97] transition-all duration-300 text-sm tracking-wide"
+                className="hero-btn-primary inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm tracking-wide"
               >
                 Explore My Projects
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="arrow-icon w-4 h-4" />
               </a>
               <a
-                href="/resume.pdf"
+                href="/Vigneshwaran_S_Resume_Updated.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-zinc-300 border border-white/10 bg-white/5 backdrop-blur-md hover:bg-white/10 hover:text-white hover:-translate-y-[3px] hover:border-white/20 active:scale-[0.97] transition-all duration-300 text-sm tracking-wide"
+                className="hero-btn-secondary inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm tracking-wide"
               >
                 View Resume
-                <FileText className="w-4 h-4" />
+                <FileText className="file-icon w-4 h-4" />
               </a>
             </motion.div>
 
@@ -187,10 +197,10 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Column: Premium Corporate Orbits Portrait UI (Written second in DOM so it goes on the right on desktop, and below text on mobile) */}
+          {/* Right Column: Premium Corporate Orbits Portrait UI */}
           <div className="w-full lg:w-[48%] flex flex-col items-center justify-center relative mb-14 lg:mb-0">
             
-            {/* Master float translateY container: 0px -> -6px -> 0px, 6s ease-in-out */}
+            {/* Master float translateY container */}
             <motion.div
               animate={{
                 y: [0, -6, 0]
@@ -202,25 +212,34 @@ export default function Hero() {
               }}
               className="relative flex items-center justify-center w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px]"
             >
-              {/* Radial Purple background glow: Center rgba(168,85,247,.20) fading to transparent, radius 500px */}
+              {/* Radial Purple background glow */}
               <div 
-                className="absolute rounded-full pointer-events-none z-0"
+                className="absolute rounded-full pointer-events-none z-0 transition-all duration-300"
                 style={{
-                  background: 'radial-gradient(circle, rgba(168, 85, 247, 0.20) 0%, transparent 70%)',
+                  background: 'radial-gradient(circle, var(--profile-glow) 0%, transparent 70%)',
                   width: '500px',
                   height: '500px'
                 }}
               />
 
-              {/* SVG Overlay: viewbox 500x500 to scale dynamically with parent wrapper container */}
+              {/* SVG Overlay */}
               <svg 
                 viewBox="0 0 500 500" 
                 className="w-full h-full absolute top-0 left-0 z-10 pointer-events-none"
               >
                 <defs>
-                  {/* Arc Glow Filter */}
-                  <filter id="arcGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  {/* Arc Glow Filter - Dark Theme */}
+                  <filter id="arcGlowDark" x="-20%" y="-20%" width="140%" height="140%">
                     <feGaussianBlur stdDeviation="8" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+
+                  {/* Arc Glow Filter - Light Theme */}
+                  <filter id="arcGlowLight" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="4" result="blur" />
                     <feMerge>
                       <feMergeNode in="blur" />
                       <feMergeNode in="SourceGraphic" />
@@ -239,36 +258,37 @@ export default function Hero() {
                   </linearGradient>
                 </defs>
 
-                {/* 1. Concentric circles (4 rings, rgba(168,85,247,.18) color, thin 1px) */}
+                {/* Concentric circles */}
                 <circle cx="250" cy="250" r="218" stroke="rgba(168, 85, 247, 0.18)" strokeWidth="1" fill="none" />
                 <circle cx="250" cy="250" r="228" stroke="rgba(168, 85, 247, 0.18)" strokeWidth="1" fill="none" />
                 <circle cx="250" cy="250" r="238" stroke="rgba(168, 85, 247, 0.18)" strokeWidth="1" fill="none" />
                 <circle cx="250" cy="250" r="248" stroke="rgba(168, 85, 247, 0.18)" strokeWidth="1" fill="none" />
 
-                {/* 2. Gradient Arc Segments */}
-                {/* Top Right Arc: Starts around 20°, Ends around 70°, Radius 233, #A855F7 to #9333EA */}
+                {/* Gradient Arc Segments */}
                 <path 
                   d={describeArc(250, 250, 233, 20, 70)}
                   fill="none"
                   stroke="url(#topRightGrad)"
                   strokeWidth="10"
                   strokeLinecap="round"
-                  filter="url(#arcGlow)"
+                  filter={theme === 'dark' ? 'url(#arcGlowDark)' : 'url(#arcGlowLight)'}
+                  style={{ strokeOpacity: theme === 'dark' ? 1.0 : 0.35 }}
+                  className="transition-all duration-400"
                 />
 
-                {/* Bottom Left Arc: Starts around 205°, Ends around 255°, Radius 233, #EC4899 to #F43F5E */}
                 <path 
                   d={describeArc(250, 250, 233, 205, 255)}
                   fill="none"
                   stroke="url(#bottomLeftGrad)"
                   strokeWidth="10"
                   strokeLinecap="round"
-                  filter="url(#arcGlow)"
+                  filter={theme === 'dark' ? 'url(#arcGlowDark)' : 'url(#arcGlowLight)'}
+                  style={{ strokeOpacity: theme === 'dark' ? 1.0 : 0.35 }}
+                  className="transition-all duration-400"
                 />
               </svg>
 
-              {/* 3. Exactly Four Premium Glowing Particles */}
-              {/* Particle 1: Purple 8px - top-left quadrant */}
+              {/* Glowing Particles */}
               <motion.div
                 animate={{
                   y: [0, -3, 0],
@@ -277,7 +297,6 @@ export default function Hero() {
                 transition={{ duration: 5, ease: "easeInOut", repeat: Infinity }}
                 className="absolute top-[10%] left-[20%] w-2 h-2 rounded-full bg-[#A855F7] shadow-[0_0_8px_rgba(168,85,247,0.7)] opacity-40 blur-[0.5px] z-20 pointer-events-none"
               />
-              {/* Particle 2: Pink 7px - bottom-right quadrant */}
               <motion.div
                 animate={{
                   y: [0, 4, 0],
@@ -286,7 +305,6 @@ export default function Hero() {
                 transition={{ duration: 6, ease: "easeInOut", repeat: Infinity, delay: 0.5 }}
                 className="absolute bottom-[12%] right-[22%] w-[7px] h-[7px] rounded-full bg-[#EC4899] shadow-[0_0_6px_rgba(236,72,153,0.7)] opacity-40 blur-[0.5px] z-20 pointer-events-none"
               />
-              {/* Particle 3: Soft white sparkle 8px - top-left/top */}
               <motion.div
                 animate={{
                   y: [0, -4, 0],
@@ -295,7 +313,6 @@ export default function Hero() {
                 transition={{ duration: 5.5, ease: "easeInOut", repeat: Infinity, delay: 1 }}
                 className="absolute top-[4%] left-[44%] w-2 h-2 rounded-full bg-white/70 shadow-[0_0_8px_rgba(255,255,255,0.5)] opacity-50 blur-[0.5px] z-20 pointer-events-none"
               />
-              {/* Particle 4: Soft white sparkle 6px - left quadrant */}
               <motion.div
                 animate={{
                   y: [0, 3, 0],
@@ -305,7 +322,7 @@ export default function Hero() {
                 className="absolute top-[45%] left-[4%] w-[6px] h-[6px] rounded-full bg-white/70 shadow-[0_0_6px_rgba(255,255,255,0.4)] opacity-40 blur-[0.5px] z-20 pointer-events-none"
               />
 
-              {/* Circular Portrait Frame: 420px desktop (340px tablet, 280px mobile), Background blended, 6px border #5A6373, Inner shadow */}
+              {/* Circular Portrait Frame */}
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}

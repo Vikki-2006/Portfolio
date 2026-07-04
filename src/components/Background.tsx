@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 // Generate a deterministic static list of 100 stars to avoid hydration mismatch in server-side builds
 const starSettings = Array.from({ length: 100 }, (_, i) => {
@@ -16,16 +17,28 @@ const starSettings = Array.from({ length: 100 }, (_, i) => {
 });
 
 export default function Background() {
-  const stars = useMemo(() => starSettings, []);
+  const { theme } = useTheme();
+
+  const stars = useMemo(() => {
+    if (theme === 'light') {
+      return starSettings.map(star => ({
+        ...star,
+        color: '#D4D4D8' // Soft light gray particles in light theme
+      }));
+    }
+    return starSettings;
+  }, [theme]);
 
   return (
-    <div className="fixed inset-0 w-full h-full z-[-1] select-none pointer-events-none overflow-hidden bg-[#09090B]">
+    <div className="fixed inset-0 w-full h-full z-[-1] select-none pointer-events-none overflow-hidden bg-[var(--background)]">
       
       {/* 1. Large soft purple ambient glow from the top-left */}
       <div 
-        className="absolute rounded-full blur-[140px] pointer-events-none"
+        className="absolute rounded-full blur-[140px] pointer-events-none transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
         style={{
-          background: 'radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 70%)',
+          background: theme === 'dark' 
+            ? 'radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 70%)' 
+            : 'radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%)',
           width: '1000px',
           height: '1000px',
           left: '-20%',
@@ -35,9 +48,11 @@ export default function Background() {
 
       {/* 2. Large soft pink ambient glow from the top-right */}
       <div 
-        className="absolute rounded-full blur-[140px] pointer-events-none"
+        className="absolute rounded-full blur-[140px] pointer-events-none transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
         style={{
-          background: 'radial-gradient(circle, rgba(236, 72, 153, 0.10) 0%, transparent 70%)',
+          background: theme === 'dark' 
+            ? 'radial-gradient(circle, rgba(236, 72, 153, 0.10) 0%, transparent 70%)' 
+            : 'radial-gradient(circle, rgba(236, 72, 153, 0.03) 0%, transparent 70%)',
           width: '1000px',
           height: '1000px',
           right: '-20%',
@@ -47,9 +62,11 @@ export default function Background() {
 
       {/* 3. Very subtle blue glow behind the profile image */}
       <div 
-        className="absolute rounded-full blur-[120px] pointer-events-none"
+        className="absolute rounded-full blur-[120px] pointer-events-none transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
         style={{
-          background: 'radial-gradient(circle, rgba(99, 102, 241, 0.14) 0%, transparent 70%)',
+          background: theme === 'dark' 
+            ? 'radial-gradient(circle, rgba(99, 102, 241, 0.14) 0%, transparent 70%)' 
+            : 'radial-gradient(circle, rgba(99, 102, 241, 0.04) 0%, transparent 70%)',
           width: '700px',
           height: '700px',
           right: '8%',
@@ -59,40 +76,44 @@ export default function Background() {
 
       {/* 4. Extremely faint square grid overlay across the entire Hero (opacity around 2-3%) */}
       <div 
-        className="absolute inset-0 opacity-[0.025]"
+        className="absolute inset-0 transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
         style={{
-          backgroundImage: `
-            linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px)
-          `,
+          opacity: theme === 'dark' ? 0.025 : 0.04,
+          backgroundImage: theme === 'dark'
+            ? `linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+               linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px)`
+            : `linear-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px),
+               linear-gradient(90deg, rgba(15, 23, 42, 0.08) 1px, transparent 1px)`,
           backgroundSize: '72px 72px'
         }}
       />
 
       {/* 5. 80-120 tiny white, purple and pink particles randomly distributed (slow twinkling stars) */}
-      {stars.map((star) => (
-        <motion.div
-          key={star.id}
-          className="absolute rounded-full pointer-events-none"
-          style={{
-            left: star.left,
-            top: star.top,
-            width: `${star.size}px`,
-            height: `${star.size}px`,
-            backgroundColor: star.color,
-            boxShadow: `0 0 3px ${star.color}`
-          }}
-          animate={{
-            opacity: [0.15, 0.85, 0.15]
-          }}
-          transition={{
-            duration: star.duration,
-            repeat: Infinity,
-            delay: star.delay,
-            ease: "easeInOut"
-          }}
-        />
-      ))}
+      <div style={{ opacity: 'var(--stars-opacity)' }} className="absolute inset-0 transition-opacity duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]">
+        {stars.map((star) => (
+          <motion.div
+            key={star.id}
+            className="absolute rounded-full pointer-events-none transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+            style={{
+              left: star.left,
+              top: star.top,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              backgroundColor: star.color,
+              boxShadow: `0 0 3px ${star.color}`
+            }}
+            animate={{
+              opacity: [0.15, 0.85, 0.15]
+            }}
+            transition={{
+              duration: star.duration,
+              repeat: Infinity,
+              delay: star.delay,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+      </div>
 
       {/* 6. 2 Floating Blurred Planets */}
       {/* Large planet near the top-right */}
@@ -101,8 +122,8 @@ export default function Background() {
         style={{
           width: '110px',
           height: '110px',
-          background: 'radial-gradient(circle at 30% 30%, #3F3F46, #09090B)',
-          boxShadow: '0 0 50px rgba(236, 72, 153, 0.08)',
+          background: 'var(--planet-bg-1)',
+          boxShadow: '0 0 50px var(--planet-glow)',
           right: '12%',
           top: '22%',
           opacity: 0.85
@@ -123,8 +144,8 @@ export default function Background() {
         style={{
           width: '60px',
           height: '60px',
-          background: 'radial-gradient(circle at 35% 35%, #27272A, #09090B)',
-          boxShadow: '0 0 35px rgba(124, 58, 237, 0.08)',
+          background: 'var(--planet-bg-2)',
+          boxShadow: '0 0 35px var(--planet-glow)',
           right: '22%',
           bottom: '18%',
           opacity: 0.85
@@ -196,17 +217,19 @@ export default function Background() {
 
       {/* 8. Soft vignette around screen edges */}
       <div 
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
         style={{
-          background: 'radial-gradient(circle, transparent 40%, rgba(9, 9, 11, 0.85) 100%)'
+          background: 'radial-gradient(circle, transparent 40%, var(--vignette-color) 100%)'
         }}
       />
 
       {/* 9. Subtle bottom glow fading upward */}
       <div 
-        className="absolute bottom-0 left-0 w-full h-[300px] pointer-events-none"
+        className="absolute bottom-0 left-0 w-full h-[300px] pointer-events-none transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
         style={{
-          background: 'linear-gradient(to top, rgba(124, 58, 237, 0.08), transparent 100%)'
+          background: theme === 'dark'
+            ? 'linear-gradient(to top, rgba(124, 58, 237, 0.08), transparent 100%)'
+            : 'linear-gradient(to top, rgba(124, 58, 237, 0.024), transparent 100%)'
         }}
       />
 

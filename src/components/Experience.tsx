@@ -26,16 +26,22 @@ export default function Experience() {
         
         {/* Section Header */}
         <div className="max-w-3xl mb-16 text-left">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-violet-400">Professional Path</h2>
-          <p className="mt-2 text-3xl font-bold text-white sm:text-4xl">Internship Experience</p>
-          <div className="w-16 h-1 bg-gradient-to-r from-violet-600 to-red-500 rounded-full mt-4"></div>
+          <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)]">Professional Path</h2>
+          <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl tracking-tight">Internship Experience</p>
+          <div className="section-underline"></div>
         </div>
 
         {/* Timeline Container */}
         <div className="relative max-w-3xl mx-auto lg:mx-0">
           
           {/* Vertical Path Line */}
-          <div className="absolute left-4 top-2 bottom-2 w-0.5 timeline-line opacity-30"></div>
+          <div 
+            className="absolute left-4 top-2 bottom-2 w-0.5 transition-all duration-300"
+            style={{
+              background: 'var(--timeline-line)',
+              opacity: 'var(--timeline-line-opacity)'
+            }}
+          ></div>
 
           {/* Timeline Node */}
           <div className="relative pl-12 pb-4">
@@ -51,25 +57,25 @@ export default function Experience() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="glass-panel rounded-2xl p-6 sm:p-8 border border-zinc-900 shadow-lg relative overflow-hidden"
+              className="glass-panel portfolio-card rounded-2xl p-6 sm:p-8 border border-zinc-800 shadow-lg relative overflow-hidden"
             >
               {/* Subtle background glow */}
               <div className="absolute -top-16 -right-16 w-32 h-32 bg-red-500/5 rounded-full blur-2xl pointer-events-none"></div>
 
               {/* Role & Duration Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-zinc-900 pb-4 mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-zinc-800 pb-4 mb-6">
                 <div>
-                  <h3 className="text-xl font-bold text-white tracking-wide">{internshipData.role}</h3>
+                  <h3 className="text-xl font-bold text-zinc-100 tracking-wide">{internshipData.role}</h3>
                   <p className="text-gradient font-bold text-base mt-1">{internshipData.company}</p>
                 </div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-semibold text-zinc-400 self-start sm:self-center">
-                  <Calendar className="w-3.5 h-3.5 text-zinc-500" />
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--date-bg)] border border-[var(--date-border)] text-xs font-bold text-[var(--date-text)] transition-colors duration-300 self-start sm:self-center">
+                  <Calendar className="w-3.5 h-3.5 text-[var(--date-text)]" />
                   {internshipData.duration}
                 </div>
               </div>
 
               {/* Bullet Points */}
-              <ul className="space-y-4 text-zinc-400 text-sm sm:text-base leading-relaxed">
+              <ul className="space-y-4 text-zinc-300 text-sm sm:text-base leading-relaxed font-medium">
                 {internshipData.points.map((point, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-violet-500 mt-0.5 flex-shrink-0" />
