@@ -2,201 +2,282 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Yesteryear&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@500;600;700&f[]=general-sans@600&display=swap');
 
-:root, html[data-theme="dark"] {
-  --background: #09090B;
+/* ═══════════════════════════════════════════════════════
+   DESIGN TOKENS
+   All colors defined once here. Light theme overrides below.
+   ═══════════════════════════════════════════════════════ */
+
+:root,
+html[data-theme="dark"] {
+  /* ── Surfaces ─────────────────────────── */
+  --background:           #09090B;
   --background-secondary: #121214;
-  --card-bg: rgba(15, 15, 20, 0.65);
-  --card-hover-bg: rgba(20, 20, 25, 0.7);
-  --navbar-bg: rgba(10, 10, 15, 0.6);
-  --border-color: rgba(255, 255, 255, 0.05);
-  --text-primary: #F4F4F5;
-  --text-secondary: #A1A1AA;
-  --text-primary-muted: #D4D4D8;
-  --text-secondary-muted: #71717A;
+  --card-bg:              rgba(15, 15, 20, 0.65);
+  --card-hover-bg:        rgba(20, 20, 25, 0.70);
+  --navbar-bg:            rgba(10, 10, 15, 0.60);
+
+  /* ── Borders ──────────────────────────── */
+  --border-color:  rgba(255, 255, 255, 0.05);
+
+  /* ── Typography ──────────────────────── */
+  --text-primary:        #F4F4F5;
+  --text-secondary:      #A1A1AA;
+  --text-primary-muted:  #D4D4D8;
+  --text-secondary-muted:#71717A;
+
+  /* ── Shadows ──────────────────────────── */
   --shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  --planet-glow: rgba(236, 72, 153, 0.08);
-  --planet-bg-1: radial-gradient(circle at 30% 30%, #3F3F46, #09090B);
-  --planet-bg-2: radial-gradient(circle at 35% 35%, #27272A, #09090B);
+
+  /* ── Accents ──────────────────────────── */
+  --purple: #8B5CF6;
+  --pink:   #EC4899;
+
+  /* ── Decorative ───────────────────────── */
+  --planet-glow:    rgba(236, 72, 153, 0.08);
+  --planet-bg-1:    radial-gradient(circle at 30% 30%, #3F3F46, #09090B);
+  --planet-bg-2:    radial-gradient(circle at 35% 35%, #27272A, #09090B);
   --vignette-color: rgba(9, 9, 11, 0.85);
   --ring-glow-opacity: 1.0;
   --ring-blur: 8px;
-  --glass-button-bg: rgba(255, 255, 255, 0.06);
-  --glass-button-border: rgba(255, 255, 255, 0.12);
-  --glass-button-text: rgba(255, 255, 255, 0.92);
-  --card-hover-glow: rgba(139, 92, 246, 0.15);
   --stars-opacity: 1.0;
-  --purple: #8B5CF6;
-  --pink: #EC4899;
 
-  --nav-text-active: var(--text-primary);
+  /* ── Glass buttons ────────────────────── */
+  --glass-button-bg:     rgba(255, 255, 255, 0.06);
+  --glass-button-border: rgba(255, 255, 255, 0.12);
+  --glass-button-text:   rgba(255, 255, 255, 0.92);
+  --card-hover-glow:     rgba(139, 92, 246, 0.15);
+
+  /* ── Navigation ───────────────────────── */
+  --nav-text-active:   var(--text-primary);
   --nav-text-inactive: var(--text-secondary);
-  --nav-text-hover: var(--text-primary);
-  --timeline-line: linear-gradient(to bottom, #7C3AED 0%, #EF4444 100%);
+  --nav-text-hover:    var(--text-primary);
+
+  /* ── Timeline ─────────────────────────── */
+  --timeline-line:        linear-gradient(to bottom, #7C3AED 0%, #EF4444 100%);
   --timeline-line-opacity: 0.3;
-  --input-bg: rgba(9, 9, 11, 0.3);
-  --input-hover-bg: rgba(9, 9, 11, 0.5);
-  --input-border: rgba(255, 255, 255, 0.05);
-  --input-text: #FFFFFF;
-  --input-focus-bg: rgba(9, 9, 11, 0.6);
+
+  /* ── Form inputs ──────────────────────── */
+  --input-bg:           rgba(9, 9, 11, 0.30);
+  --input-hover-bg:     rgba(9, 9, 11, 0.50);
+  --input-border:       rgba(255, 255, 255, 0.08);
+  --input-text:         #FFFFFF;
+  --input-placeholder:  #52525B;
+  --input-icon:         #52525B;
+  --input-icon-focus:   #A78BFA;
+  --input-focus-bg:     rgba(9, 9, 11, 0.60);
   --input-focus-border: #8B5CF6;
-  --input-focus-ring: rgba(139, 92, 246, 0.1);
-  --tag-bg: rgba(255, 255, 255, 0.05);
-  --tag-border: rgba(255, 255, 255, 0.05);
-  --tag-text: var(--text-secondary);
-  --tag-hover-bg: rgba(255, 255, 255, 0.1);
-  --tag-hover-border: rgba(139, 92, 246, 0.2);
-  --tag-hover-text: #FFFFFF;
+  --input-focus-ring:   rgba(139, 92, 246, 0.12);
+  --input-shadow:       inset 0 1px 3px rgba(0, 0, 0, 0.3);
+  /* Autofill paint colour (must be a solid/opaque colour for box-shadow trick) */
+  --input-autofill-bg:   #0D0D10;
+  --input-autofill-text: #FFFFFF;
+
+  /* ── Contact section ──────────────────── */
+  --contact-form-bg:          rgba(15, 15, 20, 0.65);
+  --contact-form-border:      rgba(255, 255, 255, 0.06);
+  --contact-form-shadow:      0 8px 32px rgba(0, 0, 0, 0.25);
+  --contact-card-bg:          rgba(15, 15, 20, 0.65);
+  --contact-card-border:      rgba(255, 255, 255, 0.06);
+  --contact-card-shadow:      0 2px 12px rgba(0, 0, 0, 0.2);
+  --contact-card-icon-bg:     rgba(39, 39, 42, 0.8);
+  --contact-card-icon-border: rgba(255, 255, 255, 0.08);
+  --contact-card-icon-color:  #A78BFA;
+  --contact-error-color:      #F87171;
+  --contact-ambient:          radial-gradient(circle, rgba(139,92,246,0.06) 0%, rgba(239,68,68,0.03) 100%);
+
+  /* ── Tags ─────────────────────────────── */
+  --tag-bg:           rgba(255, 255, 255, 0.05);
+  --tag-border:       rgba(255, 255, 255, 0.05);
+  --tag-text:         var(--text-secondary);
+  --tag-hover-bg:     rgba(255, 255, 255, 0.10);
+  --tag-hover-border: rgba(139, 92, 246, 0.20);
+  --tag-hover-text:   #FFFFFF;
   --tag-hover-shadow: 0 0 12px rgba(139, 92, 246, 0.12);
-  --footer-bg: transparent;
+
+  /* ── Footer ───────────────────────────── */
+  --footer-bg:     transparent;
   --footer-border: var(--background);
+
+  /* ── Misc ─────────────────────────────── */
   --profile-glow: rgba(168, 85, 247, 0.20);
-  --date-bg: rgba(20, 20, 25, 0.65);
-  --date-border: rgba(255, 255, 255, 0.05);
-  --date-text: var(--text-secondary);
+  --date-bg:      rgba(20, 20, 25, 0.65);
+  --date-border:  rgba(255, 255, 255, 0.05);
+  --date-text:    var(--text-secondary);
 }
 
+/* ── PREMIUM LIGHT THEME ──────────────────────────────────────
+   Apple / Linear / Vercel / Framer quality.
+   Layered backgrounds, visible ambient glows, strong depth.
+   ─────────────────────────────────────────────────────────── */
 html[data-theme="light"] {
-  --background: #F8FAFC;
+  /* ── Surfaces: layered, not flat ─────────────── */
+  /* Base is a very faint warm-cool gradient so sections can breathe */
+  --background:           #F7F8FC;
   --background-secondary: #FFFFFF;
-  --card-bg: #FFFFFF;
-  --card-hover-bg: #FFFFFF;
-  --navbar-bg: rgba(255, 255, 255, 0.75);
-  --border-color: rgba(15, 23, 42, 0.08);
-  --text-primary: #18181B;
-  --text-secondary: #52525B;
-  --text-primary-muted: #3F3F46;
-  --text-secondary-muted: #71717A;
-  --shadow: 0 12px 40px rgba(15, 23, 42, 0.05), 0 2px 8px rgba(15, 23, 42, 0.02);
-  --planet-glow: rgba(139, 92, 246, 0.024);
-  --planet-bg-1: radial-gradient(circle at 30% 30%, #F4F4F5, #E4E4E7);
-  --planet-bg-2: radial-gradient(circle at 35% 35%, #FAFAFA, #F4F4F5);
-  --vignette-color: rgba(250, 250, 250, 0.75);
-  --ring-glow-opacity: 0.15;
-  --ring-blur: 3px;
-  --glass-button-bg: #FFFFFF;
-  --glass-button-border: #D4D4D8;
-  --glass-button-text: #18181B;
-  --card-hover-glow: none;
-  --stars-opacity: 0.15;
-  --purple: #7C3AED;
-  --pink: #EC4899;
+  --card-bg:              #FFFFFF;
+  --card-hover-bg:        #FAFBFF;
+  --navbar-bg:            rgba(255, 255, 255, 0.82);
 
-  --nav-text-active: #7C3AED;
-  --nav-text-inactive: #3F3F46;
-  --nav-text-hover: #18181B;
-  --timeline-line: #8B5CF6;
+  /* ── Borders ──────────────────────────── */
+  --border-color: #E2E8F0;
+
+  /* ── Typography ──────────────────────── */
+  --text-primary:        #0F172A;
+  --text-secondary:      #475569;
+  --text-primary-muted:  #1E293B;
+  --text-secondary-muted:#94A3B8;
+
+  /* ── Shadows: multi-layer, premium depth ───── */
+  --shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 4px 12px rgba(15, 23, 42, 0.06),
+    0 12px 32px rgba(15, 23, 42, 0.04);
+
+  /* ── Accents ──────────────────────────── */
+  --purple: #6D28D9;
+  --pink:   #DB2777;
+
+  /* ── Decorative glows (kept visible, not killed) ─ */
+  --planet-glow:       rgba(109, 40, 217, 0.08);
+  --planet-bg-1:       radial-gradient(circle at 30% 30%, #EDE9FE, #DDD6FE);
+  --planet-bg-2:       radial-gradient(circle at 35% 35%, #F5F3FF, #EDE9FE);
+  --vignette-color:    rgba(247, 248, 252, 0.70);
+  --ring-glow-opacity: 0.35;
+  --ring-blur: 5px;
+  --stars-opacity:     0.0;
+
+  /* ── Glass buttons ────────────────────── */
+  --glass-button-bg:     #FFFFFF;
+  --glass-button-border: #DDE1E8;
+  --glass-button-text:   #0F172A;
+  --card-hover-glow:     rgba(109, 40, 217, 0.08);
+
+  /* ── Navigation ───────────────────────── */
+  --nav-text-active:   #6D28D9;
+  --nav-text-inactive: #334155;
+  --nav-text-hover:    #0F172A;
+
+  /* ── Timeline ─────────────────────────── */
+  --timeline-line:         linear-gradient(to bottom, #6D28D9 0%, #DB2777 100%);
   --timeline-line-opacity: 1.0;
-  --input-bg: #FFFFFF;
-  --input-hover-bg: #FFFFFF;
-  --input-border: #D4D4D8;
-  --input-text: #18181B;
-  --input-focus-bg: #FFFFFF;
-  --input-focus-border: #8B5CF6;
-  --input-focus-ring: rgba(139, 92, 246, 0.15);
-  --tag-bg: #F1F5F9;
-  --tag-border: rgba(15, 23, 42, 0.06);
-  --tag-text: #4B5563;
-  --tag-hover-bg: rgba(124, 58, 237, 0.08);
-  --tag-hover-border: rgba(124, 58, 237, 0.2);
-  --tag-hover-text: #7C3AED;
+
+  /* ── Form inputs: Apple-style ─────────────── */
+  --input-bg:           #FFFFFF;
+  --input-hover-bg:     #FAFBFF;
+  --input-border:       #CBD5E1;
+  --input-text:         #0F172A;
+  --input-placeholder:  #94A3B8;
+  --input-icon:         #94A3B8;
+  --input-icon-focus:   #6D28D9;
+  --input-focus-bg:     #FFFFFF;
+  --input-focus-border: #6D28D9;
+  --input-focus-ring:   rgba(109, 40, 217, 0.12);
+  --input-shadow:
+    0 1px 3px rgba(15, 23, 42, 0.06),
+    inset 0 1px 2px rgba(15, 23, 42, 0.03);
+  --input-autofill-bg:   #FFFFFF;
+  --input-autofill-text: #0F172A;
+
+  /* ── Contact section ──────────────────── */
+  --contact-form-bg:     #FFFFFF;
+  --contact-form-border: #E2E8F0;
+  --contact-form-shadow:
+    0 1px 3px rgba(15, 23, 42, 0.05),
+    0 8px 24px rgba(15, 23, 42, 0.06),
+    0 0 0 1px rgba(15, 23, 42, 0.03);
+  --contact-card-bg:          #FFFFFF;
+  --contact-card-border:      #E2E8F0;
+  --contact-card-shadow:
+    0 1px 3px rgba(15, 23, 42, 0.05),
+    0 4px 16px rgba(15, 23, 42, 0.06);
+  --contact-card-icon-bg:     #F1F0FF;
+  --contact-card-icon-border: #DDD6FE;
+  --contact-card-icon-color:  #6D28D9;
+  --contact-error-color:      #B91C1C;
+  --contact-ambient:          none;
+
+  /* ── Tags ─────────────────────────────── */
+  --tag-bg:           #F1F5F9;
+  --tag-border:       #E2E8F0;
+  --tag-text:         #334155;
+  --tag-hover-bg:     rgba(109, 40, 217, 0.07);
+  --tag-hover-border: rgba(109, 40, 217, 0.25);
+  --tag-hover-text:   #6D28D9;
   --tag-hover-shadow: none;
-  --footer-bg: #F1F5F9;
-  --footer-border: rgba(15, 23, 42, 0.08);
-  --profile-glow: rgba(168, 85, 247, 0.08);
-  --date-bg: rgba(124, 58, 237, 0.08);
-  --date-border: rgba(124, 58, 237, 0.15);
-  --date-text: #7C3AED;
+
+  /* ── Footer ───────────────────────────── */
+  --footer-bg:     #EEF2F7;
+  --footer-border: #E2E8F0;
+
+  /* ── Section alternation ─────────────────── */
+  /* Odd sections stay on --background (#F7F8FC).            */
+  /* Even sections shift to a slightly warmer white.         */
+  --section-alt-bg: #FAFBFF;
+
+  /* ── Misc ─────────────────────────────── */
+  --profile-glow: rgba(109, 40, 217, 0.18);
+  --date-bg:      rgba(109, 40, 217, 0.07);
+  --date-border:  rgba(109, 40, 217, 0.18);
+  --date-text:    #6D28D9;
 }
 
-/* Enable smooth transitions only when theme-ready class is present */
-html.theme-ready,
+/* ═══════════════════════════════════════════════════════
+   THEME TRANSITION — 60 FPS
+
+   ONLY the elements that actually change colour get
+   transitions. No div/span/p/li/svg/h1-h3 — they inherit
+   from their parents and do NOT need their own transition.
+   No will-change on every element — that causes GPU layer
+   explosion and is the primary cause of the 5 FPS stutter.
+   ═══════════════════════════════════════════════════════ */
+
 html.theme-ready body,
-html.theme-ready .glass-panel,
+html.theme-ready #root,
 html.theme-ready nav,
-html.theme-ready a,
-html.theme-ready button,
-html.theme-ready span,
-html.theme-ready div,
-html.theme-ready h1,
-html.theme-ready h2,
-html.theme-ready h3,
-html.theme-ready p,
-html.theme-ready li,
-html.theme-ready svg,
+html.theme-ready .glass-panel,
+html.theme-ready .portfolio-card,
+html.theme-ready .contact-form-card,
+html.theme-ready .contact-info-card,
+html.theme-ready .contact-card-icon-wrap,
+html.theme-ready .social-icon-btn,
+html.theme-ready .section-underline,
 html.theme-ready input,
-html.theme-ready textarea {
-  transition-property: background-color, color, border-color, box-shadow, opacity !important;
-  transition-duration: 450ms !important;
-  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
-  will-change: background-color, color, border-color, box-shadow, opacity;
+html.theme-ready textarea,
+html.theme-ready select,
+html.theme-ready button:not(.portfolio-btn-primary):not(.hero-btn-primary):not(.hero-btn-secondary),
+html.theme-ready a:not(.portfolio-btn-primary):not(.hero-btn-primary) {
+  transition:
+    background-color 320ms ease-in-out,
+    color            320ms ease-in-out,
+    border-color     320ms ease-in-out,
+    box-shadow       320ms ease-in-out !important;
 }
 
-/* Stagger delays across sections only during theme transition to prevent hover delays */
-html.theme-transitioning nav,
-html.theme-transitioning nav * {
-  transition-delay: 0ms !important;
-}
-html.theme-transitioning #home,
-html.theme-transitioning #home * {
-  transition-delay: 25ms !important;
-}
-html.theme-transitioning #about,
-html.theme-transitioning #about * {
-  transition-delay: 50ms !important;
-}
-html.theme-transitioning #skills,
-html.theme-transitioning #skills * {
-  transition-delay: 75ms !important;
-}
-html.theme-transitioning #experience,
-html.theme-transitioning #experience * {
-  transition-delay: 100ms !important;
-}
-html.theme-transitioning #projects,
-html.theme-transitioning #projects * {
-  transition-delay: 125ms !important;
-}
-html.theme-transitioning #achievements,
-html.theme-transitioning #achievements * {
-  transition-delay: 150ms !important;
-}
-html.theme-transitioning #certifications,
-html.theme-transitioning #certifications * {
-  transition-delay: 175ms !important;
-}
-html.theme-transitioning #contact,
-html.theme-transitioning #contact * {
-  transition-delay: 200ms !important;
-}
-html.theme-transitioning footer,
-html.theme-transitioning footer * {
-  transition-delay: 225ms !important;
+/* During transition: kill expensive backdrop-filter recalculation */
+html.theme-transitioning .glass-panel,
+html.theme-transitioning .contact-form-card,
+html.theme-transitioning nav {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html.theme-ready,
   html.theme-ready body,
-  html.theme-ready .glass-panel,
+  html.theme-ready #root,
   html.theme-ready nav,
-  html.theme-ready a,
-  html.theme-ready button,
-  html.theme-ready span,
-  html.theme-ready div,
-  html.theme-ready h1,
-  html.theme-ready h2,
-  html.theme-ready h3,
-  html.theme-ready p,
-  html.theme-ready li,
-  html.theme-ready svg,
+  html.theme-ready .glass-panel,
+  html.theme-ready .portfolio-card,
+  html.theme-ready .contact-form-card,
+  html.theme-ready .contact-info-card,
+  html.theme-ready .social-icon-btn,
   html.theme-ready input,
   html.theme-ready textarea,
-  html.theme-transitioning #root {
+  html.theme-ready button,
+  html.theme-ready a {
     transition-duration: 50ms !important;
   }
-
   .theme-toggle-btn,
-  .theme-toggle-icon,
-  .theme-toggle-btn::before {
+  .theme-toggle-icon {
     animation: none !important;
     transition-duration: 50ms !important;
   }
@@ -427,104 +508,101 @@ html.theme-transitioning footer * {
   text-shadow: 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
-/* Light theme body background gradient override */
+/* Light theme body: use the CSS variable — no gradient override needed */
 html[data-theme="light"],
 html[data-theme="light"] body,
 html[data-theme="light"] #root {
-  background: linear-gradient(180deg, #FAFAFA 0%, #F7F8FC 50%, #F5F5F7 100%) !important;
+  background-color: var(--background) !important;
 }
 
-/* Identical Card Hover Behavior across all card types */
+/* Card hover: transform/shadow only — no !important on color props (handled by variables) */
 .portfolio-card {
-  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition:
+    transform     250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow    250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color  250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-card:hover {
+  transform: translateY(-4px) scale(1.01);
 }
 
 html[data-theme="dark"] .portfolio-card:hover {
-  transform: translateY(-4px) scale(1.01) !important;
-  box-shadow: 0 10px 30px -10px rgba(124, 58, 237, 0.15), 0 0 15px rgba(139, 92, 246, 0.15) !important;
-  border-color: rgba(124, 58, 237, 0.25) !important;
+  box-shadow: 0 10px 30px -10px rgba(124, 58, 237, 0.15), 0 0 15px rgba(139, 92, 246, 0.12);
+  border-color: rgba(124, 58, 237, 0.25);
 }
 
 html[data-theme="light"] .portfolio-card {
-  background: #FFFFFF !important;
-  border: 1px solid rgba(15, 23, 42, 0.08) !important;
-  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.05), 0 2px 8px rgba(15, 23, 42, 0.02) !important;
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  box-shadow: var(--shadow);
 }
 
 html[data-theme="light"] .portfolio-card:hover {
-  transform: translateY(-4px) scale(1.01) !important;
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.09), 0 0 15px rgba(124, 58, 237, 0.05) !important; /* soft violet shadow */
-  border-color: rgba(124, 58, 237, 0.15) !important; /* soft violet border highlight */
-  background: #FFFFFF !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 0 0 1px rgba(124, 58, 237, 0.10);
+  border-color: rgba(124, 58, 237, 0.20);
 }
 
-/* Premium Section Heading Underline Class */
+/* Section underline — same gradient both themes, just different size in light */
 .section-underline {
   width: 4rem;
   height: 4px;
   border-radius: 9999px;
-  background: linear-gradient(to right, #7C3AED 0%, #EC4899 100%);
+  background: linear-gradient(to right, var(--purple) 0%, var(--pink) 100%);
   margin-top: 1rem;
-  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 html[data-theme="light"] .section-underline {
-  width: 5rem !important; /* stronger width */
-  height: 5px !important; /* stronger thickness */
-  background: linear-gradient(to right, #7C3AED 0%, #F43F5E 100%) !important; /* vibrant purple to red gradient */
-  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.15) !important;
+  width: 4.5rem;
+  height: 5px;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.18);
 }
 
-/* Premium Navbar glass and link effects override */
+/* Navbar — light theme uses variable navbar-bg; only add a refined shadow */
 html[data-theme="light"] nav {
-  background: rgba(255, 255, 255, 0.72) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03) !important;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.06) !important;
+  background: var(--navbar-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  border-bottom: 1px solid var(--border-color);
 }
 
-/* Button overrides for light theme */
-html[data-theme="light"] .premium-glass-button {
-  background-color: #FFFFFF !important;
-  border: 1px solid #D4D4D8 !important;
-  color: #18181B !important;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+/* Glass button — fully driven by CSS variables, no !important overrides needed */
+.premium-glass-button {
+  background-color: var(--glass-button-bg);
+  border: 1px solid var(--glass-button-border);
+  color: var(--glass-button-text);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color     250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color            250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow       250ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform        250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-glass-button:hover {
+  background-color: rgba(139, 92, 246, 0.14);
+  border-color: var(--purple);
+  color: var(--purple);
+  box-shadow: 0 0 16px rgba(139, 92, 246, 0.20);
+  transform: translateY(-2px) scale(1.02);
 }
 
 html[data-theme="light"] .premium-glass-button:hover {
-  background-color: rgba(139, 92, 246, 0.08) !important;
-  border-color: #8B5CF6 !important;
-  color: #7C3AED !important;
-  box-shadow: 0 0 12px rgba(139, 92, 246, 0.15) !important;
-  transform: translateY(-2px) scale(1.02) !important;
+  color: var(--purple);
 }
 
-html[data-theme="light"] .portfolio-btn-primary {
-  background: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%) !important;
-  color: #FFFFFF !important;
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.2) !important;
+.premium-glass-button:active {
+  transform: translateY(0) scale(0.97);
+  transition-duration: 100ms;
 }
 
-html[data-theme="light"] .portfolio-btn-primary:hover {
-  transform: translateY(-2px) scale(1.03) !important;
-  background: linear-gradient(135deg, #8B5CF6 0%, #FF5FA7 100%) !important; /* brighter */
-  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.35) !important;
-}
-
-html[data-theme="light"] .portfolio-btn-secondary {
-  background-color: #FFFFFF !important;
-  border: 1px solid #D4D4D8 !important;
-  color: #18181B !important;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
-}
-
-html[data-theme="light"] .portfolio-btn-secondary:hover {
-  background-color: rgba(139, 92, 246, 0.08) !important;
-  border-color: #8B5CF6 !important;
-  color: #7C3AED !important;
-  box-shadow: 0 0 12px rgba(139, 92, 246, 0.15) !important;
-  transform: translateY(-2px) scale(1.02) !important;
+.premium-glass-button:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 2px;
 }
 
 /* Social Icon Button styling */
@@ -811,4 +889,201 @@ html[data-theme="dark"] .theme-toggle-icon-sun {
 }
 
 
+/* ═══════════════════════════════════════════════════════════════
+   CONTACT COMPONENT CSS
+   All theming is driven by CSS variables so light/dark just work.
+   ═══════════════════════════════════════════════════════════════ */
 
+/* Ambient background blob — visible only in dark mode */
+.contact-ambient-blob {
+  background: var(--contact-ambient);
+  filter: blur(120px);
+  opacity: 1;
+}
+
+/* Form card (the glassmorphism panel wrapping the form) */
+.contact-form-card {
+  background: var(--contact-form-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--contact-form-border);
+  box-shadow: var(--contact-form-shadow);
+}
+
+html[data-theme="light"] .contact-form-card {
+  /* In light mode: clean white card, no blur needed */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Contact info cards (Email / Location) */
+.contact-info-card {
+  background: var(--contact-card-bg);
+  border: 1px solid var(--contact-card-border);
+  box-shadow: var(--contact-card-shadow);
+  transition:
+    transform     250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow    250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color  250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-info-card:hover {
+  transform: translateY(-3px);
+}
+
+html[data-theme="dark"] .contact-info-card:hover {
+  border-color: rgba(139, 92, 246, 0.25);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25), 0 0 0 1px rgba(139, 92, 246, 0.12);
+}
+
+html[data-theme="light"] .contact-info-card:hover {
+  border-color: rgba(124, 58, 237, 0.20);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 0 0 1px rgba(124, 58, 237, 0.10);
+}
+
+/* Icon badge inside contact cards */
+.contact-card-icon-wrap {
+  background-color: var(--contact-card-icon-bg);
+  border: 1px solid var(--contact-card-icon-border);
+  color: var(--contact-card-icon-color);
+}
+
+.contact-info-card:hover .contact-card-icon-wrap {
+  background-image: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%);
+  background-color: transparent;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+
+/* Form inputs */
+.contact-input {
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--input-text);
+  box-shadow: var(--input-shadow);
+  transition:
+    background-color 150ms ease,
+    border-color     150ms ease,
+    box-shadow       150ms ease;
+}
+
+/* Placeholder via CSS — works cross-browser */
+.contact-input::placeholder {
+  color: var(--input-placeholder);
+  opacity: 1;
+}
+
+.contact-input:hover {
+  background-color: var(--input-hover-bg);
+}
+
+.contact-input:focus {
+  background-color: var(--input-focus-bg);
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 4px var(--input-focus-ring), var(--input-shadow);
+  outline: none;
+}
+
+.contact-input--error {
+  border-color: var(--contact-error-color) !important;
+}
+
+.contact-input--error:focus {
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.08) !important;
+}
+
+/* Input icon (the lucide icon inside the field) */
+.contact-icon {
+  color: var(--input-icon);
+}
+
+.group:focus-within .contact-icon {
+  color: var(--input-icon-focus);
+}
+
+/* Inline validation error text */
+.contact-error {
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 500;
+  color: var(--contact-error-color);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   BROWSER AUTOFILL FIX — Chrome, Brave, Edge (all Chromium)
+   ───────────────────────────────────────────────────────────────
+   Strategy:
+   · -webkit-box-shadow inset 1000px paints over the forced bg
+   · -webkit-text-fill-color overrides autofill text colour
+   · transition: background-color 99999s prevents fade-in flicker
+   · CSS variables drive the colours so both themes are covered
+   ═══════════════════════════════════════════════════════════════ */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+select:-webkit-autofill:active {
+  /* Dark theme defaults (matches :root) */
+  -webkit-box-shadow: 0 0 0 1000px #0D0D10 inset !important;
+  box-shadow:         0 0 0 1000px #0D0D10 inset !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  caret-color: #FFFFFF !important;
+  /* Freeze the browser fade-in animation */
+  transition: background-color 99999s ease 0s, color 99999s ease 0s !important;
+  border-radius: 1rem !important;
+  outline: none !important;
+}
+
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow:
+    0 0 0 1000px #0D0D10 inset,
+    0 0 0 4px rgba(139, 92, 246, 0.12) !important;
+  box-shadow:
+    0 0 0 1000px #0D0D10 inset,
+    0 0 0 4px rgba(139, 92, 246, 0.12) !important;
+  border-color: #8B5CF6 !important;
+}
+
+/* Light theme autofill — paint with white */
+html[data-theme="light"] input:-webkit-autofill,
+html[data-theme="light"] input:-webkit-autofill:hover,
+html[data-theme="light"] input:-webkit-autofill:focus,
+html[data-theme="light"] input:-webkit-autofill:active,
+html[data-theme="light"] textarea:-webkit-autofill,
+html[data-theme="light"] textarea:-webkit-autofill:hover,
+html[data-theme="light"] textarea:-webkit-autofill:focus,
+html[data-theme="light"] textarea:-webkit-autofill:active,
+html[data-theme="light"] select:-webkit-autofill,
+html[data-theme="light"] select:-webkit-autofill:hover,
+html[data-theme="light"] select:-webkit-autofill:focus,
+html[data-theme="light"] select:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #FFFFFF inset !important;
+  box-shadow:         0 0 0 1000px #FFFFFF inset !important;
+  -webkit-text-fill-color: #111827 !important;
+  caret-color: #111827 !important;
+  transition: background-color 99999s ease 0s, color 99999s ease 0s !important;
+  border-color: #E5E7EB !important;
+  border-radius: 1rem !important;
+}
+
+html[data-theme="light"] input:-webkit-autofill:focus,
+html[data-theme="light"] textarea:-webkit-autofill:focus,
+html[data-theme="light"] select:-webkit-autofill:focus {
+  -webkit-box-shadow:
+    0 0 0 1000px #FFFFFF inset,
+    0 0 0 4px rgba(124, 58, 237, 0.10) !important;
+  box-shadow:
+    0 0 0 1000px #FFFFFF inset,
+    0 0 0 4px rgba(124, 58, 237, 0.10) !important;
+  border-color: #7C3AED !important;
+}

@@ -14,7 +14,7 @@ import { ThemeProvider } from './context/ThemeContext';
 export default function App() {
   return (
     <ThemeProvider>
-      <div className="relative min-h-screen bg-transparent isolate text-zinc-100 selection:bg-violet-600/30 selection:text-white transition-colors duration-400">
+      <div className="relative min-h-screen bg-transparent isolate text-zinc-100 selection:bg-violet-600/30 selection:text-white">
         {/* Premium Layered Background */}
         <Background />
 

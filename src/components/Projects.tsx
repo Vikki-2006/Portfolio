@@ -57,6 +57,7 @@ const projectsData: Project[] = [
     ],
     tags: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vite'],
     githubUrl: 'https://github.com/Vikki-2006',
+    demoUrl: 'https://vigneshwaran2006.vercel.app/',
     placeholderType: 'portfolio'
   }
 ];

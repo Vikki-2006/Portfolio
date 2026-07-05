@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 
 type Theme = 'light' | 'dark';
 
@@ -12,67 +12,63 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(() => {
-    // Detect stored preference or system preference before loading
     const savedTheme = localStorage.getItem('theme') as Theme | null;
-    if (savedTheme === 'light' || savedTheme === 'dark') {
-      return savedTheme;
-    }
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return systemPrefersDark ? 'dark' : 'light';
+    if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
   const [isReady, setIsReady] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const isTransitioning = useRef(false);
+  const mountedRef = useRef(false);
 
-  // Handle setting attributes and flags on mounting/updating
+  // ── Initial mount: apply data-theme + icon class, then enable transitions ──
   useEffect(() => {
-    // Apply theme attribute
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.style.backgroundColor = theme === 'dark' ? '#09090B' : '';
-    
-    // Set initial icon classes so the rotation state matches on page load
-    if (theme === 'dark') {
-      document.documentElement.classList.add('icon-theme-dark');
-      document.documentElement.classList.remove('icon-theme-light');
-    } else {
-      document.documentElement.classList.add('icon-theme-light');
-      document.documentElement.classList.remove('icon-theme-dark');
-    }
+    if (mountedRef.current) return; // only run once on mount
+    mountedRef.current = true;
 
-    // Add theme-ready class after initial mount to prevent transition animation on first load
-    const timer = setTimeout(() => {
+    const root = document.documentElement;
+    root.setAttribute('data-theme', theme);
+    root.classList.add(theme === 'dark' ? 'icon-theme-dark' : 'icon-theme-light');
+    root.classList.remove(theme === 'dark' ? 'icon-theme-light' : 'icon-theme-dark');
+
+    // Small delay so the initial paint is committed before transitions are enabled
+    const t = setTimeout(() => {
+      root.classList.add('theme-ready');
       setIsReady(true);
-      document.documentElement.classList.add('theme-ready');
-    }, 100);
+    }, 80);
 
-    return () => clearTimeout(timer);
-  }, [theme]);
+    return () => clearTimeout(t);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // intentionally empty — runs once
 
   const toggleTheme = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
+    if (isTransitioning.current) return;
+    isTransitioning.current = true;
 
-    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    const nextTheme: Theme = theme === 'dark' ? 'light' : 'dark';
+    const root = document.documentElement;
 
-    // 1. Immediately rotate the toggle icon and add transition classes
-    document.documentElement.classList.add('theme-transitioning');
-    if (nextTheme === 'dark') {
-      document.documentElement.classList.add('icon-theme-dark');
-      document.documentElement.classList.remove('icon-theme-light');
-    } else {
-      document.documentElement.classList.add('icon-theme-light');
-      document.documentElement.classList.remove('icon-theme-dark');
-    }
+    // 1. Immediately swap the toggle icon
+    root.classList.add(nextTheme === 'dark' ? 'icon-theme-dark' : 'icon-theme-light');
+    root.classList.remove(nextTheme === 'dark' ? 'icon-theme-light' : 'icon-theme-dark');
 
-    // 2. Set the theme state instantly
-    setTheme(nextTheme);
+    // 2. Signal CSS that a theme switch is in progress
+    //    (used to temporarily disable backdrop-filter)
+    root.classList.add('theme-transitioning');
+
+    // 3. Swap the data-theme attribute — CSS variables update instantly,
+    //    elements that have transitions will animate smoothly to the new values
+    root.setAttribute('data-theme', nextTheme);
+
+    // 4. Persist and sync React state
     localStorage.setItem('theme', nextTheme);
+    setTheme(nextTheme);
 
-    // 3. Clear transition classes after 450ms morph completes
+    // 5. Clean up after the transition (220 ms — matches CSS duration)
     setTimeout(() => {
-      document.documentElement.classList.remove('theme-transitioning');
-      setIsTransitioning(false);
-    }, 450);
+      root.classList.remove('theme-transitioning');
+      isTransitioning.current = false;
+    }, 240);
   };
 
   return (
