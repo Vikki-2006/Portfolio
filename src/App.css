@@ -17,6 +17,35 @@
   }
 }
 
+/* High-quality rendering improvements for Retina and high-DPI displays */
+:root {
+  --render-transition: 300ms;
+}
+
+html, body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+  font-feature-settings: "liga" 1, "kern" 1;
+  font-kerning: normal;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Improve SVG and image crispness on high-DPI displays */
+img, picture, svg, canvas {
+  image-rendering: auto;
+  shape-rendering: geometricPrecision;
+  vector-effect: non-scaling-stroke;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Apply to all text for crisp rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+}
+
 .hero {
   position: relative;
 

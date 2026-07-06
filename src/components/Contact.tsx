@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import { Mail, MapPin, FileText, ArrowRight, User, MessageSquare, Check, Loader2, FileDown, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, MapPin, FileText, ArrowRight, User, MessageSquare, Check, Loader2, FileDown } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { sendContactEmail } from '../lib/emailjs';
+import SectionContainer from './SectionContainer';
+import Toast from './Toast';
+import type { ToastData, ToastType } from './Toast';
 
 // ─── Contact info cards ─────────────────────────────────────────────────────
 const contactCards = [
@@ -19,41 +22,6 @@ const contactCards = [
     icon: MapPin,
   },
 ];
-
-// ─── Toast component ────────────────────────────────────────────────────────
-type ToastType = 'success' | 'error';
-interface Toast { type: ToastType; message: string; }
-
-function ToastNotification({ toast, onClose }: { toast: Toast; onClose: () => void }) {
-  return (
-    <AnimatePresence>
-      <motion.div
-        key="toast"
-        initial={{ opacity: 0, y: -16, scale: 0.96 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: -16, scale: 0.96 }}
-        transition={{ duration: 0.3 }}
-        className={`fixed top-6 left-1/2 -translate-x-1/2 z-[9999] flex items-center gap-3 px-5 py-3.5 rounded-2xl shadow-2xl border text-sm font-semibold backdrop-blur-xl select-none ${
-          toast.type === 'success'
-            ? 'bg-emerald-950/90 border-emerald-700/60 text-emerald-300'
-            : 'bg-red-950/90 border-red-700/60 text-red-300'
-        }`}
-      >
-        {toast.type === 'success'
-          ? <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-          : <X className="w-4 h-4 text-red-400 flex-shrink-0" />}
-        <span>{toast.message}</span>
-        <button
-          onClick={onClose}
-          className="ml-2 text-zinc-500 hover:text-zinc-300 transition-colors cursor-pointer"
-          aria-label="Dismiss notification"
-        >
-          <X className="w-3.5 h-3.5" />
-        </button>
-      </motion.div>
-    </AnimatePresence>
-  );
-}
 
 // ─── Validation ──────────────────────────────────────────────────────────────
 interface FormErrors { name?: string; email?: string; subject?: string; message?: string; }
@@ -77,11 +45,10 @@ export default function Contact() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
-  const [toast, setToast] = useState<Toast | null>(null);
+  const [toast, setToast] = useState<ToastData | null>(null);
 
-  const showToast = (type: ToastType, message: string) => {
-    setToast({ type, message });
-    setTimeout(() => setToast(null), 5000);
+  const showToast = (type: ToastType, title: string, description?: string) => {
+    setToast({ type, title, description });
   };
 
   const handleChange = (field: keyof typeof form) =>
@@ -100,7 +67,7 @@ export default function Contact() {
       await sendContactEmail(form);
       setIsSent(true);
       setForm({ name: '', email: '', subject: '', message: '' });
-      showToast('success', "Message sent successfully! I'll get back to you soon.");
+      showToast('success', 'Message sent successfully!', "Thanks for reaching out. I'll get back to you soon.");
       setTimeout(() => setIsSent(false), 4000);
     } catch (error: unknown) {
       const isDev = import.meta.env.DEV;
@@ -121,23 +88,22 @@ export default function Contact() {
 
   return (
     <>
-      {toast && <ToastNotification toast={toast} onClose={() => setToast(null)} />}
+      {toast && <Toast toast={toast} onClose={() => setToast(null)} />}
 
-      <section id="contact" className="py-20 bg-transparent relative">
+      <SectionContainer id="contact">
         {/* Ambient gradient — hidden in light mode via CSS */}
         <div className="contact-ambient-blob absolute top-1/2 left-1/3 -translate-x-1/2 w-[450px] h-[450px] rounded-full pointer-events-none z-0" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
+        <div className="relative z-10">
           {/* Section Header */}
-          <div className="max-w-3xl mb-12 text-left">
+          <div className="mb-10 text-left">
             <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)]">Connection</h2>
             <p className="mt-2 text-3xl font-bold text-[var(--text-primary)] sm:text-4xl tracking-tight">Get In Touch</p>
             <div className="section-underline" />
           </div>
 
           {/* Split Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 lg:items-center items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
             {/* Left: Form */}
             <div className="lg:col-span-7 space-y-6">
@@ -239,15 +205,14 @@ export default function Contact() {
                     id="contact-submit"
                     type="submit"
                     disabled={isSubmitting}
-                    className="portfolio-btn-primary w-full relative group overflow-hidden py-3.5 px-6 bg-gradient-to-r from-violet-600 via-purple-600 to-pink-500 hover:to-pink-600 rounded-2xl text-xs sm:text-sm font-semibold text-white transition-all duration-300 hover:shadow-[0_8px_30px_rgba(139,92,246,0.35)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none flex items-center justify-center gap-2"
+                    className="portfolio-btn-primary w-full py-3.5 px-6 disabled:opacity-50 disabled:pointer-events-none text-xs sm:text-sm"
                   >
-                    <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:animate-[shine_1.5s_ease-in-out_infinite] z-0" />
                     {isSubmitting ? (
-                      <><Loader2 className="w-4 h-4 animate-spin z-10" /><span className="z-10">Sending Message...</span></>
+                      <><Loader2 className="w-4 h-4 animate-spin" /><span>Sending Message...</span></>
                     ) : isSent ? (
-                      <><Check className="w-4 h-4 z-10 text-emerald-400" /><span className="z-10">Message Sent Successfully!</span></>
+                      <><Check className="w-4 h-4 text-emerald-400" /><span>Message Sent Successfully!</span></>
                     ) : (
-                      <><span className="z-10">Send Message</span><ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform z-10" /></>
+                      <><span>Send Message</span><ArrowRight className="w-4 h-4" /></>
                     )}
                   </button>
                 </form>
@@ -255,7 +220,7 @@ export default function Contact() {
             </div>
 
             {/* Right: Contact cards */}
-            <div className="lg:col-span-5 flex flex-col gap-4 w-full">
+            <div className="lg:col-span-5 flex flex-col gap-6 w-full lg:pt-[190px]">
               {contactCards.map((card) => {
                 const CardIcon = card.icon;
                 return (
@@ -292,23 +257,21 @@ export default function Contact() {
               })}
 
               {/* Download Resume */}
-              <div className="flex justify-center w-full mt-2">
-                <motion.a
-                  whileHover={{ y: -4 }}
+              <div className="flex justify-center w-full mt-0">
+                <a
                   href="/Vigneshwaran_S_Resume_Updated.pdf"
                   download="Vigneshwaran_S_Resume_Updated.pdf"
-                  className="portfolio-btn-primary w-60 relative group overflow-hidden py-3.5 px-6 bg-gradient-to-r from-violet-600 via-purple-600 to-pink-500 hover:to-pink-600 rounded-2xl text-xs sm:text-sm font-semibold text-white transition-all duration-300 hover:shadow-[0_8px_30px_rgba(139,92,246,0.35)] active:translate-y-0 active:scale-[0.98] flex items-center justify-center gap-2 border border-transparent shadow-md select-none"
+                  className="portfolio-btn-primary w-60 py-3.5 px-6 select-none text-xs sm:text-sm"
                 >
-                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:animate-[shine_1.5s_ease-in-out_infinite] z-0" />
-                  <FileDown className="w-4 h-4 z-10" />
-                  <span className="z-10">Download Resume</span>
-                </motion.a>
+                  <FileDown className="w-4 h-4" />
+                  Download Resume
+                </a>
               </div>
             </div>
 
           </div>
         </div>
-      </section>
+      </SectionContainer>
     </>
   );
 }

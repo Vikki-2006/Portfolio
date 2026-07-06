@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { ChevronUp } from 'lucide-react';
 
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" className={className} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +50,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-[var(--footer-bg)] border-t border-[var(--footer-border)] py-12 relative select-none transition-all duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1400px] mx-auto px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-6">
           
           {/* Left: Branding Logo in Yesteryear */}
@@ -120,16 +119,29 @@ export default function Footer() {
           Back to Top
         </span>
 
-        {/* Button Wrapper with Gradient Border */}
+        {/* Transparent Button with Gradient Arrow & Hover Glow */}
         <button
           onClick={scrollToTop}
-          className="w-12 h-12 p-[1.5px] bg-gradient-to-r from-violet-600 to-pink-500 rounded-xl hover:scale-[1.08] hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] active:scale-95 transition-all duration-300 flex items-center justify-center cursor-pointer overflow-hidden"
+          className="hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center cursor-pointer bg-transparent border-0 p-0 outline-none select-none"
           aria-label="Back to top"
         >
-          {/* Dark Glass Background with blur */}
-          <div className="w-full h-full bg-[var(--card-bg)]/90 backdrop-blur rounded-[11px] flex items-center justify-center text-[var(--purple)] transition-colors duration-300">
-            <ChevronUp className="w-5 h-5" />
-          </div>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="url(#arrow-grad)"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-8 h-8 filter drop-shadow-[0_0_2px_rgba(139,92,246,0.4)] hover:drop-shadow-[0_0_8px_rgba(139,92,246,0.85)] transition-all duration-300"
+          >
+            <defs>
+              <linearGradient id="arrow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#7C3AED" />
+                <stop offset="100%" stopColor="#EC4899" />
+              </linearGradient>
+            </defs>
+            <path d="m18 15-6-6-6 6" />
+          </svg>
         </button>
       </div>
 

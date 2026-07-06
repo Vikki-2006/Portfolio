@@ -1,5 +1,6 @@
 import { Trophy } from 'lucide-react';
 import { motion } from 'framer-motion';
+import SectionContainer from './SectionContainer';
 
 interface Achievement {
   id: string;
@@ -68,17 +69,15 @@ const achievementsData: Achievement[] = [
 
 export default function Achievements() {
   return (
-    <section id="achievements" className="py-20 bg-transparent relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="max-w-3xl mb-12 text-left">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)]">Milestones</h2>
-          <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl tracking-tight">Achievements & Competitive Records</p>
-          <div className="section-underline"></div>
-        </div>
+    <SectionContainer id="achievements">
+      {/* Section Header */}
+      <div className="mb-10 text-left">
+        <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)]">Milestones</h2>
+        <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl tracking-tight">Achievements & Competitive Records</p>
+        <div className="section-underline"></div>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {achievementsData.map((item, index) => {
             const Icon = item.icon;
             return (
@@ -176,8 +175,6 @@ export default function Achievements() {
             );
           })}
         </div>
-
-      </div>
-    </section>
+    </SectionContainer>
   );
 }

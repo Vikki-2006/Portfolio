@@ -1,22 +1,21 @@
 import { GraduationCap, MapPin, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
+import SectionContainer from './SectionContainer';
 
 export default function About() {
   return (
-    <section id="about" className="py-20 bg-transparent relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16 text-left">
+    <SectionContainer id="about">
+      {/* Section Header */}
+      <div className="mb-10 text-left">
           <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)]">ABOUT ME</h2>
           <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl tracking-tight">Building Scalable Software Solutions</p>
           <div className="section-underline"></div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[58fr_42fr] gap-12 items-start">
           
           {/* Left Column: Biography Narrative */}
-          <div className="lg:col-span-7 space-y-6 text-zinc-300 text-base sm:text-lg leading-relaxed font-medium">
+          <div className="space-y-6 text-zinc-300 text-base sm:text-lg leading-relaxed font-medium">
             <p>
               I'm Vigneshwaran S, a B.Tech Information Technology student passionate about software engineering and full-stack web development. I enjoy transforming ideas into modern, scalable applications with clean architecture, intuitive user experiences, and efficient backend systems.
             </p>
@@ -36,14 +35,13 @@ export default function About() {
           </div>
 
           {/* Right Column: Key Details / Education Card */}
-          <div className="lg:col-span-5">
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="glass-panel portfolio-card rounded-2xl p-6 sm:p-8 border border-zinc-800 shadow-xl relative overflow-hidden"
-            >
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="glass-panel portfolio-card rounded-2xl p-6 sm:p-8 border border-zinc-800 shadow-xl relative overflow-hidden"
+          >
               {/* Subtle background glow */}
               <div className="absolute -top-16 -right-16 w-32 h-32 bg-violet-600/10 rounded-full blur-2xl pointer-events-none"></div>
 
@@ -79,10 +77,6 @@ export default function About() {
               </div>
             </motion.div>
           </div>
-
-        </div>
-
-      </div>
-    </section>
+      </SectionContainer>
   );
 }

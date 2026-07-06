@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
+import SectionContainer from './SectionContainer';
 
 interface TechItem {
   name: string;
@@ -283,34 +284,16 @@ function SkillCard({ category }: { category: SkillCategory }) {
 
         <div className="flex flex-col h-full justify-between gap-6">
           
-          {/* Top Block: Category Details (Left) and Logo Grid (Right) */}
-          <div className="flex flex-col sm:flex-row justify-between items-start gap-4 relative z-10">
+          {/* Top Block: Category Details */}
+          <div className="relative z-10">
             
-            {/* Left: Elegant Minimal Accent Bar + Title + Subtitle */}
+            {/* Elegant Minimal Accent Bar + Title + Subtitle */}
             <div className="flex items-center gap-4.5">
               <div className="w-[4px] h-11 rounded-full bg-gradient-to-b from-violet-500 to-pink-500 flex-shrink-0" />
               <div>
                 <h3 className="text-lg sm:text-xl font-bold text-zinc-100 leading-tight font-sans">{category.title}</h3>
                 <p className="text-zinc-500 text-xs mt-1.5 uppercase tracking-wider font-semibold font-sans">{category.subtitle}</p>
               </div>
-            </div>
-
-            {/* Right: Quick Tech Logo Strip with Official Colors */}
-            <div className="flex items-center gap-1.5 flex-wrap bg-[var(--tag-bg)] p-1.5 rounded-lg border border-[var(--border-color)]">
-              {category.items.map((tech, techIndex) => {
-                const TechIcon = tech.icon;
-                return (
-                  <div 
-                    key={techIndex} 
-                    className="p-1.5 rounded bg-zinc-950/80 transition-all duration-300 flex items-center justify-center"
-                    title={tech.name}
-                  >
-                    <TechIcon 
-                      className="w-5 h-5 filter saturate-[1.1] hover:scale-110 transition-transform duration-300" 
-                    />
-                  </div>
-                );
-              })}
             </div>
 
           </div>
@@ -347,22 +330,20 @@ function SkillCard({ category }: { category: SkillCategory }) {
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-20 bg-transparent relative">
-      
+    <SectionContainer id="skills">
       {/* Background radial glow */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-r from-violet-600/5 to-pink-500/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+      <div className="relative z-10">
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 text-left">
+        <div className="mb-10 text-left">
           <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)] font-sans">MY SKILLS</h2>
           <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl font-sans tracking-tight">Technologies I Work With</p>
           <div className="section-underline"></div>
         </div>
 
         {/* 2x2 Grid Layout - Equal heights, spacious gaps */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {skillsData.map((category, catIndex) => (
             <SkillCard 
               key={catIndex} 
@@ -370,8 +351,7 @@ export default function Skills() {
             />
           ))}
         </div>
-
       </div>
-    </section>
+    </SectionContainer>
   );
 }

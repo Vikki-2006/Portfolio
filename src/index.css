@@ -644,137 +644,188 @@ html[data-theme="light"] .social-icon-btn:hover {
   transform: scale(1.05) translateY(-2px) !important;
 }
 
-/* Primary Button (Explore My Projects) */
+/* ═══════════════════════════════════════════════════════
+   PREMIUM BUTTON STYLES
+   Unified premium CTA styles for all primary/secondary buttons.
+   ═══════════════════════════════════════════════════════ */
+
+/* Primary Gradient CTA Button */
+.portfolio-btn-primary,
 .hero-btn-primary {
   position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  border-radius: 9999px;
-  font-weight: 600;
+  border-radius: 14px; /* 12–14px rounded corners */
+  font-weight: 600; /* Semibold weight */
+  font-size: 0.875rem; /* text-sm default */
+  letter-spacing: 0.025em; /* slight tracking-wide */
   text-decoration: none;
-  font-size: 0.875rem; /* text-sm */
-  letter-spacing: 0.025em; /* tracking-wide */
   cursor: pointer;
-  will-change: transform;
-  backface-visibility: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* thin semi-transparent border */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   
-  /* Transition rule */
-  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
-              background 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  /* Gradient Shift Setup */
+  background-size: 200% auto;
+  background-position: left center;
+  color: #FFFFFF !important;
+  
+  /* Transition: smooth 250–300ms ease */
+  transition: 
+    transform 280ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-position 280ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 280ms cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
+html[data-theme="dark"] .portfolio-btn-primary,
 html[data-theme="dark"] .hero-btn-primary {
-  background: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%) !important;
-  color: #FFFFFF !important;
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.15) !important;
+  /* Toned down soft gradient */
+  background-image: linear-gradient(135deg, #6D28D9 0%, #B61C7A 50%, #6D28D9 100%) !important;
+  /* Soft shadow only (no neon bloom) */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
 }
 
-html[data-theme="dark"] .hero-btn-primary:hover {
-  transform: translateY(-3px) scale(1.03) !important;
-  background: linear-gradient(135deg, #8B5CF6 0%, #FF5FA7 100%) !important; /* brighter */
-  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.35) !important;
-}
-
+html[data-theme="light"] .portfolio-btn-primary,
 html[data-theme="light"] .hero-btn-primary {
-  background: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%) !important;
-  color: #FFFFFF !important;
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.2) !important;
+  /* Soft gradient for light mode */
+  background-image: linear-gradient(135deg, #5B21B6 0%, #BE185D 50%, #5B21B6 100%) !important;
+  /* Soft shadow only */
+  box-shadow: 0 4px 12px rgba(109, 40, 217, 0.1), 0 1px 3px rgba(109, 40, 217, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
+.portfolio-btn-primary:hover,
+.hero-btn-primary:hover {
+  transform: translateY(-2px) !important; /* Slight lift */
+  background-position: right center !important; /* Gradient shift */
+}
+
+html[data-theme="dark"] .portfolio-btn-primary:hover,
+html[data-theme="dark"] .hero-btn-primary:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+html[data-theme="light"] .portfolio-btn-primary:hover,
 html[data-theme="light"] .hero-btn-primary:hover {
-  transform: translateY(-3px) scale(1.03) !important;
-  background: linear-gradient(135deg, #8B5CF6 0%, #FF5FA7 100%) !important; /* brighter */
-  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.35) !important;
+  box-shadow: 0 6px 18px rgba(109, 40, 217, 0.15), 0 2px 6px rgba(109, 40, 217, 0.08) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
 }
 
+.portfolio-btn-primary:active,
 .hero-btn-primary:active {
-  transform: translateY(0) scale(0.98) !important;
-  transition-duration: 80ms !important;
+  transform: scale(0.98) translateY(0) !important; /* Scale to 0.98, natural compression */
 }
 
-/* Arrow Icon animation in Primary Button */
-.hero-btn-primary .arrow-icon {
-  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
+html[data-theme="dark"] .portfolio-btn-primary:active,
+html[data-theme="dark"] .hero-btn-primary:active {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) !important;
 }
 
-.hero-btn-primary:hover .arrow-icon {
-  transform: translateX(4px) !important;
+html[data-theme="light"] .portfolio-btn-primary:active,
+html[data-theme="light"] .hero-btn-primary:active {
+  box-shadow: 0 2px 6px rgba(109, 40, 217, 0.08) !important;
 }
 
-/* Secondary Button (View Resume) */
+/* Secondary Button (Dark style with border highlight) */
+.portfolio-btn-secondary,
 .hero-btn-secondary {
   position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  border-radius: 9999px;
+  border-radius: 14px;
   font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
   text-decoration: none;
-  font-size: 0.875rem; /* text-sm */
-  letter-spacing: 0.025em; /* tracking-wide */
   cursor: pointer;
-  will-change: transform;
-  backface-visibility: hidden;
-
-  /* Transition rule */
-  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
-              background-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
-              color 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  
+  /* Transition: smooth 250–300ms ease */
+  transition: 
+    transform 280ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 280ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 280ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 280ms cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* Secondary Button Dark Mode */
+html[data-theme="dark"] .portfolio-btn-secondary,
 html[data-theme="dark"] .hero-btn-secondary {
-  background-color: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  color: rgba(255, 255, 255, 0.92) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
 }
 
+html[data-theme="dark"] .portfolio-btn-secondary:hover,
 html[data-theme="dark"] .hero-btn-secondary:hover {
-  background-color: rgba(139, 92, 246, 0.18) !important;
-  border-color: #8B5CF6 !important;
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(139, 92, 246, 0.4) !important; /* subtle border highlight on hover */
   color: #FFFFFF !important;
-  box-shadow: 
-    0 8px 24px rgba(139, 92, 246, 0.25),
-    0 0 35px rgba(236, 72, 153, 0.12) !important;
-  transform: translateY(-3px) scale(1.02) !important;
+  transform: translateY(-2px) !important; /* Slight lift */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important; /* very soft shadow */
 }
 
-/* Secondary Button Light Mode */
+html[data-theme="light"] .portfolio-btn-secondary,
 html[data-theme="light"] .hero-btn-secondary {
   background-color: #FFFFFF !important;
   border: 1px solid #D4D4D8 !important;
   color: #18181B !important;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
 }
 
+html[data-theme="light"] .portfolio-btn-secondary:hover,
 html[data-theme="light"] .hero-btn-secondary:hover {
-  background-color: rgba(124, 58, 237, 0.05) !important; /* light violet bg tint */
-  border-color: #7C3AED !important; /* border changes to violet */
-  color: #7C3AED !important; /* text transitions to violet */
-  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.08) !important; /* soft shadow appears gradually */
-  transform: translateY(-3px) scale(1.02) !important;
+  background-color: rgba(124, 58, 237, 0.03) !important;
+  border-color: rgba(124, 58, 237, 0.4) !important; /* subtle border highlight */
+  color: #7C3AED !important;
+  transform: translateY(-2px) !important; /* Slight lift */
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.06) !important; /* soft shadow */
 }
 
+.portfolio-btn-secondary:active,
 .hero-btn-secondary:active {
-  transform: translateY(0) scale(0.98) !important;
-  transition-duration: 80ms !important;
+  transform: scale(0.98) translateY(0) !important;
 }
 
-/* File Icon animation in Secondary Button */
+/* Icon slide animation on hover (統一 3–4px translation) */
+.portfolio-btn-primary svg,
+.portfolio-btn-primary .arrow-icon,
+.portfolio-btn-primary .file-icon,
+.portfolio-btn-secondary svg,
+.portfolio-btn-secondary .arrow-icon,
+.portfolio-btn-secondary .file-icon,
+.hero-btn-primary svg,
+.hero-btn-primary .arrow-icon,
+.hero-btn-primary .file-icon,
+.hero-btn-secondary svg,
+.hero-btn-secondary .arrow-icon,
 .hero-btn-secondary .file-icon {
-  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1) !important;
   will-change: transform;
 }
 
+.portfolio-btn-primary:hover svg,
+.portfolio-btn-primary:hover .arrow-icon,
+.portfolio-btn-primary:hover .file-icon,
+.portfolio-btn-secondary:hover svg,
+.portfolio-btn-secondary:hover .arrow-icon,
+.portfolio-btn-secondary:hover .file-icon,
+.hero-btn-primary:hover svg,
+.hero-btn-primary:hover .arrow-icon,
+.hero-btn-primary:hover .file-icon,
+.hero-btn-secondary:hover svg,
+.hero-btn-secondary:hover .arrow-icon,
 .hero-btn-secondary:hover .file-icon {
-  transform: translateY(-2px) rotate(8deg) !important;
+  transform: translateX(4px) !important; /* Slide 3-4px to the right */
 }
 
 /* Theme Toggle Button custom styles */

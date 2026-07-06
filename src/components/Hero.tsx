@@ -2,39 +2,19 @@ import { FileText, ArrowRight } from 'lucide-react';
 import profile from '@/assets/profile.png';
 import { motion } from 'framer-motion';
 import { type ReactNode } from 'react';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { SiLeetcode, SiCodechef, SiHackerrank } from 'react-icons/si';
 import { useTheme } from '../context/ThemeContext';
 
-const GithubIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-  </svg>
-);
+const GithubIcon = ({ className }: { className?: string }) => <FaGithub className={className} />;
 
-const LinkedinIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
-    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-  </svg>
-);
+const LinkedinIcon = ({ className }: { className?: string }) => <FaLinkedin className={className} />;
 
-const LeetCodeIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
-    <path d="M13.483 0a1.374 1.374 0 0 0-.961.414l-9.8 9.8a1.375 1.375 0 0 0 0 1.956l.085.085a1.379 1.379 0 0 0 1.951-.01l9.74-9.751a1.375 1.375 0 0 0-.929-2.494zM11.224 3.407a1.376 1.376 0 0 0-.97.408l-7.9 7.9a1.375 1.375 0 0 0 0 1.956l.085.085a1.379 1.379 0 0 0 1.951-.01l7.84-7.851a1.375 1.375 0 0 0-.929-2.494zM22.564 13.045a1.377 1.377 0 0 0-1.916.03l-4.14 4.14a1.375 1.375 0 0 0 0 1.956l.085.085a1.379 1.379 0 0 0 1.951-.01l4.08-4.091a1.375 1.375 0 0 0-.06-2.11z"/>
-    <path d="M16.883 8.812a1.37 1.37 0 0 0-1.65-.205l-10.2 6a1.375 1.375 0 0 0-.326 2.21l.067.067a1.379 1.379 0 0 0 1.91-.18l9.54-7.89a1.375 1.375 0 0 0 .659-1.956z"/>
-  </svg>
-);
+const LeetCodeIcon = ({ className }: { className?: string }) => <SiLeetcode className={className} />;
 
-const CodeChefIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
-    <path d="M21 11.235V12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.09 0 4.01.71 5.54 1.9l1.415-1.415C16.89 2.01 14.54 1 12 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11c0-.77-.08-1.52-.232-2.245L21 11.235z"/>
-    <path d="M18.5 7.5c-.828 0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5 1.5-.672 1.5-1.5-.672-1.5-1.5-1.5zm-6.5-4c-2.485 0-4.5 2.015-4.5 4.5s2.015 4.5 4.5 4.5 4.5-2.015 4.5-4.5-2.015-4.5-4.5-4.5z"/>
-  </svg>
-);
+const CodeChefIcon = ({ className }: { className?: string }) => <SiCodechef className={className} />;
 
-const HackerRankIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 0a12 12 0 0 0-3.3 23.5v-4.148c0-.39-.17-.74-.47-.96L3.9 15.17c-.3-.22-.47-.58-.47-.96V9.79c0-.38.17-.74.47-.96L8.23 5.4c.3-.22.47-.58.47-.96V2.29A10.021 10.021 0 0 1 12 2c1.23 0 2.42.22 3.53.62l-.76.76c-.28.28-.43.66-.43 1.06v2.338c0 .38-.17.74-.47.96l-3.37 2.47a.784.784 0 0 0-.3.62v2.36a.784.784 0 0 0 .3.62l3.37 2.47c.3.22.47.58.47.96v4.12A12.001 12.001 0 0 0 12 0zm0 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/>
-  </svg>
-);
+const HackerRankIcon = ({ className }: { className?: string }) => <SiHackerrank className={className} />;
 
 interface SocialLinkProps {
   href: string;
@@ -86,11 +66,11 @@ export default function Hero() {
   return (
     <section id="home" className="relative min-h-screen pt-32 pb-20 flex items-center justify-center bg-transparent">
       
-      <div className="max-w-[1450px] mx-auto px-6 sm:px-8 lg:px-12 w-full relative z-10">
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center justify-between">
+      <div className="max-w-[1400px] mx-auto px-8 w-full relative z-10">
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 xl:gap-x-28 2xl:gap-x-36 items-center justify-between">
           
           {/* Left Column: Text & Links */}
-          <div className="w-full lg:w-[52%] flex flex-col items-center lg:items-start text-center lg:text-left">
+          <div className="w-full lg:w-[60%] flex flex-col items-center lg:items-start text-center lg:text-left">
             
             {/* Redesigned Hero Heading matching Sujith G portfolio Visual Hierarchy */}
             <motion.h1 
@@ -99,11 +79,32 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.0 }}
               className="mb-3 text-center lg:text-left flex flex-col w-full items-center lg:items-start"
             >
-              <div className="flex flex-col items-center lg:items-start select-none mb-[7px]">
-                <span className="font-generalsans-semibold text-zinc-100 text-[26px] sm:text-[32px] lg:text-[38px] leading-none tracking-[-0.02em]">
-                  Hi, I'm
-                </span>
-                <div className="w-[48px] h-[3px] bg-gradient-to-r from-violet-500 to-pink-500 rounded-full mt-2"></div>
+              <div className="flex flex-col items-center lg:items-start select-none mb-6 group">
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0 }}
+                  className="inline-flex items-center"
+                >
+                  <span
+                    className="font-outfit text-[22px] sm:text-[28px] lg:text-[34px] font-semibold tracking-[-0.02em] leading-[1.1] text-[rgba(255,255,255,0.96)] transition-colors duration-300"
+                    style={{ textShadow: '0 0 10px rgba(139,92,246,0.10)' }}
+                  >
+                    Hello,
+                  </span>
+                  <span
+                    className="font-outfit text-[22px] sm:text-[28px] lg:text-[34px] font-semibold tracking-[-0.02em] leading-[1.1] bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent transition-colors duration-300 ml-2"
+                    style={{ textShadow: '0 0 10px rgba(139,92,246,0.10)' }}
+                  >
+                    I&apos;m
+                  </span>
+                </motion.div>
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+                  className="origin-left w-[56px] h-[3px] mt-2.5 rounded-full bg-gradient-to-r from-[#8B5CF6] via-[#A855F7] to-[#EC4899] shadow-[0_0_18px_rgba(139,92,246,0.15)] transition-[filter,opacity] duration-300 group-hover:brightness-110"
+                />
               </div>
               <span className="font-milker bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 bg-clip-text text-transparent text-[21px] sm:text-[36px] lg:text-[53px] leading-[1.05] py-0.5 whitespace-nowrap block select-all tracking-normal">
                 VIGNESHWARAN S
@@ -117,11 +118,7 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="flex flex-wrap justify-center lg:justify-start gap-2 mt-4 text-zinc-400 font-semibold text-sm sm:text-base"
             >
-              <span>Software Engineer</span>
-              <span className="text-zinc-500">•</span>
-              <span>Full Stack Developer</span>
-              <span className="text-zinc-500">•</span>
-              <span>Backend Developer</span>
+              <span>Full-Stack Developer • Competitive Programmer • Problem Solver</span>
             </motion.div>
 
             {/* Introduction */}
@@ -129,9 +126,10 @@ export default function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-8 text-zinc-300 text-base sm:text-lg leading-relaxed max-w-xl font-medium"
+              className="mt-8 text-zinc-300 text-base sm:text-lg leading-relaxed max-w-3xl font-medium"
+              style={{ textAlign: 'justify', textJustify: 'inter-word' }}
             >
-              Passionate Full Stack Developer focused on building scalable, high-quality web applications using Python, React, FastAPI, and SQL. Strong foundation in software engineering, data structures, algorithms, and problem solving, with a commitment to writing clean, efficient, and maintainable code. Currently seeking Software Engineer Internship and Full-Time opportunities.
+              Passionate Software Engineer specializing in full-stack web development with expertise in <span className="text-[var(--purple)]">React</span>, <span className="text-[var(--purple)]">FastAPI</span>, <span className="text-[var(--purple)]">Python</span>, <span className="text-[var(--purple)]">C</span>, <span className="text-[var(--purple)]">C++</span>, <span className="text-[var(--purple)]">PostgreSQL</span>, and <span className="text-[var(--purple)]">Firebase</span>. Experienced in building scalable applications, designing efficient backend systems, and delivering intuitive user experiences. Backed by strong computer science fundamentals, internship experience, and a commitment to continuous learning, I strive to build software that is clean, maintainable, and impactful. Currently seeking Software Engineer Internship and Full-Time opportunities to contribute to innovative engineering teams.
             </motion.p>
 
             {/* Action Buttons */}
@@ -143,7 +141,7 @@ export default function Hero() {
             >
               <a
                 href="#projects"
-                className="hero-btn-primary inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm tracking-wide"
+                className="hero-btn-primary px-7 py-3.5 text-sm"
               >
                 Explore My Projects
                 <ArrowRight className="arrow-icon w-4 h-4" />
@@ -152,7 +150,7 @@ export default function Hero() {
                 href="/Vigneshwaran_S_Resume_Updated.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hero-btn-secondary inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm tracking-wide"
+                className="hero-btn-secondary px-7 py-3.5 text-sm"
               >
                 View Resume
                 <FileText className="file-icon w-4 h-4" />
@@ -170,27 +168,27 @@ export default function Hero() {
               <div className="flex flex-wrap justify-center lg:justify-start gap-4">
                 <SocialLink 
                   href="https://github.com/Vikki-2006" 
-                  icon={<GithubIcon />} 
+                  icon={<GithubIcon className="w-5 h-5" />} 
                   title="GitHub" 
                 />
                 <SocialLink 
                   href="https://www.linkedin.com/in/vigneshwaran-s-1b4364369/" 
-                  icon={<LinkedinIcon />} 
+                  icon={<LinkedinIcon className="w-5 h-5" />} 
                   title="LinkedIn" 
                 />
                 <SocialLink 
                   href="https://leetcode.com/u/Vikki-2006/" 
-                  icon={<LeetCodeIcon />} 
+                  icon={<LeetCodeIcon className="w-5 h-5" />} 
                   title="LeetCode" 
                 />
                 <SocialLink 
                   href="https://www.codechef.com/users/vikki2006" 
-                  icon={<CodeChefIcon />} 
+                  icon={<CodeChefIcon className="w-5 h-5" />} 
                   title="CodeChef" 
                 />
                 <SocialLink 
                   href="https://www.hackerrank.com/profile/Vikki_2006" 
-                  icon={<HackerRankIcon />} 
+                  icon={<HackerRankIcon className="w-5 h-5" />} 
                   title="HackerRank" 
                 />
               </div>
@@ -198,7 +196,7 @@ export default function Hero() {
           </div>
 
           {/* Right Column: Premium Corporate Orbits Portrait UI */}
-          <div className="w-full lg:w-[48%] flex flex-col items-center justify-center relative mb-14 lg:mb-0">
+          <div className="w-full lg:w-[40%] flex flex-col items-center justify-center relative mb-14 lg:mb-0">
             
             {/* Master float translateY container */}
             <motion.div

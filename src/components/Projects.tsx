@@ -1,5 +1,6 @@
 import { ExternalLink, Trash2, LayoutGrid } from 'lucide-react';
 import { motion } from 'framer-motion';
+import SectionContainer from './SectionContainer';
 
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" className={`${className} fill-current`} xmlns="http://www.w3.org/2000/svg">
@@ -183,18 +184,16 @@ function ProjectScreenshotPlaceholder({ type }: { type: 'iot' | 'kanban' | 'port
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20 bg-transparent relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16 text-left">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)]">My Creations</h2>
-          <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl tracking-tight">Featured Projects</p>
-          <div className="section-underline"></div>
-        </div>
+    <SectionContainer id="projects">
+      {/* Section Header */}
+      <div className="mb-10 text-left">
+        <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)]">My Creations</h2>
+        <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl tracking-tight">Featured Projects</p>
+        <div className="section-underline"></div>
+      </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Projects Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projectsData.map((project, index) => (
             <motion.div
               key={project.id}
@@ -251,7 +250,7 @@ export default function Projects() {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="portfolio-btn-secondary flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl border border-zinc-800 bg-zinc-900/30 text-xs font-semibold text-zinc-300 hover:bg-zinc-900 hover:text-white transition-all hover:scale-[1.02]"
+                    className="portfolio-btn-secondary w-full py-2.5 text-xs"
                   >
                     <GithubIcon className="w-4.5 h-4.5" />
                     Codebase
@@ -262,7 +261,7 @@ export default function Projects() {
                       href={project.demoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="portfolio-btn-primary flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-violet-600 to-red-500 shadow-md shadow-violet-600/5 hover:scale-[1.02] transition-all"
+                      className="portfolio-btn-primary w-full py-2.5 text-xs"
                     >
                       <ExternalLink className="w-4 h-4" />
                       Live Demo
@@ -270,10 +269,10 @@ export default function Projects() {
                   ) : (
                     <button
                       disabled
-                      className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--tag-bg)] text-xs font-semibold text-zinc-500 cursor-not-allowed select-none"
+                      className="portfolio-btn-secondary w-full py-2.5 text-xs opacity-50 cursor-not-allowed select-none"
                       title="Live deployment is not active"
                     >
-                      <ExternalLink className="w-4 h-4 text-zinc-500" />
+                      <ExternalLink className="w-4 h-4" />
                       Live Demo
                     </button>
                   )}
@@ -284,8 +283,6 @@ export default function Projects() {
             </motion.div>
           ))}
         </div>
-
-      </div>
-    </section>
+    </SectionContainer>
   );
 }

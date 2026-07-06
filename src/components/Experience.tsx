@@ -1,5 +1,6 @@
 import { Briefcase, Calendar, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import SectionContainer from './SectionContainer';
 
 interface InternshipDetails {
   role: string;
@@ -21,18 +22,16 @@ const internshipData: InternshipDetails = {
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-20 bg-transparent relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16 text-left">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)]">Professional Path</h2>
-          <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl tracking-tight">Internship Experience</p>
-          <div className="section-underline"></div>
-        </div>
+    <SectionContainer id="experience">
+      {/* Section Header */}
+      <div className="mb-10 text-left">
+        <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)]">Professional Path</h2>
+        <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl tracking-tight">Internship Experience</p>
+        <div className="section-underline"></div>
+      </div>
 
-        {/* Timeline Container */}
-        <div className="relative max-w-3xl mx-auto lg:mx-0">
+      {/* Timeline Container */}
+      <div className="relative w-full">
           
           {/* Vertical Path Line */}
           <div 
@@ -89,7 +88,6 @@ export default function Experience() {
 
         </div>
 
-      </div>
-    </section>
+    </SectionContainer>
   );
 }

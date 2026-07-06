@@ -1,6 +1,7 @@
 import { ShieldCheck, Award, Trophy } from 'lucide-react';
 import { SiMeta } from 'react-icons/si';
 import { motion } from 'framer-motion';
+import SectionContainer from './SectionContainer';
 
 const IbmIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" className={`${className} fill-current`} xmlns="http://www.w3.org/2000/svg">
@@ -62,18 +63,16 @@ const certificationsData: Certification[] = [
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="py-20 bg-transparent relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16 text-left">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)]">Credentials</h2>
-          <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl tracking-tight">Industry Certifications</p>
-          <div className="section-underline"></div>
-        </div>
+    <SectionContainer id="certifications">
+      {/* Section Header */}
+      <div className="mb-10 text-left">
+        <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)]">Credentials</h2>
+        <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl tracking-tight">Industry Certifications</p>
+        <div className="section-underline"></div>
+      </div>
 
-        {/* Certifications Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Certifications Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {certificationsData.map((cert, index) => {
             const Icon = cert.logo;
             return (
@@ -129,8 +128,6 @@ export default function Certifications() {
             );
           })}
         </div>
-
-      </div>
-    </section>
+    </SectionContainer>
   );
 }
