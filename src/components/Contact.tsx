@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Mail, MapPin, FileText, ArrowRight, User, MessageSquare, Check, Loader2, FileDown } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { sendContactEmail } from '../lib/emailjs';
+import { sendContactEmail } from '../lib/web3forms';
 import SectionContainer from './SectionContainer';
 import Toast from './Toast';
 import type { ToastData, ToastType } from './Toast';
@@ -67,14 +67,10 @@ export default function Contact() {
       await sendContactEmail(form);
       setIsSent(true);
       setForm({ name: '', email: '', subject: '', message: '' });
-      showToast('success', 'Message sent successfully!', "Thanks for reaching out. I'll get back to you soon.");
+      showToast('success', 'Message sent successfully!', "I'll get back to you soon.");
       setTimeout(() => setIsSent(false), 4000);
     } catch (error: unknown) {
-      const isDev = import.meta.env.DEV;
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      showToast('error', isDev
-        ? `Send failed: ${errorMessage}`
-        : 'Failed to send message. Please try again or email me directly at vikki.29062006@gmail.com');
+      showToast('error', 'Unable to send message.', 'Please try again later.');
     } finally {
       setIsSubmitting(false);
     }
