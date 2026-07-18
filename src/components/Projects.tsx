@@ -1,4 +1,4 @@
-import { ExternalLink, Trash2, LayoutGrid } from 'lucide-react';
+import { ExternalLink, Trash2, LayoutGrid, Terminal, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionContainer from './SectionContainer';
 
@@ -16,7 +16,7 @@ interface Project {
   tags: string[];
   githubUrl: string;
   demoUrl?: string; // If undefined or empty, demo button will be disabled
-  placeholderType: 'iot' | 'kanban' | 'portfolio';
+  placeholderType: 'iot' | 'kanban' | 'portfolio' | 'cli';
 }
 
 const projectsData: Project[] = [
@@ -35,16 +35,16 @@ const projectsData: Project[] = [
   },
   {
     id: '02',
-    title: 'Task Management System',
-    category: 'Full Stack Web Application',
+    title: 'AI Developer Assistant CLI',
+    category: 'AI & CLI Application',
     description: [
-      'Built a full-stack task management app with JWT authentication, CRUD operations, and status tracking.',
-      'Designed a normalized PostgreSQL schema with foreign key constraints ensuring strict multi-user data isolation.',
-      'Implemented protected routes on both React frontend and FastAPI backend for secure, role-based access control.'
+      "Developed a modular AI-powered command-line developer assistant integrating Google's Gemini API to help developers generate code, explain concepts, debug programs, and create technical documentation.",
+      "Designed a clean, extensible architecture with reusable Python modules, configuration management, Markdown rendering, conversation history, and interactive CLI workflows.",
+      "Implemented secure environment-based API key management, customizable prompts, session persistence, and a production-ready project structure following software engineering best practices."
     ],
-    tags: ['React', 'TypeScript', 'FastAPI', 'PostgreSQL', 'JWT'],
-    githubUrl: 'https://github.com/Vikki-2006',
-    placeholderType: 'kanban'
+    tags: ['Python', 'Google Gemini API', 'Markdown', 'CLI'],
+    githubUrl: 'https://github.com/Vikki-2006/ai-developer-assistant',
+    placeholderType: 'cli'
   },
   {
     id: '03',
@@ -64,7 +64,101 @@ const projectsData: Project[] = [
 ];
 
 // Modern CSS/SVG Mockup placeholders instead of AI illustrations or empty grids
-function ProjectScreenshotPlaceholder({ type }: { type: 'iot' | 'kanban' | 'portfolio' }) {
+function ProjectScreenshotPlaceholder({ type }: { type: 'iot' | 'kanban' | 'portfolio' | 'cli' }) {
+  if (type === 'cli') {
+    return (
+      <div className="w-full h-48 bg-gradient-to-b from-[#13131A] to-[#0A0A0E] border-b border-zinc-900 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-zinc-800 transition-all select-none">
+        {/* Ambient radial glows */}
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-28 h-28 bg-purple-500/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-28 h-28 bg-pink-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        {/* Terminal/CLI Mockup */}
+        <div className="w-full h-full bg-zinc-950/75 border border-zinc-800/60 rounded-xl flex flex-col overflow-hidden shadow-xl backdrop-blur-sm relative z-10">
+          {/* Title Bar */}
+          <div className="flex items-center justify-between px-3 py-1.5 border-b border-zinc-900/60 bg-zinc-950/40">
+            <div className="flex items-center gap-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-red-500/60"></div>
+              <div className="w-1.5 h-1.5 rounded-full bg-yellow-500/60"></div>
+              <div className="w-1.5 h-1.5 rounded-full bg-green-500/60"></div>
+              <span className="text-[8px] text-zinc-500 font-mono ml-2 flex items-center gap-1">
+                <Terminal className="w-2.5 h-2.5 text-violet-400" />
+                gemini-cli-assistant
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="px-1.5 py-0.5 rounded bg-zinc-900 border border-zinc-800/60 text-[7px] font-mono text-zinc-500 flex items-center gap-0.5">
+                <span className="w-1 h-1 rounded-full bg-emerald-500"></span>
+                active
+              </span>
+            </div>
+          </div>
+
+          {/* Body with Split View */}
+          <div className="flex-grow grid grid-cols-2 gap-2 p-2.5 font-mono text-[8px] leading-normal overflow-hidden">
+            {/* Left Terminal Prompt & Answer */}
+            <div className="flex flex-col justify-between border-r border-zinc-900/60 pr-2">
+              <div className="space-y-1.5">
+                <div className="flex items-start gap-1">
+                  <span className="text-pink-500 font-bold">$</span>
+                  <span className="text-zinc-200">gemini-cli explain search</span>
+                </div>
+                <div className="text-zinc-400 space-y-1 pl-1.5 border-l border-zinc-800/80">
+                  <div className="flex items-center gap-1 text-[7px] text-violet-400 font-semibold">
+                    <Sparkles className="w-2 h-2 text-violet-400 animate-pulse" />
+                    <span>Gemini:</span>
+                  </div>
+                  <p className="text-[7px] leading-normal text-zinc-500">
+                    Binary search splits the list in halves. Code generated...
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-1 text-[7px] text-violet-400 font-bold">
+                <span>Python 3.10</span>
+              </div>
+            </div>
+
+            {/* Right Editor Pane */}
+            <div className="pl-1 flex flex-col justify-between">
+              <div className="space-y-1">
+                <div className="flex items-center justify-between text-[7px] text-zinc-500 pb-0.5 border-b border-zinc-900/40">
+                  <span>binary_search.py</span>
+                  <span className="text-violet-400 font-bold">Generated</span>
+                </div>
+                {/* Syntax highlighted lines */}
+                <div className="space-y-0.5 font-mono text-[7px] text-zinc-300">
+                  <div>
+                    <span className="text-pink-500">def</span> <span className="text-blue-400">search</span><span className="text-zinc-400">(arr, k):</span>
+                  </div>
+                  <div className="pl-2.5 text-zinc-500">
+                    low, high = 0, len(arr)-1
+                  </div>
+                  <div className="pl-2.5">
+                    <span className="text-pink-500">while</span> low &lt;= high:
+                  </div>
+                  <div className="pl-4.5 text-zinc-500">
+                    mid = (low + high)//2
+                  </div>
+                  <div className="pl-4.5">
+                    <span className="text-pink-500">if</span> arr[mid] == k:
+                  </div>
+                  <div className="pl-6.5">
+                    <span className="text-pink-500">return</span> mid
+                  </div>
+                </div>
+              </div>
+
+              {/* Editor status */}
+              <div className="flex items-center justify-between text-[6px] text-zinc-650 pt-0.5">
+                <span>markdown-doc</span>
+                <span>Ln 1, Col 1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (type === 'iot') {
     return (
       <div className="w-full h-48 bg-gradient-to-b from-[#13131A] to-[#0A0A0E] border-b border-zinc-900 flex items-center justify-center relative overflow-hidden group-hover:border-zinc-800 transition-all select-none">

@@ -1,5 +1,5 @@
 import { ShieldCheck, Award, Trophy } from 'lucide-react';
-import { SiMeta } from 'react-icons/si';
+import { SiMeta, SiHackerrank } from 'react-icons/si';
 import { motion } from 'framer-motion';
 import SectionContainer from './SectionContainer';
 
@@ -57,7 +57,15 @@ const certificationsData: Certification[] = [
     logo: Trophy,
     desc: 'Practical software engineering training in frontend components, databases, server integration, and team delivery.',
     themeColor: 'from-[#0a4a83]/10 to-[#06335c]/10',
-    link: 'https://drive.google.com/file/d/1VHepRoEKIQGfNJqYfqhgi9gp0Xt5H2B_/view'
+    link: 'https://drive.google.com/file/d/1jp6LJZ1vZi4fYFXEWO9qLSsUa3NSG7D7/view?usp=drivesdk'
+  },
+  {
+    title: 'Software Engineer Certificate',
+    issuer: 'HackerRank',
+    logo: SiHackerrank,
+    desc: "Industry-recognized certification validating problem solving, SQL, REST APIs, and software engineering fundamentals through HackerRank's Software Engineer assessment.",
+    themeColor: 'from-[#0a4a83]/10 to-[#06335c]/10',
+    link: 'https://www.hackerrank.com/certificates/2259d3828116'
   }
 ];
 

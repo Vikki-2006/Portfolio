@@ -47,9 +47,9 @@ const achievementsData: Achievement[] = [
     platform: 'HackerRank',
     icon: '/logos/hackerrank.png',
     bullets: [
-      'Earned 5★ Gold Badge in Python.',
-      'Achieved 4★ Silver Badge in C++.',
-      'Secured 4★ Badge in general Problem Solving and 2★ Badge in C.'
+      'Earned 5-Star badges in Problem Solving, Python, SQL, Java, and C++.',
+      'Earned 3-Star badges in C and React.',
+      'Continuously improving problem-solving and programming skills through HackerRank.'
     ],
     link: 'https://www.hackerrank.com/profile/Vikki_2006',
     logoHoverStyles: 'group-hover:scale-[1.05] group-hover:bg-[#2EC866]/10 group-hover:border-[#2EC866]/20 group-hover:shadow-[0_0_12px_rgba(46,200,102,0.3)]'
@@ -59,6 +59,7 @@ const achievementsData: Achievement[] = [
     title: 'TEXPERIA Hackathon Recognition',
     platform: 'SNS College of Technology',
     icon: Trophy,
+    subtitle: 'Recognized at the TEXPERIA 2026 Hackathon for developing an innovative AI-powered solution and presenting a working prototype before industry mentors and faculty reviewers.',
     bullets: [
       'Won appreciation and formal recognition for technical projects at the TEXPERIA 2026 Hackathon.',
       'Developed and pitch-demonstrated solutions alongside dynamic team structures.'
@@ -144,10 +145,17 @@ export default function Achievements() {
                           {item.title}
                         </h3>
                       )}
+                      
+                      {/* Subtitle Summary */}
+                      {item.subtitle && (
+                        <p className="text-[11px] sm:text-xs text-zinc-400 mt-1.5 leading-relaxed font-medium">
+                          {item.subtitle}
+                        </p>
+                      )}
                     </div>
-
+ 
                     {/* Description bullet points */}
-                    <ul className="space-y-2 text-zinc-300 text-xs sm:text-[13px] leading-relaxed border-t border-zinc-800 pt-3 mt-3 font-medium">
+                    <ul className="space-y-1.5 text-zinc-300 text-xs sm:text-[13px] leading-relaxed border-t border-zinc-800 pt-2.5 mt-2.5 font-medium">
                       {item.bullets.map((bullet, bIndex) => (
                         <li key={bIndex} className="flex items-start gap-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-violet-500 mt-1.5 flex-shrink-0"></span>

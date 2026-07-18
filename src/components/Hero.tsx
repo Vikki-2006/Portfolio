@@ -111,7 +111,7 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="flex flex-wrap justify-center lg:justify-start gap-2 mt-4 text-[var(--text-secondary)] font-semibold text-sm sm:text-base"
             >
-              <span>Full-Stack Developer • Competitive Programmer • Problem Solver</span>
+              <span>Full-Stack Developer • Building Intelligent Software</span>
             </motion.div>
 
             {/* Introduction */}
