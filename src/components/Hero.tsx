@@ -1,45 +1,8 @@
 import { FileText, ArrowRight } from 'lucide-react';
 import profile from '@/assets/profile.png';
 import { motion } from 'framer-motion';
-import { type ReactNode } from 'react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { SiLeetcode, SiCodechef, SiHackerrank } from 'react-icons/si';
 import { useTheme } from '../context/ThemeContext';
-
-const GithubIcon = ({ className }: { className?: string }) => <FaGithub className={className} />;
-
-const LinkedinIcon = ({ className }: { className?: string }) => <FaLinkedin className={className} />;
-
-const LeetCodeIcon = ({ className }: { className?: string }) => <SiLeetcode className={className} />;
-
-const CodeChefIcon = ({ className }: { className?: string }) => <SiCodechef className={className} />;
-
-const HackerRankIcon = ({ className }: { className?: string }) => <SiHackerrank className={className} />;
-
-interface SocialLinkProps {
-  href: string;
-  icon: ReactNode;
-  title: string;
-}
-
-const SocialLink = ({ href, icon, title }: SocialLinkProps) => {
-  return (
-    <div className="relative group">
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="social-icon-btn flex items-center justify-center transition-all duration-300 cursor-pointer relative"
-      >
-        {icon}
-      </a>
-      {/* Tooltip */}
-      <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 text-[11px] font-semibold text-zinc-100 bg-zinc-950/90 border border-zinc-800 backdrop-blur-md rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-xl scale-95 group-hover:scale-100 origin-bottom">
-        {title}
-      </span>
-    </div>
-  );
-};
+import SocialIcon from './SocialIcon';
 
 // SVG arc helper functions
 const polarToCartesian = (centerX: number, centerY: number, radius: number, angleInDegrees: number) => {
@@ -59,6 +22,55 @@ const describeArc = (x: number, y: number, radius: number, startAngle: number, e
     "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
   ].join(" ");
 };
+
+interface ParticleConfig {
+  size: number;
+  color: string;
+  glowColor: string;
+  offset: number;
+  duration: number; // orbit duration (15s to 35s)
+  direction: 'cw' | 'ccw';
+  floatDuration: number;
+  floatDelay: number;
+  twinkleDuration: number;
+  twinkleDelay: number;
+  angle: number;
+}
+
+const ORBITING_PARTICLES: ParticleConfig[] = [
+  // Mobile active (0 - 9: total 10 particles)
+  // Purple (7), Pink (2), White (1)
+  { size: 1.5, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 2, duration: 24, direction: 'cw', floatDuration: 5.2, floatDelay: 0.2, twinkleDuration: 3.2, twinkleDelay: 0.5, angle: 15 },
+  { size: 2, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 6, duration: 32, direction: 'ccw', floatDuration: 6.8, floatDelay: 0.8, twinkleDuration: 4.1, twinkleDelay: 1.2, angle: 50 },
+  { size: 1, color: '#EC4899', glowColor: 'rgba(236, 72, 153, var(--pink-glow-opacity))', offset: 8, duration: 28, direction: 'cw', floatDuration: 7.5, floatDelay: 1.5, twinkleDuration: 2.8, twinkleDelay: 0.1, angle: 85 },
+  { size: 3, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 4, duration: 36, direction: 'ccw', floatDuration: 6.2, floatDelay: 1.2, twinkleDuration: 3.5, twinkleDelay: 0.9, angle: 120 },
+  { size: 1.5, color: '#EC4899', glowColor: 'rgba(236, 72, 153, var(--pink-glow-opacity))', offset: 9, duration: 22, direction: 'cw', floatDuration: 5.5, floatDelay: 0.5, twinkleDuration: 2.2, twinkleDelay: 1.5, angle: 160 },
+  { size: 2, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 1, duration: 30, direction: 'ccw', floatDuration: 6.0, floatDelay: 0.3, twinkleDuration: 4.5, twinkleDelay: 0.3, angle: 195 },
+  { size: 1.5, color: '#FFFFFF', glowColor: 'rgba(255, 255, 255, var(--white-glow-opacity))', offset: 5, duration: 27, direction: 'cw', floatDuration: 7.1, floatDelay: 1.7, twinkleDuration: 3.0, twinkleDelay: 2.0, angle: 230 },
+  { size: 2, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 7, duration: 40, direction: 'ccw', floatDuration: 6.6, floatDelay: 0.6, twinkleDuration: 5.2, twinkleDelay: 0.7, angle: 265 },
+  { size: 1, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 3, duration: 34, direction: 'cw', floatDuration: 5.8, floatDelay: 1.1, twinkleDuration: 3.8, twinkleDelay: 1.3, angle: 300 },
+  { size: 2, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 10, duration: 25, direction: 'ccw', floatDuration: 4.9, floatDelay: 0.4, twinkleDuration: 2.5, twinkleDelay: 0.6, angle: 335 },
+
+  // Tablet active (10 - 15: total 6 particles, cumulating to 16)
+  // Purple (4), Pink (1), White (1)
+  { size: 1, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 4, duration: 28, direction: 'ccw', floatDuration: 6.4, floatDelay: 0.4, twinkleDuration: 3.3, twinkleDelay: 1.2, angle: 35 },
+  { size: 3, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 7, duration: 23, direction: 'cw', floatDuration: 5.0, floatDelay: 0.2, twinkleDuration: 4.2, twinkleDelay: 0.5, angle: 105 },
+  { size: 1.5, color: '#EC4899', glowColor: 'rgba(236, 72, 153, var(--pink-glow-opacity))', offset: 2, duration: 39, direction: 'ccw', floatDuration: 7.3, floatDelay: 2.2, twinkleDuration: 2.7, twinkleDelay: 1.8, angle: 145 },
+  { size: 2, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 6, duration: 30, direction: 'cw', floatDuration: 6.1, floatDelay: 1.1, twinkleDuration: 3.9, twinkleDelay: 0.2, angle: 215 },
+  { size: 1.5, color: '#FFFFFF', glowColor: 'rgba(255, 255, 255, var(--white-glow-opacity))', offset: 9, duration: 25, direction: 'ccw', floatDuration: 5.9, floatDelay: 0.9, twinkleDuration: 3.0, twinkleDelay: 1.1, angle: 250 },
+  { size: 1, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 1, duration: 35, direction: 'cw', floatDuration: 6.8, floatDelay: 1.8, twinkleDuration: 4.6, twinkleDelay: 0.7, angle: 315 },
+
+  // Desktop only active (16 - 23: total 8 particles, cumulating to 24)
+  // Purple (6), Pink (2), White (0)
+  { size: 2, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 5, duration: 29, direction: 'ccw', floatDuration: 5.3, floatDelay: 0.3, twinkleDuration: 2.4, twinkleDelay: 1.4, angle: 20 },
+  { size: 1.5, color: '#EC4899', glowColor: 'rgba(236, 72, 153, var(--pink-glow-opacity))', offset: 8, duration: 37, direction: 'cw', floatDuration: 7.4, floatDelay: 0.7, twinkleDuration: 5.5, twinkleDelay: 0.9, angle: 70 },
+  { size: 3, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 3, duration: 31, direction: 'ccw', floatDuration: 6.5, floatDelay: 1.5, twinkleDuration: 3.4, twinkleDelay: 0.3, angle: 130 },
+  { size: 2, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 10, duration: 26, direction: 'cw', floatDuration: 5.7, floatDelay: 0.7, twinkleDuration: 4.0, twinkleDelay: 1.0, angle: 180 },
+  { size: 1, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 2, duration: 37, direction: 'ccw', floatDuration: 7.0, floatDelay: 2.3, twinkleDuration: 2.6, twinkleDelay: 2.1, angle: 200 },
+  { size: 2, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 6, duration: 31, direction: 'cw', floatDuration: 5.5, floatDelay: 1.0, twinkleDuration: 4.5, twinkleDelay: 1.3, angle: 240 },
+  { size: 1.5, color: '#EC4899', glowColor: 'rgba(236, 72, 153, var(--pink-glow-opacity))', offset: 9, duration: 25, direction: 'ccw', floatDuration: 5.2, floatDelay: 0.6, twinkleDuration: 3.2, twinkleDelay: 0.6, angle: 280 },
+  { size: 1, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 4, duration: 34, direction: 'cw', floatDuration: 6.7, floatDelay: 1.3, twinkleDuration: 3.7, twinkleDelay: 0.8, angle: 340 },
+];
 
 export default function Hero() {
   const { theme } = useTheme();
@@ -87,7 +99,7 @@ export default function Hero() {
                   className="inline-flex items-center"
                 >
                   <span
-                    className="font-outfit text-[22px] sm:text-[28px] lg:text-[34px] font-semibold tracking-[-0.02em] leading-[1.1] text-[rgba(255,255,255,0.96)] transition-colors duration-300"
+                    className="font-outfit text-[22px] sm:text-[28px] lg:text-[34px] font-semibold tracking-[-0.02em] leading-[1.1] text-[var(--text-primary)] transition-colors duration-300"
                     style={{ textShadow: '0 0 10px rgba(139,92,246,0.10)' }}
                   >
                     Hello,
@@ -116,7 +128,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-2 mt-4 text-zinc-400 font-semibold text-sm sm:text-base"
+              className="flex flex-wrap justify-center lg:justify-start gap-2 mt-4 text-[var(--text-secondary)] font-semibold text-sm sm:text-base"
             >
               <span>Full-Stack Developer • Competitive Programmer • Problem Solver</span>
             </motion.div>
@@ -126,7 +138,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-8 text-zinc-300 text-base sm:text-lg leading-relaxed max-w-3xl font-medium"
+              className="mt-8 text-[var(--text-primary-muted)] text-base sm:text-lg leading-relaxed max-w-3xl font-medium"
               style={{ textAlign: 'justify', textJustify: 'inter-word' }}
             >
               Passionate Software Engineer specializing in full-stack web development with expertise in <span className="text-[var(--purple)]">React</span>, <span className="text-[var(--purple)]">FastAPI</span>, <span className="text-[var(--purple)]">Python</span>, <span className="text-[var(--purple)]">C</span>, <span className="text-[var(--purple)]">C++</span>, <span className="text-[var(--purple)]">PostgreSQL</span>, and <span className="text-[var(--purple)]">Firebase</span>. Experienced in building scalable applications, designing efficient backend systems, and delivering intuitive user experiences. Backed by strong computer science fundamentals, internship experience, and a commitment to continuous learning, I strive to build software that is clean, maintainable, and impactful. Currently seeking Software Engineer Internship and Full-Time opportunities to contribute to innovative engineering teams.
@@ -162,34 +174,34 @@ export default function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.35 }}
-              className="mt-10 pt-8 border-t border-zinc-900/50 w-full max-w-xl flex flex-col items-center lg:items-start"
+              className="mt-10 pt-8 border-t border-[var(--border-color)] w-full max-w-xl flex flex-col items-center lg:items-start"
             >
-              <p className="text-zinc-500 text-xs font-semibold uppercase tracking-wider mb-4 text-center lg:text-left">CONNECT</p>
+              <p className="text-[var(--text-secondary)] text-xs font-semibold uppercase tracking-wider mb-4 text-center lg:text-left">CONNECT WITH ME</p>
               <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                <SocialLink 
+                <SocialIcon 
                   href="https://github.com/Vikki-2006" 
-                  icon={<GithubIcon className="w-5 h-5" />} 
+                  network="github"
                   title="GitHub" 
                 />
-                <SocialLink 
+                <SocialIcon 
                   href="https://www.linkedin.com/in/vigneshwaran-s-1b4364369/" 
-                  icon={<LinkedinIcon className="w-5 h-5" />} 
+                  network="linkedin"
                   title="LinkedIn" 
                 />
-                <SocialLink 
+                <SocialIcon 
                   href="https://leetcode.com/u/Vikki-2006/" 
-                  icon={<LeetCodeIcon className="w-5 h-5" />} 
+                  network="leetcode"
                   title="LeetCode" 
                 />
-                <SocialLink 
+                <SocialIcon 
                   href="https://www.codechef.com/users/vikki2006" 
-                  icon={<CodeChefIcon className="w-5 h-5" />} 
+                  network="codechef"
                   title="CodeChef" 
                 />
-                <SocialLink 
-                  href="https://www.hackerrank.com/profile/Vikki_2006" 
-                  icon={<HackerRankIcon className="w-5 h-5" />} 
-                  title="HackerRank" 
+                <SocialIcon 
+                  href="https://x.com/Vignesh72625559" 
+                  network="x"
+                  title="X (Twitter)" 
                 />
               </div>
             </motion.div>
@@ -225,65 +237,11 @@ export default function Hero() {
                 viewBox="0 0 500 500" 
                 className="w-full h-full absolute top-0 left-0 z-10 pointer-events-none"
               >
-                <defs>
-                  {/* Arc Glow Filter - Dark Theme */}
-                  <filter id="arcGlowDark" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="8" result="blur" />
-                    <feMerge>
-                      <feMergeNode in="blur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-
-                  {/* Arc Glow Filter - Light Theme */}
-                  <filter id="arcGlowLight" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="4" result="blur" />
-                    <feMerge>
-                      <feMergeNode in="blur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-
-                  {/* Gradient Arc Gradients */}
-                  <linearGradient id="topRightGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#A855F7" />
-                    <stop offset="100%" stopColor="#9333EA" />
-                  </linearGradient>
-                  
-                  <linearGradient id="bottomLeftGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#EC4899" />
-                    <stop offset="100%" stopColor="#F43F5E" />
-                  </linearGradient>
-                </defs>
-
                 {/* Concentric circles */}
                 <circle cx="250" cy="250" r="218" stroke="rgba(168, 85, 247, 0.18)" strokeWidth="1" fill="none" />
                 <circle cx="250" cy="250" r="228" stroke="rgba(168, 85, 247, 0.18)" strokeWidth="1" fill="none" />
                 <circle cx="250" cy="250" r="238" stroke="rgba(168, 85, 247, 0.18)" strokeWidth="1" fill="none" />
                 <circle cx="250" cy="250" r="248" stroke="rgba(168, 85, 247, 0.18)" strokeWidth="1" fill="none" />
-
-                {/* Gradient Arc Segments */}
-                <path 
-                  d={describeArc(250, 250, 233, 20, 70)}
-                  fill="none"
-                  stroke="url(#topRightGrad)"
-                  strokeWidth="10"
-                  strokeLinecap="round"
-                  filter={theme === 'dark' ? 'url(#arcGlowDark)' : 'url(#arcGlowLight)'}
-                  style={{ strokeOpacity: theme === 'dark' ? 1.0 : 0.35 }}
-                  className="transition-all duration-400"
-                />
-
-                <path 
-                  d={describeArc(250, 250, 233, 205, 255)}
-                  fill="none"
-                  stroke="url(#bottomLeftGrad)"
-                  strokeWidth="10"
-                  strokeLinecap="round"
-                  filter={theme === 'dark' ? 'url(#arcGlowDark)' : 'url(#arcGlowLight)'}
-                  style={{ strokeOpacity: theme === 'dark' ? 1.0 : 0.35 }}
-                  className="transition-all duration-400"
-                />
               </svg>
 
               {/* Glowing Particles */}
@@ -320,21 +278,94 @@ export default function Hero() {
                 className="absolute top-[45%] left-[4%] w-[6px] h-[6px] rounded-full bg-white/70 shadow-[0_0_6px_rgba(255,255,255,0.4)] opacity-40 blur-[0.5px] z-20 pointer-events-none"
               />
 
-              {/* Circular Portrait Frame */}
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className="relative w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] lg:w-[420px] lg:h-[420px] rounded-full border-[6px] border-[#5A6373] overflow-hidden z-10 flex items-center justify-center p-2 cursor-default bg-black"
-                style={{
-                  boxShadow: 'inset 0 4px 12px rgba(0,0,0,0.15), 0 10px 30px rgba(0,0,0,0.2)'
-                }}
-              >
-                <img
-                  src={profile}
-                  alt="Vigneshwaran S"
-                  className="w-full h-full object-contain scale-[1.22] translate-y-[5%] select-none pointer-events-none z-10"
-                />
-              </motion.div>
+              {/* Profile Image & Orbiting Particles Container */}
+              <div className="relative flex items-center justify-center">
+                
+                {/* Orbiting Particles System (behind frame, z-0) */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+                  {ORBITING_PARTICLES.map((p, idx) => {
+                    let responsiveness = "absolute";
+                    if (idx >= 10 && idx < 16) {
+                      responsiveness = "absolute hidden sm:block";
+                    } else if (idx >= 16) {
+                      responsiveness = "absolute hidden lg:block";
+                    }
+                    
+                    return (
+                      <div
+                        key={idx}
+                        className={responsiveness}
+                        style={{
+                          width: 0,
+                          height: 0,
+                          transform: `rotate(${p.angle}deg)`
+                        }}
+                      >
+                        {/* 1. Orbit animation layer (cw or ccw rotation) */}
+                        <div
+                          className="absolute"
+                          style={{
+                            width: 0,
+                            height: 0,
+                            animation: `particle-orbit-${p.direction} ${p.duration}s linear infinite`
+                          }}
+                        >
+                          {/* 2. Radius translation layer */}
+                          <div
+                            className="absolute"
+                            style={{
+                              width: 0,
+                              height: 0,
+                              transform: `translateY(calc(-1 * (var(--profile-radius) + ${p.offset}px)))`
+                            }}
+                          >
+                            {/* 3. Inner drifting, scaling and twinkling particle */}
+                            <div
+                              className="absolute rounded-full"
+                              style={{
+                                width: `${p.size}px`,
+                                height: `${p.size}px`,
+                                backgroundColor: p.color,
+                                boxShadow: `0 0 calc(2px + ${p.size}px) ${p.glowColor}`,
+                                filter: 'var(--particle-blur-filter)',
+                                animation: `particle-drift-${idx % 4} ${p.floatDuration}s ease-in-out ${p.floatDelay}s infinite alternate, particle-twinkle-${idx % 3} ${p.twinkleDuration}s ease-in-out ${p.twinkleDelay}s infinite alternate`
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Circular Portrait Frame + Animated Gradient Border */}
+                <div className="profile-border-ring">
+                  {/* Spinning conic-gradient arc — only this element rotates */}
+                  <div className="profile-border-ring__arc" aria-hidden="true" />
+                  {/* Soft bloom for glow spread — rotates in sync */}
+                  <div className="profile-border-ring__bloom" aria-hidden="true" />
+                  {/* Subtle inner glow for premium depth — static */}
+                  <div className="profile-border-ring__inner-glow" aria-hidden="true" />
+
+                  {/* Profile frame sits on top, perfectly still */}
+                  <div className="profile-border-ring__frame">
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                      className="relative w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] lg:w-[420px] lg:h-[420px] rounded-full border-[6px] border-[#5A6373] overflow-hidden z-10 flex items-center justify-center p-2 cursor-default bg-black"
+                      style={{
+                        boxShadow: 'inset 0 4px 12px rgba(0,0,0,0.15), 0 10px 30px rgba(0,0,0,0.2)'
+                      }}
+                    >
+                      <img
+                        src={profile}
+                        alt="Vigneshwaran S"
+                        className="w-full h-full object-contain scale-[1.22] translate-y-[5%] select-none pointer-events-none z-10"
+                      />
+                    </motion.div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </div>
           

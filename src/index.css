@@ -1138,3 +1138,324 @@ html[data-theme="light"] select:-webkit-autofill:focus {
     0 0 0 4px rgba(124, 58, 237, 0.10) !important;
   border-color: #7C3AED !important;
 }
+
+/* ═══════════════════════════════════════════════════════
+   HERO PROFILE — PREMIUM HUD ORBITING STARFIELD
+   GPU-accelerated circular orbits + independent drift & twinkle.
+   Combines 3 nesting layers of CSS transform & opacity animations.
+   ═══════════════════════════════════════════════════════ */
+
+/* Responsive Custom Properties for Particles */
+:root {
+  /* Mobile (Default) - 10 count, 40% glow reduction */
+  --profile-radius: 156px; /* 146px border radius + 10px gap */
+  --purple-glow-opacity: 0.30;
+  --pink-glow-opacity: 0.27;
+  --white-glow-opacity: 0.16;
+  --particle-blur-filter: blur(0.2px);
+}
+
+@media (min-width: 640px) {
+  :root {
+    /* Tablet - 10% glow reduction */
+    --profile-radius: 188px; /* 178px border radius + 10px gap */
+    --purple-glow-opacity: 0.45;
+    --pink-glow-opacity: 0.40;
+    --white-glow-opacity: 0.24;
+    --particle-blur-filter: blur(0.3px);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    /* Desktop - Full glow opacities */
+    --profile-radius: 228px; /* 218px border radius + 10px gap */
+    --purple-glow-opacity: 0.50;
+    --pink-glow-opacity: 0.45;
+    --white-glow-opacity: 0.27;
+    --particle-blur-filter: blur(0.4px);
+  }
+}
+
+/* Layer 1: Circular Orbit Animations */
+@keyframes particle-orbit-cw {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes particle-orbit-ccw {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Layer 2: Local Drift Animations (2px to 5px drift, 0.9 to 1.15 scale) */
+@keyframes particle-drift-0 {
+  0% {
+    transform: translate(-50%, -50%) translate(0, 0) scale(0.9);
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(2px, -3px) scale(1.15);
+  }
+}
+
+@keyframes particle-drift-1 {
+  0% {
+    transform: translate(-50%, -50%) translate(0, 0) scale(1.15);
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(-3px, 2px) scale(0.9);
+  }
+}
+
+@keyframes particle-drift-2 {
+  0% {
+    transform: translate(-50%, -50%) translate(0, 0) scale(0.95);
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(-2px, -2px) scale(1.1);
+  }
+}
+
+@keyframes particle-drift-3 {
+  0% {
+    transform: translate(-50%, -50%) translate(0, 0) scale(1.1);
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(3px, 3px) scale(0.95);
+  }
+}
+
+/* Layer 3: Independent Twinkle Animations (Opacity 30% to 100%) */
+@keyframes particle-twinkle-0 {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1.0;
+  }
+}
+
+@keyframes particle-twinkle-1 {
+  0% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 0.95;
+  }
+}
+
+@keyframes particle-twinkle-2 {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1.0;
+  }
+}
+
+/* GPU acceleration styling */
+.relative.flex.items-center.justify-center div[style*="width: 0"] {
+  will-change: transform;
+}
+
+.relative.flex.items-center.justify-center div.rounded-full {
+  will-change: transform, opacity;
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .relative.flex.items-center.justify-center div[style*="width: 0"] {
+    animation: none !important;
+  }
+  .relative.flex.items-center.justify-center div.rounded-full {
+    animation: none !important;
+    transform: translate(-50%, -50%) !important;
+    opacity: 0.7 !important;
+  }
+  .profile-border-ring__arc,
+  .profile-border-ring__bloom {
+    animation: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   HERO PROFILE — ANIMATED GRADIENT BORDER
+   GPU-accelerated conic-gradient arc that travels clockwise.
+   Only a 12% glowing segment is visible; the rest is dark.
+   Pulsates in brightness (80% -> 100%) and has a soft motion blur.
+   ═══════════════════════════════════════════════════════ */
+
+@keyframes profile-arc-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes profile-glow-pulse {
+  0% { opacity: 0.80; }
+  100% { opacity: 1.00; }
+}
+
+/* Outer container — matches the profile frame size precisely */
+.profile-border-ring {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* sizes mirror the profile frame at each breakpoint (mobile default) */
+  width:  292px;
+  height: 292px;
+  border-radius: 50%;
+  will-change: transform;
+  /* Soft ambient glow bleeding into the surrounding background (reduced 20%) */
+  filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.14))
+          drop-shadow(0 0 14px rgba(168, 85, 247, 0.06));
+}
+
+/* The spinning conic-gradient disc — sits BEHIND the image */
+.profile-border-ring__arc {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  /*
+    12% glowing arc (purple → violet → pink → white → violet → purple)
+    The rest is transparent = appears dark.
+    Disc rotates so the arc sweeps clockwise continuously.
+  */
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 248deg,
+    #8B5CF6                    254deg,
+    #A855F7                    260deg,
+    #EC4899                    266deg,
+    rgba(255,255,255,0.95)     270deg,
+    #EC4899                    274deg,
+    #A855F7                    280deg,
+    #8B5CF6                    286deg,
+    transparent               292deg,
+    transparent               360deg
+  );
+  /* 7s per full revolution + 3s brightness pulse */
+  animation: profile-arc-spin 7s linear infinite, profile-glow-pulse 3s ease-in-out infinite alternate;
+  will-change: transform;
+  /* Very soft motion blur for neon energy look */
+  filter: blur(0.6px);
+  /* Inner mask: cut out the centre, leaving only a 5px ring */
+  -webkit-mask: radial-gradient(
+    circle,
+    transparent calc(50% - 5px),
+    black       calc(50% - 5px),
+    black       50%,
+    transparent 50%
+  );
+  mask: radial-gradient(
+    circle,
+    transparent calc(50% - 5px),
+    black       calc(50% - 5px),
+    black       50%,
+    transparent 50%
+  );
+}
+
+/* Bloom layer — blurred copy for glow spread around the arc */
+.profile-border-ring__bloom {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent              0deg,
+    transparent              248deg,
+    rgba(139, 92, 246, 0.0)  252deg,
+    rgba(139, 92, 246, 0.55) 258deg,
+    rgba(168, 85, 247, 0.70) 264deg,
+    rgba(236, 72, 153, 0.75) 270deg,
+    rgba(255, 255, 255, 0.50) 272deg,
+    rgba(236, 72, 153, 0.70) 274deg,
+    rgba(168, 85, 247, 0.55) 280deg,
+    rgba(139, 92, 246, 0.30) 286deg,
+    rgba(139, 92, 246, 0.0)  292deg,
+    transparent              360deg
+  );
+  animation: profile-arc-spin 7s linear infinite, profile-glow-pulse 3s ease-in-out infinite alternate;
+  will-change: transform;
+  filter: blur(7px);
+  opacity: 0.40; /* Reduced by 20% from 0.50 */
+  pointer-events: none;
+}
+
+/* Very subtle inner glow — adds depth/premium feel */
+.profile-border-ring__inner-glow {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 9px rgba(139, 92, 246, 0.08),
+              inset 0 0 4px rgba(168, 85, 247, 0.05);
+  pointer-events: none;
+  z-index: 12;
+}
+
+/* Profile frame sits on top, perfectly still */
+.profile-border-ring__frame {
+  position: relative;
+  z-index: 10;
+  border-radius: 50%;
+}
+
+/* ── Responsive ─────────────────────────────────────── */
+
+/* Tablet (sm: 640px → lg: 1024px) */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .profile-border-ring {
+    width:  356px;
+    height: 356px;
+    filter: drop-shadow(0 0 11px rgba(139, 92, 246, 0.18))
+            drop-shadow(0 0 19px rgba(168, 85, 247, 0.08));
+  }
+  .profile-border-ring__bloom {
+    opacity: 0.52; /* Reduced by 20% from 0.65 */
+    filter: blur(6px);
+  }
+}
+
+/* Desktop (lg: 1024px+) */
+@media (min-width: 1024px) {
+  .profile-border-ring {
+    width:  436px;
+    height: 436px;
+    filter: drop-shadow(0 0 14px rgba(139, 92, 246, 0.22))
+            drop-shadow(0 0 25px rgba(168, 85, 247, 0.11));
+  }
+  .profile-border-ring__arc {
+    -webkit-mask: radial-gradient(
+      circle,
+      transparent calc(50% - 6px),
+      black       calc(50% - 6px),
+      black       50%,
+      transparent 50%
+    );
+    mask: radial-gradient(
+      circle,
+      transparent calc(50% - 6px),
+      black       calc(50% - 6px),
+      black       50%,
+      transparent 50%
+    );
+  }
+  .profile-border-ring__bloom {
+    opacity: 0.68; /* Reduced by 20% from 0.85 */
+    filter: blur(7px);
+  }
+  .profile-border-ring__inner-glow {
+    box-shadow: inset 0 0 14px rgba(139, 92, 246, 0.12),
+                inset 0 0  6px rgba(168, 85, 247, 0.07);
+  }
+}
