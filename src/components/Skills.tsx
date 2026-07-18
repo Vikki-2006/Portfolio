@@ -204,6 +204,27 @@ const skillsData: SkillCategory[] = [
   }
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: [0.16, 1, 0.3, 1] as any
+    }
+  }
+};
+
 function SkillCard({ category }: { category: SkillCategory }) {
   const { theme } = useTheme();
 
@@ -260,6 +281,7 @@ function SkillCard({ category }: { category: SkillCategory }) {
               opacity: [0.15, 0.45, 0.15]
             }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            style={{ willChange: "transform" }}
             className={`absolute top-[25%] left-[35%] w-1.5 h-1.5 rounded-full blur-[0.5px] ${theme === 'dark' ? 'bg-violet-400' : 'bg-zinc-400'}`}
           />
           <motion.div 
@@ -269,6 +291,7 @@ function SkillCard({ category }: { category: SkillCategory }) {
               opacity: [0.1, 0.4, 0.1]
             }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            style={{ willChange: "transform" }}
             className={`absolute bottom-[35%] right-[25%] w-[2px] h-[2px] rounded-full blur-[0.5px] ${theme === 'dark' ? 'bg-pink-400' : 'bg-zinc-400'}`}
           />
           <motion.div 
@@ -278,6 +301,7 @@ function SkillCard({ category }: { category: SkillCategory }) {
               opacity: [0.2, 0.5, 0.2]
             }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            style={{ willChange: "transform" }}
             className={`absolute top-[65%] left-[20%] w-1.5 h-1.5 rounded-full blur-[0.5px] ${theme === 'dark' ? 'bg-indigo-400' : 'bg-zinc-400'}`}
           />
         </div>
@@ -334,24 +358,31 @@ export default function Skills() {
       {/* Background radial glow */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-r from-violet-600/5 to-pink-500/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
 
-      <div className="relative z-10">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+        className="relative z-10"
+      >
         {/* Section Header */}
-        <div className="mb-10 text-left">
+        <motion.div variants={cardVariants} className="mb-10 text-left">
           <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)] font-sans">MY SKILLS</h2>
           <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl font-sans tracking-tight">Technologies I Work With</p>
           <div className="section-underline"></div>
-        </div>
+        </motion.div>
 
         {/* 2x2 Grid Layout - Equal heights, spacious gaps */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {skillsData.map((category, catIndex) => (
-            <SkillCard 
-              key={catIndex} 
-              category={category} 
-            />
+            <motion.div key={catIndex} variants={cardVariants}>
+              <SkillCard 
+                category={category} 
+              />
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </SectionContainer>
   );
 }

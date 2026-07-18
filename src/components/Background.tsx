@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 
 // Generate a deterministic static list of 100 stars to avoid hydration mismatch in server-side builds
@@ -91,34 +90,27 @@ export default function Background() {
       {/* 5. 80-120 tiny white, purple and pink particles randomly distributed (slow twinkling stars) */}
       <div style={{ opacity: 'var(--stars-opacity)' }} className="absolute inset-0 transition-opacity duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]">
         {stars.map((star) => (
-          <motion.div
+          <div
             key={star.id}
-            className="absolute rounded-full pointer-events-none transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+            className="absolute rounded-full pointer-events-none transition-[left,top,background-color] duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] star-twinkle"
             style={{
               left: star.left,
               top: star.top,
               width: `${star.size}px`,
               height: `${star.size}px`,
               backgroundColor: star.color,
-              boxShadow: `0 0 3px ${star.color}`
-            }}
-            animate={{
-              opacity: [0.15, 0.85, 0.15]
-            }}
-            transition={{
-              duration: star.duration,
-              repeat: Infinity,
-              delay: star.delay,
-              ease: "easeInOut"
-            }}
+              boxShadow: `0 0 3px ${star.color}`,
+              '--star-duration': `${star.duration}s`,
+              '--star-delay': `${star.delay}s`
+            } as React.CSSProperties}
           />
         ))}
       </div>
 
       {/* 6. 2 Floating Blurred Planets */}
       {/* Large planet near the top-right */}
-      <motion.div
-        className="absolute rounded-full pointer-events-none"
+      <div
+        className="absolute rounded-full pointer-events-none planet-float-lg"
         style={{
           width: '110px',
           height: '110px',
@@ -126,21 +118,14 @@ export default function Background() {
           boxShadow: '0 0 50px var(--planet-glow)',
           right: '12%',
           top: '22%',
-          opacity: 0.85
-        }}
-        animate={{
-          y: [0, -10, 0]
-        }}
-        transition={{
-          duration: 9,
-          repeat: Infinity,
-          ease: "easeInOut"
+          opacity: 0.85,
+          willChange: 'transform'
         }}
       />
 
       {/* Small planet near the bottom-right */}
-      <motion.div
-        className="absolute rounded-full pointer-events-none"
+      <div
+        className="absolute rounded-full pointer-events-none planet-float-sm"
         style={{
           width: '60px',
           height: '60px',
@@ -148,15 +133,8 @@ export default function Background() {
           boxShadow: '0 0 35px var(--planet-glow)',
           right: '22%',
           bottom: '18%',
-          opacity: 0.85
-        }}
-        animate={{
-          y: [0, 8, 0]
-        }}
-        transition={{
-          duration: 11,
-          repeat: Infinity,
-          ease: "easeInOut"
+          opacity: 0.85,
+          willChange: 'transform'
         }}
       />
 
@@ -178,40 +156,17 @@ export default function Background() {
             <stop offset="100%" stopColor="rgba(236, 72, 153, 0)" />
           </linearGradient>
         </defs>
-        <motion.path
+        <path
+          className="wave-path-purple"
           fill="none"
           stroke="url(#wave-purple)"
           strokeWidth="1.2"
-          animate={{
-            d: [
-              "M0,110 C240,70 480,150 720,110 C960,70 1200,150 1440,110",
-              "M0,110 C240,130 480,90 720,110 C960,130 1200,90 1440,110",
-              "M0,110 C240,70 480,150 720,110 C960,70 1200,150 1440,110"
-            ]
-          }}
-          transition={{
-            duration: 14,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
         />
-        <motion.path
+        <path
+          className="wave-path-pink"
           fill="none"
           stroke="url(#wave-pink)"
           strokeWidth="1.2"
-          animate={{
-            d: [
-              "M0,130 C300,160 600,100 900,130 C1200,160 1320,100 1440,130",
-              "M0,130 C300,100 600,160 900,130 C1200,100 1320,160 1440,130",
-              "M0,130 C300,160 600,100 900,130 C1200,160 1320,100 1440,130"
-            ]
-          }}
-          transition={{
-            duration: 17,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1.5
-          }}
         />
       </svg>
 

@@ -117,8 +117,8 @@ export default function Contact() {
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.45 }}
                 className="contact-form-card rounded-3xl p-5 sm:p-7 relative overflow-hidden"
               >
                 <form onSubmit={handleSubmit} className="space-y-4 relative z-10" noValidate>

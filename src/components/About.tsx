@@ -15,7 +15,13 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-[58fr_42fr] gap-12 items-start">
           
           {/* Left Column: Biography Narrative */}
-          <div className="space-y-6 text-zinc-300 text-base sm:text-lg leading-relaxed font-medium">
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.45 }}
+            className="space-y-6 text-zinc-300 text-base sm:text-lg leading-relaxed font-medium"
+          >
             <p>
               I'm Vigneshwaran S, a B.Tech Information Technology student passionate about software engineering and full-stack web development. I enjoy transforming ideas into modern, scalable applications with clean architecture, intuitive user experiences, and efficient backend systems.
             </p>
@@ -32,14 +38,14 @@ export default function About() {
               <span className="animate-pulse flex-shrink-0 text-base">💜</span>
               <span>Passionate about building scalable software, solving complex problems, and continuously learning new technologies.</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Key Details / Education Card */}
           <motion.div 
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.45, delay: 0.1 }}
             className="glass-panel portfolio-card rounded-2xl p-6 sm:p-8 border border-zinc-800 shadow-xl relative overflow-hidden"
           >
               {/* Subtle background glow */}

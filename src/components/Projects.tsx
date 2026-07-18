@@ -293,8 +293,8 @@ export default function Projects() {
               key={project.id}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.45, delay: index * 0.08 }}
               className="glass-panel portfolio-card rounded-2xl overflow-hidden border border-zinc-800 flex flex-col justify-between shadow-lg relative group transition-all"
             >
               

@@ -52,10 +52,10 @@ export default function Experience() {
 
             {/* Internship Card */}
             <motion.div 
-              initial={{ opacity: 0, x: -15 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.45 }}
               className="glass-panel portfolio-card rounded-2xl p-6 sm:p-8 border border-zinc-800 shadow-lg relative overflow-hidden"
             >
               {/* Subtle background glow */}

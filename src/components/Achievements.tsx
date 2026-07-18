@@ -86,15 +86,15 @@ export default function Achievements() {
                 key={item.id}
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
                 className="glass-panel portfolio-card rounded-2xl p-4.5 sm:p-5 border border-zinc-800 shadow-md relative overflow-hidden group hover:border-zinc-800 transition-all duration-300 flex flex-col justify-start h-full"
               >
                 {/* Background soft color glow */}
                 <div className="absolute -top-16 -right-16 w-32 h-32 bg-violet-600/5 rounded-full blur-2xl pointer-events-none transition-all group-hover:bg-violet-600/10"></div>
                 
                 <div className="flex items-start gap-4 relative z-10 h-full w-full">
-                  {/* Platform Icon Container */}
+                   {/* Platform Icon Container */}
                   {item.link ? (
                     <a
                       href={item.link}
@@ -106,6 +106,7 @@ export default function Achievements() {
                         <img 
                           src={Icon} 
                           alt={`${item.platform} Logo`} 
+                          loading="lazy"
                           className="w-[26px] h-[26px] object-contain select-none" 
                         />
                       ) : (
@@ -118,6 +119,7 @@ export default function Achievements() {
                         <img 
                           src={Icon} 
                           alt={`${item.platform} Logo`} 
+                          loading="lazy"
                           className="w-[26px] h-[26px] object-contain select-none" 
                         />
                       ) : (

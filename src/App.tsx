@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -12,6 +14,36 @@ import Background from './components/Background';
 import { ThemeProvider } from './context/ThemeContext';
 
 export default function App() {
+  useEffect(() => {
+    // Check if the user prefers reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const lenis = new Lenis({
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.5,
+    });
+
+    let rafId: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+
+    rafId = requestAnimationFrame(raf);
+
+    // Clean up event listener and destroy Lenis instance on unmount
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <ThemeProvider>
       <div className="relative min-h-screen bg-transparent isolate text-zinc-100 selection:bg-violet-600/30 selection:text-white">

@@ -88,8 +88,8 @@ export default function Certifications() {
                 key={index}
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.45, delay: index * 0.06 }}
                 className="glass-panel portfolio-card rounded-2xl p-6 border border-zinc-800 shadow-md relative overflow-hidden group hover:border-zinc-800 transition-all duration-300 flex flex-col justify-between"
               >
                 

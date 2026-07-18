@@ -48,27 +48,41 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const nextTheme: Theme = theme === 'dark' ? 'light' : 'dark';
     const root = document.documentElement;
 
-    // 1. Immediately swap the toggle icon
-    root.classList.add(nextTheme === 'dark' ? 'icon-theme-dark' : 'icon-theme-light');
-    root.classList.remove(nextTheme === 'dark' ? 'icon-theme-light' : 'icon-theme-dark');
+    const changeTheme = () => {
+      // 1. Swap the toggle icon
+      root.classList.add(nextTheme === 'dark' ? 'icon-theme-dark' : 'icon-theme-light');
+      root.classList.remove(nextTheme === 'dark' ? 'icon-theme-light' : 'icon-theme-dark');
 
-    // 2. Signal CSS that a theme switch is in progress
-    //    (used to temporarily disable backdrop-filter)
-    root.classList.add('theme-transitioning');
+      // 2. Swap the data-theme attribute — CSS variables update instantly
+      root.setAttribute('data-theme', nextTheme);
 
-    // 3. Swap the data-theme attribute — CSS variables update instantly,
-    //    elements that have transitions will animate smoothly to the new values
-    root.setAttribute('data-theme', nextTheme);
+      // 3. Persist and sync React state
+      localStorage.setItem('theme', nextTheme);
+      setTheme(nextTheme);
+    };
 
-    // 4. Persist and sync React state
-    localStorage.setItem('theme', nextTheme);
-    setTheme(nextTheme);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // 5. Clean up after the transition (220 ms — matches CSS duration)
-    setTimeout(() => {
-      root.classList.remove('theme-transitioning');
-      isTransitioning.current = false;
-    }, 240);
+    if (prefersReducedMotion || !(document as any).startViewTransition) {
+      // Fallback transition for reduced motion or unsupported browsers
+      root.classList.add('theme-transitioning');
+      changeTheme();
+      setTimeout(() => {
+        root.classList.remove('theme-transitioning');
+        isTransitioning.current = false;
+      }, 300);
+    } else {
+      // Premium View Transition crossfade
+      const transition = (document as any).startViewTransition(() => {
+        changeTheme();
+      });
+
+      transition.finished.then(() => {
+        isTransitioning.current = false;
+      }).catch(() => {
+        isTransitioning.current = false;
+      });
+    }
   };
 
   return (

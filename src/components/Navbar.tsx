@@ -21,26 +21,36 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
 
-      // Simple active link detection
-      const sections = navLinks.map(link => link.href.substring(1));
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
+    // Highly optimized active section detection using IntersectionObserver
+    const observerOptions = {
+      root: null,
+      rootMargin: '-30% 0px -60% 0px', // trigger when section occupies middle region of viewport
+      threshold: 0
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    navLinks.forEach((link) => {
+      const sectionId = link.href.substring(1);
+      const el = document.getElementById(sectionId);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (

@@ -244,21 +244,17 @@ html.theme-ready .section-underline,
 html.theme-ready input,
 html.theme-ready textarea,
 html.theme-ready select,
-html.theme-ready button:not(.portfolio-btn-primary):not(.hero-btn-primary):not(.hero-btn-secondary),
-html.theme-ready a:not(.portfolio-btn-primary):not(.hero-btn-primary) {
+html.theme-ready button,
+html.theme-ready a {
   transition:
-    background-color 320ms ease-in-out,
-    color            320ms ease-in-out,
-    border-color     320ms ease-in-out,
-    box-shadow       320ms ease-in-out !important;
-}
-
-/* During transition: kill expensive backdrop-filter recalculation */
-html.theme-transitioning .glass-panel,
-html.theme-transitioning .contact-form-card,
-html.theme-transitioning nav {
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+    background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    color            300ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color     300ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow       300ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity          300ms cubic-bezier(0.4, 0, 0.2, 1),
+    filter           300ms cubic-bezier(0.4, 0, 0.2, 1),
+    backdrop-filter  300ms cubic-bezier(0.4, 0, 0.2, 1),
+    -webkit-backdrop-filter 300ms cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -891,10 +887,14 @@ html[data-theme="light"] .theme-toggle-btn:hover {
   height: 100%;
   opacity: 0;
   transform: rotate(180deg) scale(0.9);
+  transition: color 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity, color;
+}
+
+html:not(.theme-ready) .theme-toggle-icon {
   transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
               opacity 300ms cubic-bezier(0.22, 1, 0.36, 1),
               color 300ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform, opacity, color;
 }
 
 .theme-toggle-icon svg {
@@ -933,6 +933,53 @@ html.icon-theme-dark .theme-toggle-icon-sun,
 html[data-theme="dark"] .theme-toggle-icon-sun {
   opacity: 0;
   transform: rotate(180deg) scale(0.9);
+}
+
+/* Premium popping scale and 180° rotation when theme changes */
+@keyframes toggle-icon-enter {
+  0% {
+    transform: rotate(180deg) scale(0.9);
+    opacity: 0;
+  }
+  50% {
+    transform: rotate(90deg) scale(1.08);
+    opacity: 0.5;
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes toggle-icon-exit {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(-90deg) scale(0.95);
+    opacity: 0.5;
+  }
+  100% {
+    transform: rotate(-180deg) scale(0.9);
+    opacity: 0;
+  }
+}
+
+html.theme-ready.icon-theme-light .theme-toggle-icon-sun {
+  animation: toggle-icon-enter 320ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+html.theme-ready.icon-theme-light .theme-toggle-icon-moon {
+  animation: toggle-icon-exit 320ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+html.theme-ready.icon-theme-dark .theme-toggle-icon-moon {
+  animation: toggle-icon-enter 320ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+html.theme-ready.icon-theme-dark .theme-toggle-icon-sun {
+  animation: toggle-icon-exit 320ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .theme-toggle-btn:focus-visible {
@@ -1458,4 +1505,169 @@ html[data-theme="light"] select:-webkit-autofill:focus {
     box-shadow: inset 0 0 14px rgba(139, 92, 246, 0.12),
                 inset 0 0  6px rgba(168, 85, 247, 0.07);
   }
+}
+
+/* ==========================================================================
+   LENIS SMOOTH SCROLL RECOMMENDATIONS
+   ========================================================================== */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   PERFORMANCE & BACKGROUND CSS KEYFRAMES
+   ========================================================================== */
+
+/* Star Twinkle Animation */
+@keyframes star-twinkle {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.1);
+  }
+}
+
+.star-twinkle {
+  animation: star-twinkle var(--star-duration, 4s) ease-in-out var(--star-delay, 0s) infinite;
+  will-change: opacity, transform;
+}
+
+/* Planet Float Animations */
+@keyframes planet-float-large {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+@keyframes planet-float-small {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(-3deg);
+  }
+}
+
+.planet-float-lg {
+  animation: planet-float-large 9s ease-in-out infinite;
+  will-change: transform;
+}
+
+.planet-float-sm {
+  animation: planet-float-small 11s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Wave Morph Animations */
+@keyframes wave-morph-purple {
+  0%, 100% {
+    d: path("M0,110 C240,70 480,150 720,110 C960,70 1200,150 1440,110");
+    transform: scaleY(1);
+  }
+  50% {
+    d: path("M0,110 C240,130 480,90 720,110 C960,130 1200,90 1440,110");
+    transform: scaleY(1.05);
+  }
+}
+
+@keyframes wave-morph-pink {
+  0%, 100% {
+    d: path("M0,130 C300,160 600,100 900,130 C1200,160 1320,100 1440,130");
+    transform: scaleY(1);
+  }
+  50% {
+    d: path("M0,130 C300,100 600,160 900,130 C1200,100 1320,160 1440,130");
+    transform: scaleY(0.95);
+  }
+}
+
+.wave-path-purple {
+  animation: wave-morph-purple 14s ease-in-out infinite;
+  will-change: d, transform;
+}
+
+.wave-path-pink {
+  animation: wave-morph-pink 17s ease-in-out infinite;
+  will-change: d, transform;
+}
+
+/* ==========================================================================
+   4K & HIGH-RESOLUTION RESPONSIVENESS (1920px+)
+   ========================================================================== */
+@media (min-width: 1920px) {
+  html {
+    font-size: 105%; /* Scales all rem-based layout, paddings, gaps, and typography */
+  }
+  .max-w-\[1400px\] {
+    max-w: 1600px !important;
+  }
+}
+
+@media (min-width: 2560px) {
+  html {
+    font-size: 110%;
+  }
+  .max-w-\[1400px\] {
+    max-w: 2000px !important;
+  }
+}
+
+@media (min-width: 3440px) {
+  html {
+    font-size: 115%;
+  }
+  .max-w-\[1400px\] {
+    max-w: 2500px !important;
+  }
+}
+
+@media (min-width: 3840px) { /* 4K Display */
+  html {
+    font-size: 120%;
+  }
+  .max-w-\[1400px\] {
+    max-w: 2900px !important;
+  }
+}
+
+/* Accessibility: respect user prefers-reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+}
+
+/* Custom View Transition fade timings */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 300ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
