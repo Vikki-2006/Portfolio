@@ -1,27 +1,9 @@
 import { FileText, ArrowRight } from 'lucide-react';
 import profile from '@/assets/profile.png';
 import { motion } from 'framer-motion';
-import { useTheme } from '../context/ThemeContext';
 import SocialIcon from './SocialIcon';
 
-// SVG arc helper functions
-const polarToCartesian = (centerX: number, centerY: number, radius: number, angleInDegrees: number) => {
-  const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
-  return {
-    x: centerX + (radius * Math.cos(angleInRadians)),
-    y: centerY + (radius * Math.sin(angleInRadians))
-  };
-};
 
-const describeArc = (x: number, y: number, radius: number, startAngle: number, endAngle: number) => {
-  const start = polarToCartesian(x, y, radius, endAngle);
-  const end = polarToCartesian(x, y, radius, startAngle);
-  const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-  return [
-    "M", start.x, start.y, 
-    "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
-  ].join(" ");
-};
 
 interface ParticleConfig {
   size: number;
@@ -73,7 +55,6 @@ const ORBITING_PARTICLES: ParticleConfig[] = [
 ];
 
 export default function Hero() {
-  const { theme } = useTheme();
 
   return (
     <section id="home" className="relative min-h-screen pt-32 pb-20 flex items-center justify-center bg-transparent">
