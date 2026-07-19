@@ -12,7 +12,7 @@ A modern, responsive developer portfolio showcasing my projects, skills, achieve
 
 ## 🚀 Live Demo
 
-🔗 **Portfolio:** https://vigneshwaran2006.vercel.app/
+🔗 **Portfolio:** https://vigneshwaran-dev.vercel.app/
 
 ---
 
