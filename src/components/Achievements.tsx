@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Trophy } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionContainer from './SectionContainer';
@@ -68,7 +69,7 @@ const achievementsData: Achievement[] = [
   }
 ];
 
-export default function Achievements() {
+const Achievements = memo(function Achievements() {
   return (
     <SectionContainer id="achievements">
       {/* Section Header */}
@@ -187,4 +188,6 @@ export default function Achievements() {
         </div>
     </SectionContainer>
   );
-}
+});
+
+export default Achievements;

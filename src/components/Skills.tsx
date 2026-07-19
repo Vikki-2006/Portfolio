@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 import SectionContainer from './SectionContainer';
@@ -274,35 +275,14 @@ function SkillCard({ category }: { category: SkillCategory }) {
 
         {/* Abstract floating particles inside card */}
         <div className={`absolute inset-0 pointer-events-none z-0 overflow-hidden transition-opacity duration-300 ${theme === 'dark' ? 'opacity-30 group-hover:opacity-60' : 'opacity-[0.08] group-hover:opacity-[0.15]'}`}>
-          <motion.div 
-            animate={{
-              y: [0, -12, 0],
-              x: [0, 6, 0],
-              opacity: [0.15, 0.45, 0.15]
-            }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            style={{ willChange: "transform" }}
-            className={`absolute top-[25%] left-[35%] w-1.5 h-1.5 rounded-full blur-[0.5px] ${theme === 'dark' ? 'bg-violet-400' : 'bg-zinc-400'}`}
+          <div 
+            className={`absolute top-[25%] left-[35%] w-1.5 h-1.5 rounded-full blur-[0.5px] skill-float-p-1 ${theme === 'dark' ? 'bg-violet-400' : 'bg-zinc-400'}`}
           />
-          <motion.div 
-            animate={{
-              y: [0, 10, 0],
-              x: [0, -8, 0],
-              opacity: [0.1, 0.4, 0.1]
-            }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            style={{ willChange: "transform" }}
-            className={`absolute bottom-[35%] right-[25%] w-[2px] h-[2px] rounded-full blur-[0.5px] ${theme === 'dark' ? 'bg-pink-400' : 'bg-zinc-400'}`}
+          <div 
+            className={`absolute bottom-[35%] right-[25%] w-[2px] h-[2px] rounded-full blur-[0.5px] skill-float-p-2 ${theme === 'dark' ? 'bg-pink-400' : 'bg-zinc-400'}`}
           />
-          <motion.div 
-            animate={{
-              y: [0, -15, 0],
-              x: [0, -6, 0],
-              opacity: [0.2, 0.5, 0.2]
-            }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            style={{ willChange: "transform" }}
-            className={`absolute top-[65%] left-[20%] w-1.5 h-1.5 rounded-full blur-[0.5px] ${theme === 'dark' ? 'bg-indigo-400' : 'bg-zinc-400'}`}
+          <div 
+            className={`absolute top-[65%] left-[20%] w-1.5 h-1.5 rounded-full blur-[0.5px] skill-float-p-3 ${theme === 'dark' ? 'bg-indigo-400' : 'bg-zinc-400'}`}
           />
         </div>
 
@@ -352,11 +332,11 @@ function SkillCard({ category }: { category: SkillCategory }) {
   );
 }
 
-export default function Skills() {
+const Skills = memo(function Skills() {
   return (
     <SectionContainer id="skills">
-      {/* Background radial glow */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-r from-violet-600/5 to-pink-500/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
+      {/* Dynamic particles in background — hidden in light theme via CSS */}
+      <div className="skills-ambient-blob absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none z-0" />
 
       <motion.div
         variants={containerVariants}
@@ -385,4 +365,6 @@ export default function Skills() {
       </motion.div>
     </SectionContainer>
   );
-}
+});
+
+export default Skills;

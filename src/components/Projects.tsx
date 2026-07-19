@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { ExternalLink, Trash2, LayoutGrid, Terminal, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionContainer from './SectionContainer';
@@ -276,7 +277,7 @@ function ProjectScreenshotPlaceholder({ type }: { type: 'iot' | 'kanban' | 'port
   );
 }
 
-export default function Projects() {
+const Projects = memo(function Projects() {
   return (
     <SectionContainer id="projects">
       {/* Section Header */}
@@ -379,4 +380,6 @@ export default function Projects() {
         </div>
     </SectionContainer>
   );
-}
+});
+
+export default Projects;

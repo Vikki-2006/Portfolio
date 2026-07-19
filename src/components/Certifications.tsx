@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { ShieldCheck, Award, Trophy } from 'lucide-react';
 import { SiMeta, SiHackerrank } from 'react-icons/si';
 import { motion } from 'framer-motion';
@@ -69,7 +70,7 @@ const certificationsData: Certification[] = [
   }
 ];
 
-export default function Certifications() {
+const Certifications = memo(function Certifications() {
   return (
     <SectionContainer id="certifications">
       {/* Section Header */}
@@ -138,4 +139,6 @@ export default function Certifications() {
         </div>
     </SectionContainer>
   );
-}
+});
+
+export default Certifications;

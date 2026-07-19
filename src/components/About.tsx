@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import { GraduationCap, MapPin, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionContainer from './SectionContainer';
 
-export default function About() {
+const About = memo(function About() {
   return (
     <SectionContainer id="about">
       {/* Section Header */}
@@ -85,4 +86,6 @@ export default function About() {
           </div>
       </SectionContainer>
   );
-}
+});
+
+export default About;

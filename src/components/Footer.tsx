@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import SocialIcon from './SocialIcon';
 
-export default function Footer() {
+const Footer = memo(function Footer() {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
@@ -89,4 +89,6 @@ export default function Footer() {
 
     </footer>
   );
-}
+});
+
+export default Footer;

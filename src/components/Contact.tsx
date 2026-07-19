@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { Mail, MapPin, FileText, ArrowRight, User, MessageSquare, Check, Loader2, FileDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionContainer from './SectionContainer';
@@ -39,7 +39,7 @@ function validateForm(form: { name: string; email: string; subject: string; mess
 }
 
 // ─── Main Contact component ──────────────────────────────────────────────────
-export default function Contact() {
+const Contact = memo(function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [errors, setErrors] = useState<FormErrors>({});
   const [toast, setToast] = useState<ToastData | null>(null);
@@ -309,4 +309,6 @@ export default function Contact() {
       </SectionContainer>
     </>
   );
-}
+});
+
+export default Contact;

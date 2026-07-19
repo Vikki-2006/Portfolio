@@ -1,32 +1,21 @@
-import { useMemo } from 'react';
+import { memo } from 'react';
 import { useTheme } from '../context/ThemeContext';
 
-// Generate a deterministic static list of 100 stars to avoid hydration mismatch in server-side builds
+// Generate a static deterministic list of 100 stars
 const starSettings = Array.from({ length: 100 }, (_, i) => {
-  const colors = ['#FFFFFF', '#A855F7', '#EC4899'];
   return {
     id: i,
     left: `${(i * 17) % 100}%`,
     top: `${(i * 29) % 100}%`,
     size: ((i * 3) % 2) + 1, // 1px to 2px
-    color: colors[i % colors.length],
+    colorIndex: i % 3,
     duration: ((i * 7) % 5) + 3, // 3s to 7s duration
     delay: (i * 0.1) % 4 // 0s to 4s delay
   };
 });
 
-export default function Background() {
+const Background = memo(function Background() {
   const { theme } = useTheme();
-
-  const stars = useMemo(() => {
-    if (theme === 'light') {
-      return starSettings.map(star => ({
-        ...star,
-        color: '#D4D4D8' // Soft light gray particles in light theme
-      }));
-    }
-    return starSettings;
-  }, [theme]);
 
   return (
     <div className="fixed inset-0 w-full h-full z-[-1] select-none pointer-events-none overflow-hidden bg-[var(--background)]">
@@ -89,17 +78,15 @@ export default function Background() {
 
       {/* 5. 80-120 tiny white, purple and pink particles randomly distributed (slow twinkling stars) */}
       <div style={{ opacity: 'var(--stars-opacity)' }} className="absolute inset-0 transition-opacity duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]">
-        {stars.map((star) => (
+        {starSettings.map((star) => (
           <div
             key={star.id}
-            className="absolute rounded-full pointer-events-none transition-[left,top,background-color] duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] star-twinkle"
+            className={`absolute rounded-full pointer-events-none star-twinkle star-color-${star.colorIndex}`}
             style={{
               left: star.left,
               top: star.top,
               width: `${star.size}px`,
               height: `${star.size}px`,
-              backgroundColor: star.color,
-              boxShadow: `0 0 3px ${star.color}`,
               '--star-duration': `${star.duration}s`,
               '--star-delay': `${star.delay}s`
             } as React.CSSProperties}
@@ -190,4 +177,6 @@ export default function Background() {
 
     </div>
   );
-}
+});
+
+export default Background;

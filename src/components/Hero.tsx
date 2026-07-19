@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { FileText, ArrowRight } from 'lucide-react';
 import profile from '@/assets/profile.png';
 import { motion } from 'framer-motion';
@@ -54,7 +55,7 @@ const ORBITING_PARTICLES: ParticleConfig[] = [
   { size: 1, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 4, duration: 34, direction: 'cw', floatDuration: 6.7, floatDelay: 1.3, twinkleDuration: 3.7, twinkleDelay: 0.8, angle: 340 },
 ];
 
-export default function Hero() {
+const Hero = memo(function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen pt-32 pb-20 flex items-center justify-center bg-transparent">
@@ -192,16 +193,8 @@ export default function Hero() {
           <div className="w-full lg:w-[40%] flex flex-col items-center justify-center relative mb-14 lg:mb-0">
             
             {/* Master float translateY container */}
-            <motion.div
-              animate={{
-                y: [0, -6, 0]
-              }}
-              transition={{
-                duration: 6,
-                ease: "easeInOut",
-                repeat: Infinity
-              }}
-              className="relative flex items-center justify-center w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px]"
+            <div
+              className="hero-float-container relative flex items-center justify-center w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px]"
             >
               {/* Radial Purple background glow */}
               <div 
@@ -226,37 +219,17 @@ export default function Hero() {
               </svg>
 
               {/* Glowing Particles */}
-              <motion.div
-                animate={{
-                  y: [0, -3, 0],
-                  opacity: [0.35, 0.5, 0.35]
-                }}
-                transition={{ duration: 5, ease: "easeInOut", repeat: Infinity }}
-                className="absolute top-[10%] left-[20%] w-2 h-2 rounded-full bg-[#A855F7] shadow-[0_0_8px_rgba(168,85,247,0.7)] opacity-40 blur-[0.5px] z-20 pointer-events-none"
+              <div
+                className="hero-glow-p-1 absolute top-[10%] left-[20%] w-2 h-2 rounded-full bg-[#A855F7] shadow-[0_0_8px_rgba(168,85,247,0.7)] opacity-40 blur-[0.5px] z-20 pointer-events-none"
               />
-              <motion.div
-                animate={{
-                  y: [0, 4, 0],
-                  opacity: [0.35, 0.5, 0.35]
-                }}
-                transition={{ duration: 6, ease: "easeInOut", repeat: Infinity, delay: 0.5 }}
-                className="absolute bottom-[12%] right-[22%] w-[7px] h-[7px] rounded-full bg-[#EC4899] shadow-[0_0_6px_rgba(236,72,153,0.7)] opacity-40 blur-[0.5px] z-20 pointer-events-none"
+              <div
+                className="hero-glow-p-2 absolute bottom-[12%] right-[22%] w-[7px] h-[7px] rounded-full bg-[#EC4899] shadow-[0_0_6px_rgba(236,72,153,0.7)] opacity-40 blur-[0.5px] z-20 pointer-events-none"
               />
-              <motion.div
-                animate={{
-                  y: [0, -4, 0],
-                  opacity: [0.4, 0.6, 0.4]
-                }}
-                transition={{ duration: 5.5, ease: "easeInOut", repeat: Infinity, delay: 1 }}
-                className="absolute top-[4%] left-[44%] w-2 h-2 rounded-full bg-white/70 shadow-[0_0_8px_rgba(255,255,255,0.5)] opacity-50 blur-[0.5px] z-20 pointer-events-none"
+              <div
+                className="hero-glow-p-3 absolute top-[4%] left-[44%] w-2 h-2 rounded-full bg-white/70 shadow-[0_0_8px_rgba(255,255,255,0.5)] opacity-50 blur-[0.5px] z-20 pointer-events-none"
               />
-              <motion.div
-                animate={{
-                  y: [0, 3, 0],
-                  opacity: [0.35, 0.5, 0.35]
-                }}
-                transition={{ duration: 4.5, ease: "easeInOut", repeat: Infinity, delay: 1.5 }}
-                className="absolute top-[45%] left-[4%] w-[6px] h-[6px] rounded-full bg-white/70 shadow-[0_0_6px_rgba(255,255,255,0.4)] opacity-40 blur-[0.5px] z-20 pointer-events-none"
+              <div
+                className="hero-glow-p-4 absolute top-[45%] left-[4%] w-[6px] h-[6px] rounded-full bg-white/70 shadow-[0_0_6px_rgba(255,255,255,0.4)] opacity-40 blur-[0.5px] z-20 pointer-events-none"
               />
 
               {/* Profile Image & Orbiting Particles Container */}
@@ -347,11 +320,13 @@ export default function Hero() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
           
         </div>
       </div>
     </section>
   );
-}
+});
+
+export default Hero;

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Briefcase, Calendar, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionContainer from './SectionContainer';
@@ -20,7 +21,7 @@ const internshipData: InternshipDetails = {
   ]
 };
 
-export default function Experience() {
+const Experience = memo(function Experience() {
   return (
     <SectionContainer id="experience">
       {/* Section Header */}
@@ -90,4 +91,6 @@ export default function Experience() {
 
     </SectionContainer>
   );
-}
+});
+
+export default Experience;

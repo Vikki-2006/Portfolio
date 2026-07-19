@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
@@ -16,7 +16,7 @@ interface ToastProps {
   onClose: () => void;
 }
 
-export default function Toast({ toast, onClose }: ToastProps) {
+const Toast = memo(function Toast({ toast, onClose }: ToastProps) {
   const { theme } = useTheme();
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(100);
@@ -30,16 +30,22 @@ export default function Toast({ toast, onClose }: ToastProps) {
     const decrement = (step / duration) * 100;
 
     const interval = window.setInterval(() => {
+      if (isPaused) return;
+      
+      let shouldClose = false;
       setProgress((prev) => {
-        if (isPaused) return prev;
         const next = prev - decrement;
         if (next <= 0) {
-          window.clearInterval(interval);
-          onClose();
+          shouldClose = true;
           return 0;
         }
         return next;
       });
+
+      if (shouldClose) {
+        window.clearInterval(interval);
+        onClose();
+      }
     }, step);
 
     return () => window.clearInterval(interval);
@@ -204,4 +210,6 @@ export default function Toast({ toast, onClose }: ToastProps) {
       </motion.div>
     </AnimatePresence>
   );
-}
+});
+
+export default Toast;

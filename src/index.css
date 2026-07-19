@@ -1671,3 +1671,151 @@ html.lenis, html.lenis body {
   animation-duration: 300ms;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* ═══════════════════════════════════════════════════════
+   PERFORMANCE & BACKGROUND OPTIMIZATIONS
+   ═══════════════════════════════════════════════════════ */
+
+/* Star Colors mapped to CSS variables for 60FPS theme transitioning */
+:root {
+  --star-color-0: #D4D4D8;
+  --star-color-1: #D4D4D8;
+  --star-color-2: #D4D4D8;
+}
+html[data-theme="dark"] {
+  --star-color-0: #FFFFFF;
+  --star-color-1: #A855F7;
+  --star-color-2: #EC4899;
+}
+.star-color-0 {
+  background-color: var(--star-color-0);
+  box-shadow: 0 0 3px var(--star-color-0);
+}
+.star-color-1 {
+  background-color: var(--star-color-1);
+  box-shadow: 0 0 3px var(--star-color-1);
+}
+.star-color-2 {
+  background-color: var(--star-color-2);
+  box-shadow: 0 0 3px var(--star-color-2);
+}
+
+/* GPU-Accelerated Float/Twinkle CSS Animations (Replaces Framer Motion Infinite Loops) */
+
+/* Hero float */
+@keyframes hero-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.hero-float-container {
+  animation: hero-float 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Hero concentric particles */
+@keyframes hero-glow-particle-1 {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateY(-3px);
+    opacity: 0.5;
+  }
+}
+@keyframes hero-glow-particle-2 {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateY(4px);
+    opacity: 0.5;
+  }
+}
+@keyframes hero-glow-particle-3 {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 0.6;
+  }
+}
+@keyframes hero-glow-particle-4 {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateY(3px);
+    opacity: 0.5;
+  }
+}
+
+.hero-glow-p-1 {
+  animation: hero-glow-particle-1 5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+.hero-glow-p-2 {
+  animation: hero-glow-particle-2 6s ease-in-out infinite 0.5s;
+  will-change: transform, opacity;
+}
+.hero-glow-p-3 {
+  animation: hero-glow-particle-3 5.5s ease-in-out infinite 1s;
+  will-change: transform, opacity;
+}
+.hero-glow-p-4 {
+  animation: hero-glow-particle-4 4.5s ease-in-out infinite 1.5s;
+  will-change: transform, opacity;
+}
+
+/* Skills card floating particles */
+@keyframes skill-float-particle-1 {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translate(6px, -12px);
+    opacity: 0.45;
+  }
+}
+@keyframes skill-float-particle-2 {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.1;
+  }
+  50% {
+    transform: translate(-8px, 10px);
+    opacity: 0.4;
+  }
+}
+@keyframes skill-float-particle-3 {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translate(-6px, -15px);
+    opacity: 0.45;
+  }
+}
+
+.skill-float-p-1 {
+  animation: skill-float-particle-1 4s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+.skill-float-p-2 {
+  animation: skill-float-particle-2 5s ease-in-out infinite 0.5s;
+  will-change: transform, opacity;
+}
+.skill-float-p-3 {
+  animation: skill-float-particle-3 6s ease-in-out infinite 1s;
+  will-change: transform, opacity;
+}
