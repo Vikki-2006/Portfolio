@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Mail, MapPin, FileText, ArrowRight, User, MessageSquare, Check, Loader2, FileDown } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { sendContactEmail } from '../lib/web3forms';
 import SectionContainer from './SectionContainer';
 import Toast from './Toast';
 import type { ToastData, ToastType } from './Toast';
@@ -11,8 +10,8 @@ const contactCards = [
   {
     id: 'email',
     title: 'Email Address',
-    value: 'vikki.29062006@gmail.com',
-    href: 'mailto:vikki.29062006@gmail.com',
+    value: 'vigneshwaran.s.dev@gmail.com',
+    href: 'mailto:vigneshwaran.s.dev@gmail.com',
     icon: Mail,
   },
   {
@@ -43,9 +42,9 @@ function validateForm(form: { name: string; email: string; subject: string; mess
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [errors, setErrors] = useState<FormErrors>({});
+  const [toast, setToast] = useState<ToastData | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
-  const [toast, setToast] = useState<ToastData | null>(null);
 
   const showToast = (type: ToastType, title: string, description?: string) => {
     setToast({ type, title, description });
@@ -61,16 +60,56 @@ export default function Contact() {
     e.preventDefault();
     const validationErrors = validateForm(form);
     if (Object.keys(validationErrors).length > 0) { setErrors(validationErrors); return; }
+
     setIsSubmitting(true);
     setErrors({});
+
     try {
-      await sendContactEmail(form);
+      console.log('Sending message request to /api/send...');
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+
+      let result: any = null;
+      let textResponse = '';
+      const contentType = response.headers.get('content-type');
+
+      if (contentType && contentType.includes('application/json')) {
+        try {
+          result = await response.json();
+        } catch (jsonErr) {
+          console.error('Failed to parse response JSON:', jsonErr);
+        }
+      }
+
+      if (!result) {
+        textResponse = await response.text();
+      }
+
+      // Check response status
+      if (!response.ok) {
+        const errorMsg = (result && result.error) || textResponse || `Server returned status ${response.status}`;
+        console.error('Server error response:', errorMsg);
+        throw new Error(errorMsg);
+      }
+
+      if (!result || !result.success) {
+        const errorMsg = (result && result.error) || 'Failed to send message.';
+        console.error('API error response:', errorMsg);
+        throw new Error(errorMsg);
+      }
+
       setIsSent(true);
       setForm({ name: '', email: '', subject: '', message: '' });
-      showToast('success', 'Message sent successfully!', "I'll get back to you soon.");
+      showToast('success', 'Message sent successfully.');
       setTimeout(() => setIsSent(false), 4000);
-    } catch (error: unknown) {
-      showToast('error', 'Unable to send message.', 'Please try again later.');
+    } catch (error: any) {
+      console.error('Submission error:', error);
+      showToast('error', 'Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
