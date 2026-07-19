@@ -792,6 +792,12 @@ html[data-theme="light"] .hero-btn-secondary:hover {
   transform: scale(0.98) translateY(0) !important;
 }
 
+/* Hero section buttons rounded override */
+.hero-btn-primary,
+.hero-btn-secondary {
+  border-radius: 16px !important;
+}
+
 /* Icon slide animation on hover (統一 3–4px translation) */
 .portfolio-btn-primary svg,
 .portfolio-btn-primary .arrow-icon,

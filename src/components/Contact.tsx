@@ -294,8 +294,8 @@ const Contact = memo(function Contact() {
               {/* Download Resume */}
               <div className="flex justify-center w-full mt-0">
                 <a
-                  href="/Vigneshwaran_S_Resume_Updated.pdf"
-                  download="Vigneshwaran_S_Resume_Updated.pdf"
+                  href="/resume/Vigneshwaran_S_Resume.pdf"
+                  download
                   className="portfolio-btn-primary w-60 py-3.5 px-6 select-none text-xs sm:text-sm"
                 >
                   <FileDown className="w-4 h-4" />

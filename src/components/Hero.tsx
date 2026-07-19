@@ -141,7 +141,7 @@ const Hero = memo(function Hero() {
                 <ArrowRight className="arrow-icon w-4 h-4" />
               </a>
               <a
-                href="/Vigneshwaran_S_Resume_Updated.pdf"
+                href="/resume/Vigneshwaran_S_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hero-btn-secondary px-7 py-3.5 text-sm"
