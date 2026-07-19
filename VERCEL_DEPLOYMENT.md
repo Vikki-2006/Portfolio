@@ -22,7 +22,7 @@ To allow the serverless function (`/api/send`) to send emails securely, you need
    - Select **Environment Variables** in the left menu.
    - Add a new variable:
      - **Key**: `RESEND_API_KEY`
-     - **Value**: `re_JyfHmEuw_PndPNUo1Ho5LwSJvgEQTAvDs` (paste the API Key you copied from Resend)
+     - **Value**: `XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX` (paste the API Key you copied from Resend)
      - Keep all environments checked (**Production**, **Preview**, **Development**).
    - Click **Save**.
 
