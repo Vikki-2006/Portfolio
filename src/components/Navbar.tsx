@@ -61,24 +61,25 @@ export default function Navbar() {
           : 'bg-transparent py-5'
       }`}
     >
-      <div className="max-w-[1400px] mx-auto px-8">
+      <div className="responsive-container">
         <div className="flex items-center justify-between h-12">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="#home" className="flex items-center gap-1.5 text-zinc-100 group select-none">
+            <a href="#home" aria-label="Vigneshwaran S Portfolio Home" className="flex items-center gap-1.5 text-zinc-100 group select-none">
               <span className="text-violet-500 font-extrabold text-xl leading-none">&lt;/&gt;</span>
               <span className="font-script text-zinc-100 text-[21px] font-semibold leading-none">Vigneshwaran S</span>
             </a>
           </div>
 
           {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center space-x-1">
+          <div className="nav-links-desktop items-center space-x-1">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.substring(1);
               return (
                 <a
                   key={link.name}
                   href={link.href}
+                  aria-label={link.name}
                   className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ${
                     isActive
                       ? 'text-[var(--nav-text-active)] bg-violet-500/10 dark:bg-white/5'
@@ -94,7 +95,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex lg:hidden">
+          <div className="nav-hamburger-container">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900/60 focus:outline-none"
@@ -108,7 +109,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Panel */}
       <div
-        className={`lg:hidden fixed inset-0 z-40 bg-zinc-950/95 backdrop-blur-lg transform transition-transform duration-300 ease-in-out ${
+        className={`nav-mobile-panel fixed inset-0 z-40 bg-zinc-950/95 backdrop-blur-lg transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         style={{ top: '64px', height: 'calc(100vh - 64px)' }}

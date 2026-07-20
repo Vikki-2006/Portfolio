@@ -30,6 +30,7 @@ export default function SocialIcon({ href, network, title }: SocialIconProps) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
+        aria-label={title}
         className="social-icon-btn flex items-center justify-center cursor-pointer relative"
       >
         {getIcon()}

@@ -13,7 +13,7 @@ const About = memo(function About() {
           <div className="section-underline"></div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[58fr_42fr] gap-12 items-start">
+        <div className="about-grid gap-12 items-start">
           
           {/* Left Column: Biography Narrative */}
           <motion.div 
@@ -21,7 +21,7 @@ const About = memo(function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.45 }}
-            className="space-y-6 text-zinc-300 text-base sm:text-lg leading-relaxed font-medium"
+            className="space-y-6 text-zinc-300 text-base sm:text-lg leading-relaxed font-medium max-w-4xl"
           >
             <p>
               I'm Vigneshwaran S, a B.Tech Information Technology student passionate about software engineering and full-stack web development. I enjoy transforming ideas into modern, scalable applications with clean architecture, intuitive user experiences, and efficient backend systems.

@@ -60,11 +60,11 @@ const Hero = memo(function Hero() {
   return (
     <section id="home" className="relative min-h-screen pt-32 pb-20 flex items-center justify-center bg-transparent">
       
-      <div className="max-w-[1400px] mx-auto px-8 w-full relative z-10">
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 xl:gap-x-28 2xl:gap-x-36 items-center justify-between">
+      <div className="responsive-container relative z-10">
+        <div className="hero-flex-layout flex flex-col lg:flex-row gap-16 lg:gap-24 xl:gap-x-28 2xl:gap-x-36 items-center justify-between">
           
           {/* Left Column: Text & Links */}
-          <div className="w-full lg:w-[60%] flex flex-col items-center lg:items-start text-center lg:text-left">
+          <div className="hero-text-column w-full lg:w-[60%] flex flex-col items-center lg:items-start text-center lg:text-left">
             
             {/* Redesigned Hero Heading matching Sujith G portfolio Visual Hierarchy */}
             <motion.h1 
@@ -131,7 +131,7 @@ const Hero = memo(function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-10 flex flex-wrap justify-center lg:justify-start gap-4"
+              className="hero-buttons-container mt-10 flex flex-wrap justify-center lg:justify-start gap-4"
             >
               <a
                 href="#projects"
@@ -190,7 +190,7 @@ const Hero = memo(function Hero() {
           </div>
 
           {/* Right Column: Premium Corporate Orbits Portrait UI */}
-          <div className="w-full lg:w-[40%] flex flex-col items-center justify-center relative mb-14 lg:mb-0">
+          <div className="hero-image-column w-full lg:w-[40%] flex flex-col items-center justify-center relative mb-14 lg:mb-0">
             
             {/* Master float translateY container */}
             <div
@@ -314,6 +314,9 @@ const Hero = memo(function Hero() {
                       <img
                         src={profile}
                         alt="Vigneshwaran S"
+                        loading="eager"
+                        decoding="async"
+                        fetchPriority="high"
                         className="w-full h-full object-contain scale-[1.22] translate-y-[5%] select-none pointer-events-none z-10"
                       />
                     </motion.div>

@@ -108,6 +108,7 @@ const Achievements = memo(function Achievements() {
                           src={Icon} 
                           alt={`${item.platform} Logo`} 
                           loading="lazy"
+                          decoding="async"
                           className="w-[26px] h-[26px] object-contain select-none" 
                         />
                       ) : (
@@ -121,6 +122,7 @@ const Achievements = memo(function Achievements() {
                           src={Icon} 
                           alt={`${item.platform} Logo`} 
                           loading="lazy"
+                          decoding="async"
                           className="w-[26px] h-[26px] object-contain select-none" 
                         />
                       ) : (

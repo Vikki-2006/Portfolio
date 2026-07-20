@@ -1825,3 +1825,329 @@ html[data-theme="dark"] {
   animation: skill-float-particle-3 6s ease-in-out infinite 1s;
   will-change: transform, opacity;
 }
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE DESIGN SYSTEM OVERRIDES (MOBILE & TABLET)
+   Ensures pixel-perfect layout scaling and scroll prevention.
+   DO NOT MODIFY DESKTOP (>=1280px).
+   ═══════════════════════════════════════════════════════ */
+
+/* Global Overflow Protection */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* --- Breakpoint Variables --- */
+:root {
+  /* Default Mobile (below 768px) */
+  --profile-radius: 156px !important;
+  --purple-glow-opacity: 0.30 !important;
+  --pink-glow-opacity: 0.27 !important;
+  --white-glow-opacity: 0.16 !important;
+  --particle-blur-filter: blur(0.2px) !important;
+}
+
+@media (min-width: 768px) {
+  :root {
+    /* Large Mobile (768px - 899px) */
+    --profile-radius: 188px !important;
+    --purple-glow-opacity: 0.45 !important;
+    --pink-glow-opacity: 0.40 !important;
+    --white-glow-opacity: 0.24 !important;
+    --particle-blur-filter: blur(0.3px) !important;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1279.98px) {
+  :root {
+    /* Tablet (900px - 1279px) */
+    --profile-radius: 178px !important; /* Scaled down for tablet */
+    --purple-glow-opacity: 0.45 !important;
+    --pink-glow-opacity: 0.40 !important;
+    --white-glow-opacity: 0.24 !important;
+    --particle-blur-filter: blur(0.3px) !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    /* Desktop (1280px+) - Restores original values */
+    --profile-radius: 228px !important;
+    --purple-glow-opacity: 0.50 !important;
+    --pink-glow-opacity: 0.45 !important;
+    --white-glow-opacity: 0.27 !important;
+    --particle-blur-filter: blur(0.4px) !important;
+  }
+}
+
+/* ==========================================
+   NAVBAR RESPONSIVENESS (900px Breakpoint)
+   ========================================== */
+.nav-links-desktop {
+  display: flex;
+}
+.nav-hamburger-container {
+  display: none;
+}
+.nav-mobile-panel {
+  display: none;
+}
+
+@media (max-width: 899.98px) {
+  .nav-links-desktop {
+    display: none !important;
+  }
+  .nav-hamburger-container {
+    display: flex !important;
+  }
+  .nav-mobile-panel {
+    display: block !important;
+  }
+}
+
+/* Tablet nav link scaling to prevent wrapping */
+@media (min-width: 900px) and (max-width: 1279.98px) {
+  .nav-links-desktop a {
+    font-size: 11.5px !important;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+}
+
+/* ==========================================
+   HERO RESPONSIVENESS
+   ========================================== */
+@media (max-width: 1279.98px) {
+  /* Tablet Hero Layout (900px - 1279px) */
+  @media (min-width: 900px) {
+    .hero-flex-layout {
+      flex-direction: row !important;
+      gap: 2rem !important; /* Reduce gap to fit screen */
+    }
+    .hero-text-column {
+      width: 56% !important;
+      align-items: flex-start !important;
+      text-align: left !important;
+    }
+    .hero-text-column h1 {
+      align-items: flex-start !important;
+      text-align: left !important;
+    }
+    .hero-image-column {
+      width: 40% !important;
+      margin-bottom: 0 !important;
+    }
+    /* Scale profile image slightly smaller */
+    .hero-float-container {
+      width: 380px !important;
+      height: 380px !important;
+    }
+    .profile-border-ring__frame > div {
+      width: 320px !important;
+      height: 320px !important;
+    }
+  }
+
+  /* Mobile Hero Layout (below 900px) */
+  @media (max-width: 899.98px) {
+    .hero-flex-layout {
+      flex-direction: column !important;
+      gap: 3.5rem !important;
+    }
+    .hero-text-column {
+      width: 100% !important;
+      align-items: center !important;
+      text-align: center !important;
+    }
+    .hero-text-column h1 {
+      align-items: center !important;
+      text-align: center !important;
+    }
+    .hero-image-column {
+      width: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      margin-top: 2rem !important;
+      margin-bottom: 2rem !important;
+    }
+    /* Vertically stacked full-width buttons */
+    .hero-buttons-container {
+      flex-direction: column !important;
+      align-items: center !important;
+      width: 100% !important;
+      max-width: 340px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    .hero-buttons-container a {
+      width: 100% !important;
+      text-align: center !important;
+    }
+    /* Typography scaling */
+    .hero-text-column h1 span.font-milker {
+      font-size: 28px !important;
+    }
+  }
+
+  /* Extra small mobile typography adjustments */
+  @media (max-width: 480px) {
+    .hero-text-column h1 span.font-milker {
+      font-size: 22px !important;
+    }
+  }
+}
+
+/* ==========================================
+   ABOUT GRID RESPONSIVENESS
+   ========================================== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px) {
+  .about-grid {
+    grid-template-columns: 58fr 42fr !important;
+  }
+}
+
+/* ==========================================
+   SKILLS GRID RESPONSIVENESS
+   ========================================== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* ==========================================
+   CONTACT GRID RESPONSIVENESS
+   ========================================== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.contact-form-column {
+  width: 100%;
+}
+.contact-info-column {
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .contact-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  }
+  .contact-form-column {
+    grid-column: span 7 / span 7 !important;
+  }
+  .contact-info-column {
+    grid-column: span 5 / span 5 !important;
+  }
+}
+
+@media (max-width: 899.98px) {
+  .download-resume-container {
+    width: 100% !important;
+  }
+  .download-resume-btn {
+    width: 100% !important;
+    max-width: 340px !important;
+  }
+  .contact-ambient-blob {
+    width: 280px !important;
+    height: 280px !important;
+  }
+}
+
+/* Prevent card button overflows on extra small screens */
+@media (max-width: 359.98px) {
+  .portfolio-card .grid-cols-2 {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+  }
+  .portfolio-card .grid-cols-2 a {
+    width: 100% !important;
+  }
+}
+
+/* ==========================================
+   SECTION & SPACING OPTIMIZATIONS
+   ========================================== */
+@media (max-width: 767.98px) {
+  /* Reduce padding of section containers for comfortable mobile spacing */
+  section {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    padding-top: 5rem !important;
+    padding-bottom: 4rem !important;
+  }
+  .max-w-\[1400px\] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  /* Heading sizes */
+  h2 + p, .text-3xl {
+    font-size: 1.5rem !important; /* text-2xl */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279.98px) {
+  section {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   HIGH-RESOLUTION & RESPONSIVE CONTAINER OPTIMIZATIONS
+   Seamless support for 1440p (2K), 2160p (4K), and Ultrawides (21:9 / 32:9)
+   ═══════════════════════════════════════════════════════ */
+
+.responsive-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  max-width: 1400px;
+}
+
+@media (min-width: 1920px) {
+  .responsive-container {
+    max-width: 1600px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .responsive-container {
+    max-width: 1920px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 3840px) {
+  .responsive-container {
+    max-width: 2400px;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+/* Reduced motion optimization for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

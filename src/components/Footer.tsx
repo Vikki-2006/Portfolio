@@ -25,7 +25,7 @@ const Footer = memo(function Footer() {
 
   return (
     <footer className="bg-[var(--footer-bg)] border-t border-[var(--footer-border)] py-12 relative select-none transition-all duration-300">
-      <div className="max-w-[1400px] mx-auto px-8">
+      <div className="responsive-container">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-6">
           
           {/* Left: Branding Logo in Yesteryear */}

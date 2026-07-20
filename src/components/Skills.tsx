@@ -353,7 +353,7 @@ const Skills = memo(function Skills() {
         </motion.div>
 
         {/* 2x2 Grid Layout - Equal heights, spacious gaps */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="skills-grid gap-6">
           {skillsData.map((category, catIndex) => (
             <motion.div key={catIndex} variants={cardVariants}>
               <SkillCard 

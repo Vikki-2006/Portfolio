@@ -138,10 +138,10 @@ const Contact = memo(function Contact() {
           </div>
 
           {/* Split Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          <div className="contact-grid gap-8 lg:gap-12 items-start">
 
             {/* Left: Form */}
-            <div className="lg:col-span-7 space-y-6">
+            <div className="contact-form-column space-y-6">
               <div className="space-y-4">
                 <h3 className="text-2xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight leading-tight">
                   Let's Build Something <br />
@@ -255,7 +255,7 @@ const Contact = memo(function Contact() {
             </div>
 
             {/* Right: Contact cards */}
-            <div className="lg:col-span-5 flex flex-col gap-6 w-full lg:pt-[190px]">
+            <div className="contact-info-column flex flex-col gap-6 w-full lg:pt-[190px]">
               {contactCards.map((card) => {
                 const CardIcon = card.icon;
                 return (
@@ -292,11 +292,11 @@ const Contact = memo(function Contact() {
               })}
 
               {/* Download Resume */}
-              <div className="flex justify-center w-full mt-0">
+              <div className="download-resume-container flex justify-center w-full mt-0">
                 <a
                   href="/resume/Vigneshwaran_S_Resume.pdf"
                   download
-                  className="portfolio-btn-primary w-60 py-3.5 px-6 select-none text-xs sm:text-sm"
+                  className="download-resume-btn portfolio-btn-primary w-60 py-3.5 px-6 select-none text-xs sm:text-sm"
                 >
                   <FileDown className="w-4 h-4" />
                   Download Resume
