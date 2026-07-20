@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Lenis from 'lenis';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -85,6 +86,7 @@ export default function App() {
         <Footer />
       </div>
     </div>
+    <SpeedInsights />
     </ThemeProvider>
   );
 }
