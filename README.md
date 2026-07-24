@@ -1,4 +1,4 @@
-# 🌐My Personal Portfolio
+# 🌐My Personal Portfolio/
 
 A modern, responsive developer portfolio showcasing my projects, skills, achievements, certifications, and software engineering journey.
 
