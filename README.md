@@ -1,4 +1,3 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 # 🌐My Personal Portfolio
 
