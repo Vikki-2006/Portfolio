@@ -18,16 +18,32 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
+  // Prevent background page scrolling while mobile menu is open
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
     };
-    window.addEventListener('scroll', handleScroll);
+  }, [isOpen]);
 
-    // Highly optimized active section detection using IntersectionObserver
+  useEffect(() => {
+    let isScrolledPast = false;
+    const handleScroll = () => {
+      const past = window.scrollY > 20;
+      if (past !== isScrolledPast) {
+        isScrolledPast = past;
+        setScrolled(past);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     const observerOptions = {
       root: null,
-      rootMargin: '-30% 0px -60% 0px', // trigger when section occupies middle region of viewport
+      rootMargin: '-30% 0px -60% 0px',
       threshold: 0
     };
 
@@ -54,89 +70,120 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-[var(--navbar-bg)] backdrop-blur-xl border-b border-[var(--border-color)] py-3 shadow-lg'
-          : 'bg-transparent py-5'
-      }`}
-    >
-      <div className="responsive-container">
-        <div className="flex items-center justify-between h-12">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <a href="#home" aria-label="Vigneshwaran S Portfolio Home" className="flex items-center gap-1.5 text-zinc-100 group select-none">
-              <span className="text-violet-500 font-extrabold text-xl leading-none">&lt;/&gt;</span>
-              <span className="font-script text-zinc-100 text-[21px] font-semibold leading-none">Vigneshwaran S</span>
-            </a>
-          </div>
-
-          {/* Desktop Nav Links */}
-          <div className="nav-links-desktop items-center space-x-1">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.href.substring(1);
-              return (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  aria-label={link.name}
-                  className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ${
-                    isActive
-                      ? 'text-[var(--nav-text-active)] bg-violet-500/10 dark:bg-white/5'
-                      : 'text-[var(--nav-text-inactive)] hover:text-[var(--nav-text-hover)] hover:bg-zinc-900/5 dark:hover:bg-white/5'
-                  }`}
-                >
-                  {link.name}
-                </a>
-              );
-            })}
-            
-            <ThemeToggle className="ml-2" />
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="nav-hamburger-container">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900/60 focus:outline-none"
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu Panel */}
-      <div
-        className={`nav-mobile-panel fixed inset-0 z-40 bg-zinc-950/95 backdrop-blur-lg transform transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
+    <>
+      {/* Desktop Navbar (>=769px / md:block) - 100% UNTOUCHED */}
+      <nav
+        className={`hidden md:block fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? 'bg-[var(--navbar-bg)] backdrop-blur-xl border-b border-[var(--border-color)] py-3 shadow-lg'
+            : 'bg-transparent py-5'
         }`}
-        style={{ top: '64px', height: 'calc(100vh - 64px)' }}
       >
-        <div className="px-4 pt-4 pb-6 space-y-3 sm:px-6">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className={`block px-4 py-3 rounded-lg text-base font-semibold border-l-2 ${
-                activeSection === link.href.substring(1)
-                  ? 'border-violet-600 bg-zinc-900 text-zinc-100'
-                  : 'border-transparent text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900/40'
-              }`}
-            >
-              {link.name}
-            </a>
-          ))}
+        <div className="responsive-container">
+          <div className="flex items-center justify-between h-12">
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <a href="#home" aria-label="Vigneshwaran S Portfolio Home" className="flex items-center gap-1.5 text-zinc-100 group select-none">
+                <span className="text-violet-500 font-extrabold text-xl leading-none">&lt;/&gt;</span>
+                <span className="font-script text-zinc-100 text-[21px] font-semibold leading-none">Vigneshwaran S</span>
+              </a>
+            </div>
 
-          {/* Mobile Theme Toggle Row */}
-          <div className="pt-4 border-t border-[var(--border-color)] flex items-center justify-between px-4">
-            <span className="text-sm font-medium text-zinc-400">Theme Mode</span>
-            <ThemeToggle />
+            {/* Desktop Nav Links */}
+            <div className="nav-links-desktop items-center space-x-1">
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href.substring(1);
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    aria-label={link.name}
+                    className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                      isActive
+                        ? 'text-[var(--nav-text-active)] bg-violet-500/10 dark:bg-white/5'
+                        : 'text-[var(--nav-text-inactive)] hover:text-[var(--nav-text-hover)] hover:bg-zinc-900/5 dark:hover:bg-white/5'
+                    }`}
+                  >
+                    {link.name}
+                  </a>
+                );
+              })}
+              
+              <ThemeToggle className="ml-2" />
+            </div>
           </div>
         </div>
+      </nav>
+
+      {/* Mobile Floating Top-Right Controls (<=768px / md:hidden) - NO navbar container */}
+      <div className="absolute top-4 right-4 z-50 flex md:hidden items-center gap-2.5">
+        <ThemeToggle />
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="inline-flex items-center justify-center w-[42px] h-[42px] rounded-full text-[var(--text-primary)] hover:bg-zinc-800/30 border border-[var(--border-color)] bg-[var(--background)] shadow-md focus:outline-none transition-transform duration-200 active:scale-95"
+          aria-label="Toggle menu"
+        >
+          {isOpen ? <X className="w-5 h-5 text-violet-400" /> : <Menu className="w-5 h-5" />}
+        </button>
       </div>
-    </nav>
+
+      {/* Backdrop overlay for closing mobile drawer */}
+      <div
+        onClick={() => setIsOpen(false)}
+        className={`fixed inset-0 z-[55] bg-black/50 md:hidden transition-opacity duration-250 ease-out ${
+          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      />
+
+      {/* Mobile Navigation Drawer (Right-Side Slide-In) */}
+      <div
+        className={`fixed top-0 right-0 z-[60] h-[100dvh] w-[82vw] max-w-[360px] bg-[var(--background)] border-l border-[var(--border-color)] shadow-2xl flex flex-col md:hidden transition-transform duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          isOpen ? 'pointer-events-auto' : 'pointer-events-none'
+        }`}
+        style={{
+          transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(100%, 0, 0)',
+        }}
+      >
+        {/* Drawer Header */}
+        <div className="flex items-center justify-between px-5 py-4 border-b border-[var(--border-color)]">
+          <a
+            href="#home"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center gap-1.5 text-zinc-100 group select-none"
+          >
+            <span className="text-violet-500 font-extrabold text-lg leading-none">&lt;/&gt;</span>
+            <span className="font-script text-[var(--text-primary)] text-lg font-semibold leading-none">Vigneshwaran S</span>
+          </a>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="p-1.5 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-zinc-800/40 focus:outline-none transition-colors"
+            aria-label="Close menu"
+          >
+            <X className="w-5 h-5 text-violet-400" />
+          </button>
+        </div>
+
+        {/* Navigation Items List */}
+        <div className="px-3 py-4 space-y-1 overflow-y-auto flex-1">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.substring(1);
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`flex items-center px-4 py-2.5 rounded-lg text-sm font-semibold transition-colors duration-200 border-l-2 ${
+                  isActive
+                    ? 'border-violet-500 bg-violet-500/10 text-violet-400 font-bold'
+                    : 'border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-zinc-800/20'
+                }`}
+              >
+                {link.name}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </>
   );
 }

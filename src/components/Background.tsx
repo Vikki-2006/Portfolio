@@ -18,70 +18,140 @@ const Background = memo(function Background() {
   const { theme } = useTheme();
 
   return (
-    <div className="fixed inset-0 w-full h-full z-[-1] select-none pointer-events-none overflow-hidden bg-[var(--background)]">
+    <div className="portfolio-bg fixed inset-0 w-full h-full z-0 select-none pointer-events-none overflow-hidden bg-[var(--background)]">
       
-      {/* 1. Large soft purple ambient glow from the top-left */}
+      {/* --- DARK THEME LAYERS --- */}
       <div 
-        className="absolute rounded-full blur-[140px] pointer-events-none transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-        style={{
-          background: theme === 'dark' 
-            ? 'radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 70%)' 
-            : 'radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%)',
-          width: '1000px',
-          height: '1000px',
-          left: '-20%',
-          top: '-20%',
-        }}
-      />
+        className="absolute inset-0 pointer-events-none transition-opacity duration-280 md:duration-500 ease-in-out"
+        style={{ opacity: theme === 'dark' ? 1 : 0 }}
+      >
+        {/* 1. Large soft purple ambient glow from the top-left */}
+        <div 
+          className="absolute rounded-full blur-[60px] md:blur-[140px] w-[500px] h-[500px] md:w-[1000px] md:h-[1000px] pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 70%)',
+            left: '-20%',
+            top: '-20%',
+          }}
+        />
 
-      {/* 2. Large soft pink ambient glow from the top-right */}
+        {/* 2. Large soft pink ambient glow from the top-right */}
+        <div 
+          className="absolute rounded-full blur-[60px] md:blur-[140px] w-[500px] h-[500px] md:w-[1000px] md:h-[1000px] pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(236, 72, 153, 0.10) 0%, transparent 70%)',
+            right: '-20%',
+            top: '-15%',
+          }}
+        />
+
+        {/* 3. Very subtle blue glow behind the profile image */}
+        <div 
+          className="absolute rounded-full blur-[50px] md:blur-[120px] w-[350px] h-[350px] md:w-[700px] md:h-[700px] pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(99, 102, 241, 0.14) 0%, transparent 70%)',
+            right: '8%',
+            top: '15%',
+          }}
+        />
+
+        {/* 4. Faint square grid overlay */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            opacity: 0.025,
+            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px)`,
+            backgroundSize: '72px 72px'
+          }}
+        />
+
+        {/* 8. Soft vignette around screen edges */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, transparent 40%, rgba(9, 9, 11, 0.85) 100%)'
+          }}
+        />
+
+        {/* 9. Subtle bottom glow fading upward */}
+        <div 
+          className="absolute bottom-0 left-0 w-full h-[180px] md:h-[300px] pointer-events-none"
+          style={{
+            background: 'linear-gradient(to top, rgba(124, 58, 237, 0.08), transparent 100%)'
+          }}
+        />
+      </div>
+
+      {/* --- LIGHT THEME LAYERS --- */}
       <div 
-        className="absolute rounded-full blur-[140px] pointer-events-none transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-        style={{
-          background: theme === 'dark' 
-            ? 'radial-gradient(circle, rgba(236, 72, 153, 0.10) 0%, transparent 70%)' 
-            : 'radial-gradient(circle, rgba(236, 72, 153, 0.03) 0%, transparent 70%)',
-          width: '1000px',
-          height: '1000px',
-          right: '-20%',
-          top: '-15%',
-        }}
-      />
+        className="absolute inset-0 pointer-events-none transition-opacity duration-280 md:duration-500 ease-in-out"
+        style={{ opacity: theme === 'light' ? 1 : 0 }}
+      >
+        {/* 1. Large soft purple ambient glow from the top-left */}
+        <div 
+          className="absolute rounded-full blur-[60px] md:blur-[140px] w-[500px] h-[500px] md:w-[1000px] md:h-[1000px] pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%)',
+            left: '-20%',
+            top: '-20%',
+          }}
+        />
 
-      {/* 3. Very subtle blue glow behind the profile image */}
-      <div 
-        className="absolute rounded-full blur-[120px] pointer-events-none transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-        style={{
-          background: theme === 'dark' 
-            ? 'radial-gradient(circle, rgba(99, 102, 241, 0.14) 0%, transparent 70%)' 
-            : 'radial-gradient(circle, rgba(99, 102, 241, 0.04) 0%, transparent 70%)',
-          width: '700px',
-          height: '700px',
-          right: '8%',
-          top: '15%',
-        }}
-      />
+        {/* 2. Large soft pink ambient glow from the top-right */}
+        <div 
+          className="absolute rounded-full blur-[60px] md:blur-[140px] w-[500px] h-[500px] md:w-[1000px] md:h-[1000px] pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(236, 72, 153, 0.03) 0%, transparent 70%)',
+            right: '-20%',
+            top: '-15%',
+          }}
+        />
 
-      {/* 4. Extremely faint square grid overlay across the entire Hero (opacity around 2-3%) */}
-      <div 
-        className="absolute inset-0 transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-        style={{
-          opacity: theme === 'dark' ? 0.025 : 0.04,
-          backgroundImage: theme === 'dark'
-            ? `linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-               linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px)`
-            : `linear-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px),
-               linear-gradient(90deg, rgba(15, 23, 42, 0.08) 1px, transparent 1px)`,
-          backgroundSize: '72px 72px'
-        }}
-      />
+        {/* 3. Very subtle blue glow behind the profile image */}
+        <div 
+          className="absolute rounded-full blur-[50px] md:blur-[120px] w-[350px] h-[350px] md:w-[700px] md:h-[700px] pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(99, 102, 241, 0.04) 0%, transparent 70%)',
+            right: '8%',
+            top: '15%',
+          }}
+        />
 
-      {/* 5. 80-120 tiny white, purple and pink particles randomly distributed (slow twinkling stars) */}
-      <div style={{ opacity: 'var(--stars-opacity)' }} className="absolute inset-0 transition-opacity duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]">
+        {/* 4. Faint square grid overlay */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            opacity: 0.04,
+            backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(15, 23, 42, 0.08) 1px, transparent 1px)`,
+            backgroundSize: '72px 72px'
+          }}
+        />
+
+        {/* 8. Soft vignette around screen edges */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, transparent 40%, rgba(247, 248, 252, 0.70) 100%)'
+          }}
+        />
+
+        {/* 9. Subtle bottom glow fading upward */}
+        <div 
+          className="absolute bottom-0 left-0 w-full h-[180px] md:h-[300px] pointer-events-none"
+          style={{
+            background: 'linear-gradient(to top, rgba(124, 58, 237, 0.024), transparent 100%)'
+          }}
+        />
+      </div>
+
+      {/* 5. Tiny stars (30 on mobile, 100 on desktop) */}
+      <div style={{ opacity: 'var(--stars-opacity)' }} className="absolute inset-0 transition-opacity duration-280 md:duration-[650ms] ease-in-out">
         {starSettings.map((star) => (
           <div
             key={star.id}
-            className={`absolute rounded-full pointer-events-none star-twinkle star-color-${star.colorIndex}`}
+            className={`absolute rounded-full pointer-events-none star-twinkle star-color-${star.colorIndex} ${star.id >= 30 ? 'hidden md:block' : ''}`}
             style={{
               left: star.left,
               top: star.top,
@@ -94,40 +164,31 @@ const Background = memo(function Background() {
         ))}
       </div>
 
-      {/* 6. 2 Floating Blurred Planets */}
-      {/* Large planet near the top-right */}
+      {/* 6. 2 Floating Planets */}
       <div
-        className="absolute rounded-full pointer-events-none planet-float-lg"
+        className="absolute rounded-full pointer-events-none planet-float-lg w-[75px] h-[75px] md:w-[110px] md:h-[110px]"
         style={{
-          width: '110px',
-          height: '110px',
           background: 'var(--planet-bg-1)',
-          boxShadow: '0 0 50px var(--planet-glow)',
+          boxShadow: '0 0 30px var(--planet-glow)',
           right: '12%',
           top: '22%',
           opacity: 0.85,
-          willChange: 'transform'
         }}
       />
-
-      {/* Small planet near the bottom-right */}
       <div
-        className="absolute rounded-full pointer-events-none planet-float-sm"
+        className="absolute rounded-full pointer-events-none planet-float-sm w-[45px] h-[45px] md:w-[60px] md:h-[60px]"
         style={{
-          width: '60px',
-          height: '60px',
           background: 'var(--planet-bg-2)',
-          boxShadow: '0 0 35px var(--planet-glow)',
+          boxShadow: '0 0 20px var(--planet-glow)',
           right: '22%',
           bottom: '18%',
           opacity: 0.85,
-          willChange: 'transform'
         }}
       />
 
-      {/* 7. Animated SVG Wave Lines at the bottom with purple and pink gradients */}
+      {/* 7. Animated SVG Wave Lines */}
       <svg 
-        className="absolute bottom-0 left-0 w-full h-[220px] pointer-events-none select-none"
+        className="absolute bottom-0 left-0 w-full h-[140px] md:h-[220px] pointer-events-none select-none"
         viewBox="0 0 1440 220" 
         preserveAspectRatio="none"
       >
@@ -156,24 +217,6 @@ const Background = memo(function Background() {
           strokeWidth="1.2"
         />
       </svg>
-
-      {/* 8. Soft vignette around screen edges */}
-      <div 
-        className="absolute inset-0 pointer-events-none transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-        style={{
-          background: 'radial-gradient(circle, transparent 40%, var(--vignette-color) 100%)'
-        }}
-      />
-
-      {/* 9. Subtle bottom glow fading upward */}
-      <div 
-        className="absolute bottom-0 left-0 w-full h-[300px] pointer-events-none transition-all duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-        style={{
-          background: theme === 'dark'
-            ? 'linear-gradient(to top, rgba(124, 58, 237, 0.08), transparent 100%)'
-            : 'linear-gradient(to top, rgba(124, 58, 237, 0.024), transparent 100%)'
-        }}
-      />
 
     </div>
   );

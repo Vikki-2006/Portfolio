@@ -62,17 +62,14 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     };
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-    if (prefersReducedMotion || !(document as any).startViewTransition) {
-      // Fallback transition for reduced motion or unsupported browsers
-      root.classList.add('theme-transitioning');
+    if (prefersReducedMotion || isMobile || !(document as any).startViewTransition) {
+      // Direct instant theme swap for mobile or reduced motion (CSS transitions handle visual change)
       changeTheme();
-      setTimeout(() => {
-        root.classList.remove('theme-transitioning');
-        isTransitioning.current = false;
-      }, 300);
+      isTransitioning.current = false;
     } else {
-      // Premium View Transition crossfade
+      // Premium View Transition crossfade for desktop
       const transition = (document as any).startViewTransition(() => {
         changeTheme();
       });

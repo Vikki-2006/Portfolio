@@ -243,7 +243,6 @@ function SkillCard({ category }: { category: SkillCategory }) {
       onMouseMove={handleMouseMove}
       className="portfolio-card relative p-[2px] rounded-[24px] select-none cursor-pointer h-full group bg-[rgba(255,255,255,0.08)] hover:bg-gradient-to-br hover:from-[#7C3AED] hover:to-[#EC4899] hover:active-gradient-border hover:shadow-[0_12px_40px_rgba(0,0,0,0.35),0_0_35px_rgba(124,58,237,0.18)]"
       style={{
-        willChange: "transform, box-shadow",
         backfaceVisibility: "hidden"
       }}
     >
@@ -260,7 +259,7 @@ function SkillCard({ category }: { category: SkillCategory }) {
 
       {/* Inner Card Container: Matches the requested dark glass backdrop exactly with NO background changes on active */}
       <div 
-        className="relative rounded-[22.5px] backdrop-blur-2xl p-6 sm:p-8 h-full flex flex-col justify-between z-10 overflow-hidden transition-all duration-300 border border-[var(--border-color)] bg-[var(--card-bg)] hover:bg-[var(--card-hover-bg)]"
+        className="relative rounded-[22.5px] md:backdrop-blur-2xl p-6 sm:p-8 h-full flex flex-col justify-between z-10 overflow-hidden transition-all duration-300 border border-[var(--border-color)] bg-[var(--card-bg)] hover:bg-[var(--card-hover-bg)]"
       >
         
         {/* Mouse Follow Glow Overlay - GPU rendered using CSS custom properties */}

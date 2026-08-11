@@ -234,6 +234,7 @@ html[data-theme="light"] {
 html.theme-ready body,
 html.theme-ready #root,
 html.theme-ready nav,
+html.theme-ready .portfolio-bg,
 html.theme-ready .glass-panel,
 html.theme-ready .portfolio-card,
 html.theme-ready .contact-form-card,
@@ -247,14 +248,10 @@ html.theme-ready select,
 html.theme-ready button,
 html.theme-ready a {
   transition:
-    background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
-    color            300ms cubic-bezier(0.4, 0, 0.2, 1),
-    border-color     300ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow       300ms cubic-bezier(0.4, 0, 0.2, 1),
-    opacity          300ms cubic-bezier(0.4, 0, 0.2, 1),
-    filter           300ms cubic-bezier(0.4, 0, 0.2, 1),
-    backdrop-filter  300ms cubic-bezier(0.4, 0, 0.2, 1),
-    -webkit-backdrop-filter 300ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+    background-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    color            200ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color     200ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity          200ms cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -401,6 +398,7 @@ html.theme-ready a {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    touch-action: pan-y;
   }
   
   body {
@@ -410,6 +408,8 @@ html.theme-ready a {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
   }
 
   #root {
@@ -438,10 +438,17 @@ html.theme-ready a {
 /* Custom premium design classes */
 .glass-panel {
   background: var(--card-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow);
+}
+
+@media (min-width: 769px) {
+  .glass-panel {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
 }
 
 .glass-panel-hover {
@@ -1233,19 +1240,19 @@ html[data-theme="light"] select:-webkit-autofill:focus {
 /* Layer 1: Circular Orbit Animations */
 @keyframes particle-orbit-cw {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(0deg) translateZ(0);
   }
   100% {
-    transform: rotate(360deg);
+    transform: rotate(360deg) translateZ(0);
   }
 }
 
 @keyframes particle-orbit-ccw {
   0% {
-    transform: rotate(360deg);
+    transform: rotate(360deg) translateZ(0);
   }
   100% {
-    transform: rotate(0deg);
+    transform: rotate(0deg) translateZ(0);
   }
 }
 
@@ -1347,8 +1354,8 @@ html[data-theme="light"] select:-webkit-autofill:focus {
    ═══════════════════════════════════════════════════════ */
 
 @keyframes profile-arc-spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  from { transform: rotate(0deg) translateZ(0); }
+  to   { transform: rotate(360deg) translateZ(0); }
 }
 
 @keyframes profile-glow-pulse {
@@ -1554,7 +1561,12 @@ html.lenis, html.lenis body {
 
 .star-twinkle {
   animation: star-twinkle var(--star-duration, 4s) ease-in-out var(--star-delay, 0s) infinite;
-  will-change: opacity, transform;
+}
+
+@media (min-width: 769px) {
+  .star-twinkle {
+    will-change: opacity, transform;
+  }
 }
 
 /* Planet Float Animations */
@@ -1576,47 +1588,24 @@ html.lenis, html.lenis body {
   }
 }
 
-.planet-float-lg {
-  animation: planet-float-large 9s ease-in-out infinite;
-  will-change: transform;
-}
-
-.planet-float-sm {
-  animation: planet-float-small 11s ease-in-out infinite;
-  will-change: transform;
-}
-
-/* Wave Morph Animations */
-@keyframes wave-morph-purple {
-  0%, 100% {
-    d: path("M0,110 C240,70 480,150 720,110 C960,70 1200,150 1440,110");
-    transform: scaleY(1);
+@media (min-width: 769px) {
+  .planet-float-lg {
+    animation: planet-float-large 9s ease-in-out infinite;
+    will-change: transform;
   }
-  50% {
-    d: path("M0,110 C240,130 480,90 720,110 C960,130 1200,90 1440,110");
-    transform: scaleY(1.05);
-  }
-}
 
-@keyframes wave-morph-pink {
-  0%, 100% {
-    d: path("M0,130 C300,160 600,100 900,130 C1200,160 1320,100 1440,130");
-    transform: scaleY(1);
+  .planet-float-sm {
+    animation: planet-float-small 11s ease-in-out infinite;
+    will-change: transform;
   }
-  50% {
-    d: path("M0,130 C300,100 600,160 900,130 C1200,100 1320,160 1440,130");
-    transform: scaleY(0.95);
+
+  .wave-path-purple {
+    animation: wave-morph-purple 14s ease-in-out infinite;
   }
-}
 
-.wave-path-purple {
-  animation: wave-morph-purple 14s ease-in-out infinite;
-  will-change: d, transform;
-}
-
-.wave-path-pink {
-  animation: wave-morph-pink 17s ease-in-out infinite;
-  will-change: d, transform;
+  .wave-path-pink {
+    animation: wave-morph-pink 17s ease-in-out infinite;
+  }
 }
 
 /* ==========================================================================
@@ -1717,113 +1706,41 @@ html[data-theme="dark"] {
     transform: translateY(-6px);
   }
 }
-.hero-float-container {
-  animation: hero-float 6s ease-in-out infinite;
-  will-change: transform;
-}
+@media (min-width: 769px) {
+  .hero-float-container {
+    animation: hero-float 6s ease-in-out infinite;
+    will-change: transform;
+  }
 
-/* Hero concentric particles */
-@keyframes hero-glow-particle-1 {
-  0%, 100% {
-    transform: translateY(0);
-    opacity: 0.35;
+  .hero-glow-p-1 {
+    animation: hero-glow-particle-1 5s ease-in-out infinite;
+    will-change: transform, opacity;
   }
-  50% {
-    transform: translateY(-3px);
-    opacity: 0.5;
+  .hero-glow-p-2 {
+    animation: hero-glow-particle-2 6s ease-in-out infinite 0.5s;
+    will-change: transform, opacity;
   }
-}
-@keyframes hero-glow-particle-2 {
-  0%, 100% {
-    transform: translateY(0);
-    opacity: 0.35;
+  .hero-glow-p-3 {
+    animation: hero-glow-particle-3 5.5s ease-in-out infinite 1s;
+    will-change: transform, opacity;
   }
-  50% {
-    transform: translateY(4px);
-    opacity: 0.5;
+  .hero-glow-p-4 {
+    animation: hero-glow-particle-4 4.5s ease-in-out infinite 1.5s;
+    will-change: transform, opacity;
   }
-}
-@keyframes hero-glow-particle-3 {
-  0%, 100% {
-    transform: translateY(0);
-    opacity: 0.4;
-  }
-  50% {
-    transform: translateY(-4px);
-    opacity: 0.6;
-  }
-}
-@keyframes hero-glow-particle-4 {
-  0%, 100% {
-    transform: translateY(0);
-    opacity: 0.35;
-  }
-  50% {
-    transform: translateY(3px);
-    opacity: 0.5;
-  }
-}
 
-.hero-glow-p-1 {
-  animation: hero-glow-particle-1 5s ease-in-out infinite;
-  will-change: transform, opacity;
-}
-.hero-glow-p-2 {
-  animation: hero-glow-particle-2 6s ease-in-out infinite 0.5s;
-  will-change: transform, opacity;
-}
-.hero-glow-p-3 {
-  animation: hero-glow-particle-3 5.5s ease-in-out infinite 1s;
-  will-change: transform, opacity;
-}
-.hero-glow-p-4 {
-  animation: hero-glow-particle-4 4.5s ease-in-out infinite 1.5s;
-  will-change: transform, opacity;
-}
-
-/* Skills card floating particles */
-@keyframes skill-float-particle-1 {
-  0%, 100% {
-    transform: translate(0, 0);
-    opacity: 0.15;
+  .skill-float-p-1 {
+    animation: skill-float-particle-1 4s ease-in-out infinite;
+    will-change: transform, opacity;
   }
-  50% {
-    transform: translate(6px, -12px);
-    opacity: 0.45;
+  .skill-float-p-2 {
+    animation: skill-float-particle-2 5s ease-in-out infinite 0.5s;
+    will-change: transform, opacity;
   }
-}
-@keyframes skill-float-particle-2 {
-  0%, 100% {
-    transform: translate(0, 0);
-    opacity: 0.1;
+  .skill-float-p-3 {
+    animation: skill-float-particle-3 6s ease-in-out infinite 1s;
+    will-change: transform, opacity;
   }
-  50% {
-    transform: translate(-8px, 10px);
-    opacity: 0.4;
-  }
-}
-@keyframes skill-float-particle-3 {
-  0%, 100% {
-    transform: translate(0, 0);
-    opacity: 0.15;
-  }
-  50% {
-    transform: translate(-6px, -15px);
-    opacity: 0.45;
-  }
-}
-
-.skill-float-p-1 {
-  animation: skill-float-particle-1 4s ease-in-out infinite;
-  will-change: transform, opacity;
-}
-.skill-float-p-2 {
-  animation: skill-float-particle-2 5s ease-in-out infinite 0.5s;
-  will-change: transform, opacity;
-}
-.skill-float-p-3 {
-  animation: skill-float-particle-3 6s ease-in-out infinite 1s;
-  will-change: transform, opacity;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -1846,7 +1763,7 @@ html, body {
   --purple-glow-opacity: 0.30 !important;
   --pink-glow-opacity: 0.27 !important;
   --white-glow-opacity: 0.16 !important;
-  --particle-blur-filter: blur(0.2px) !important;
+  --particle-blur-filter: none !important;
 }
 
 @media (min-width: 768px) {
@@ -2088,6 +2005,9 @@ html, body {
     padding-top: 5rem !important;
     padding-bottom: 4rem !important;
   }
+  #home {
+    padding-top: 2.5rem !important; /* Clean top spacing for mobile Hero start with floating controls */
+  }
   .max-w-\[1400px\] {
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -2095,6 +2015,52 @@ html, body {
   /* Heading sizes */
   h2 + p, .text-3xl {
     font-size: 1.5rem !important; /* text-2xl */
+  }
+}
+
+/* Mobile GPU optimization: Disable backdrop-filter on mobile viewports to prevent frame drops during touch scroll */
+@media (max-width: 768px) {
+  .glass-panel,
+  .portfolio-card,
+  .contact-form-card,
+  .contact-info-card,
+  .premium-glass-button,
+  .social-icon-btn,
+  .theme-toggle-btn {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* Mobile drop-shadow optimization: remove container drop-shadow on mobile to keep spinning arc 100% hardware GPU composited */
+@media (max-width: 768px) {
+  .profile-border-ring {
+    filter: none !important;
+  }
+}
+
+/* Mobile theme transition - 140ms fast CSS transitions for background-color, color, border-color */
+@media (max-width: 768px) {
+  html.theme-ready body,
+  html.theme-ready #root,
+  html.theme-ready nav,
+  html.theme-ready .portfolio-bg,
+  html.theme-ready .glass-panel,
+  html.theme-ready .portfolio-card,
+  html.theme-ready .contact-form-card,
+  html.theme-ready .contact-info-card,
+  html.theme-ready .contact-card-icon-wrap,
+  html.theme-ready .social-icon-btn,
+  html.theme-ready .section-underline,
+  html.theme-ready input,
+  html.theme-ready textarea,
+  html.theme-ready select,
+  html.theme-ready button,
+  html.theme-ready a {
+    transition:
+      background-color 140ms ease,
+      color            140ms ease,
+      border-color     140ms ease !important;
   }
 }
 
@@ -2138,16 +2104,6 @@ html, body {
     max-width: 2400px;
     padding-left: 4rem;
     padding-right: 4rem;
-  }
-}
-
-/* Reduced motion optimization for accessibility */
-@media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }
 

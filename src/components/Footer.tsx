@@ -5,14 +5,15 @@ const Footer = memo(function Footer() {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
+    let isPast = false;
     const checkScrollTop = () => {
-      if (window.scrollY > 300) {
-        setShowScrollTop(true);
-      } else {
-        setShowScrollTop(false);
+      const shouldShow = window.scrollY > 300;
+      if (shouldShow !== isPast) {
+        isPast = shouldShow;
+        setShowScrollTop(shouldShow);
       }
     };
-    window.addEventListener('scroll', checkScrollTop);
+    window.addEventListener('scroll', checkScrollTop, { passive: true });
     return () => window.removeEventListener('scroll', checkScrollTop);
   }, []);
 

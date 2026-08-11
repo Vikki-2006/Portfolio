@@ -74,7 +74,7 @@ function ProjectScreenshotPlaceholder({ type }: { type: 'iot' | 'kanban' | 'port
         <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-28 h-28 bg-pink-500/10 rounded-full blur-2xl pointer-events-none"></div>
 
         {/* Terminal/CLI Mockup */}
-        <div className="w-full h-full bg-zinc-950/75 border border-zinc-800/60 rounded-xl flex flex-col overflow-hidden shadow-xl backdrop-blur-sm relative z-10">
+        <div className="w-full h-full bg-zinc-950/75 border border-zinc-800/60 rounded-xl flex flex-col overflow-hidden shadow-xl md:backdrop-blur-sm relative z-10">
           {/* Title Bar */}
           <div className="flex items-center justify-between px-3 py-1.5 border-b border-zinc-900/60 bg-zinc-950/40">
             <div className="flex items-center gap-1.5">

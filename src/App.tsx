@@ -20,6 +20,10 @@ export default function App() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
+    // Skip Lenis smooth-scroll touch hijacking on mobile touch screens to preserve native hardware-accelerated touch scroll
+    const isMobileTouch = window.matchMedia('(max-width: 768px) and (pointer: coarse)').matches;
+    if (isMobileTouch) return;
+
     const lenis = new Lenis({
       duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
@@ -47,7 +51,7 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <div className="relative min-h-screen bg-transparent isolate text-zinc-100 selection:bg-violet-600/30 selection:text-white">
+      <div className="relative min-h-screen bg-[var(--background)] isolate text-zinc-100 selection:bg-violet-600/30 selection:text-white">
         {/* Premium Layered Background */}
         <Background />
 

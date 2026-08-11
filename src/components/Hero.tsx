@@ -1,10 +1,8 @@
-import { memo } from 'react';
+import { memo, useState, useEffect, useRef } from 'react';
 import { FileText, ArrowRight } from 'lucide-react';
 import profile from '@/assets/profile.png';
 import { motion } from 'framer-motion';
 import SocialIcon from './SocialIcon';
-
-
 
 interface ParticleConfig {
   size: number;
@@ -56,9 +54,26 @@ const ORBITING_PARTICLES: ParticleConfig[] = [
 ];
 
 const Hero = memo(function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const el = heroRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { rootMargin: '100px 0px', threshold: 0 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section id="home" className="relative min-h-screen pt-32 pb-20 flex items-center justify-center bg-transparent">
+    <section ref={heroRef} id="home" className="relative min-h-screen pt-32 pb-20 flex items-center justify-center bg-transparent">
       
       <div className="responsive-container relative z-10">
         <div className="hero-flex-layout flex flex-col lg:flex-row gap-16 lg:gap-24 xl:gap-x-28 2xl:gap-x-36 items-center justify-between">
@@ -198,11 +213,9 @@ const Hero = memo(function Hero() {
             >
               {/* Radial Purple background glow */}
               <div 
-                className="absolute rounded-full pointer-events-none z-0 transition-all duration-300"
+                className="absolute rounded-full pointer-events-none z-0 transition-all duration-300 w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px]"
                 style={{
                   background: 'radial-gradient(circle, var(--profile-glow) 0%, transparent 70%)',
-                  width: '500px',
-                  height: '500px'
                 }}
               />
 
@@ -236,7 +249,10 @@ const Hero = memo(function Hero() {
               <div className="relative flex items-center justify-center">
                 
                 {/* Orbiting Particles System (behind frame, z-0) */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+                <div 
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none z-0"
+                  style={{ animationPlayState: isVisible ? 'running' : 'paused' }}
+                >
                   {ORBITING_PARTICLES.map((p, idx) => {
                     let responsiveness = "absolute";
                     if (idx >= 10 && idx < 16) {
