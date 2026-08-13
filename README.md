@@ -1,144 +1,348 @@
-# Vigneshwaran S | Python Full-Stack Developer Portfolio
+<h1 align="center">👋 Vigneshwaran S | Python Full-Stack Developer</h1>
 
-A modern, high-performance personal developer portfolio showcasing my software engineering projects, technical skills, competitive programming achievements, verified certifications, and full-stack software engineering journey.
+<p align="center">
+  <b>Building modern, scalable, and user-focused web applications with Python, FastAPI, React, and JavaScript.</b>
+</p>
 
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38BDF8?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Framer Motion](https://img.shields.io/badge/Framer_Motion-000000?style=for-the-badge&logo=framer&logoColor=white)
-![Resend](https://img.shields.io/badge/Resend-000000?style=for-the-badge&logo=resend&logoColor=white)
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+<p align="center">
+  A modern personal developer portfolio showcasing my software engineering projects,
+  technical skills, achievements, certifications, experience, and full-stack development journey.
+</p>
 
----
+<p align="center">
+  <a href="https://vigneshwaran-dev.vercel.app/">
+    <img src="https://img.shields.io/badge/🌐%20Portfolio-Visit%20Website-000000?style=for-the-badge" />
+  </a>
+</p>
 
-## 🚀 Live Demo
-
-🔗 **Live Portfolio:** [https://vigneshwaran-dev.vercel.app/](https://vigneshwaran-dev.vercel.app/)
-
----
-
-## 🏛️ Architecture
-
-```text
-React + JSX Frontend
-        |
-        | REST API
-        v
-Python FastAPI Backend
-        |
-        +---- Resend API
-        |
-        v
-Email Inbox
-```
+<p align="center">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38BDF8?style=for-the-badge&logo=tailwind-css&logoColor=white" />
+  <img src="https://img.shields.io/badge/Framer_Motion-000000?style=for-the-badge&logo=framer&logoColor=white" />
+  <img src="https://img.shields.io/badge/Resend-000000?style=for-the-badge&logo=resend&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" />
+</p>
 
 ---
 
-## ✨ Features
+<h2>👨‍💻 About Me</h2>
 
-- 🎨 **Modern Premium UI**: Glassmorphism design with responsive 60fps micro-animations.
-- 🌗 **Dark & Light Theme**: Toggleable theme system with `localStorage` persistence.
-- 📱 **Fully Responsive**: Mobile-first layout optimized for mobile, tablet, and desktop screens.
-- ⚡ **Smooth Animations**: Hardware-accelerated transitions powered by Framer Motion & CSS keyframes.
-- 💼 **Project Showcase**: Detailed cards showcasing real-world IoT, AI CLI, and Web applications.
-- 🛠️ **Skills & Technologies**: Structured breakdown of core languages, frameworks, and developer tools.
-- 📜 **Experience Section**: Full Stack Development Internship timeline with key achievements.
-- 🏆 **Achievements**: Competitive programming highlights (LeetCode 300+ solved, CodeChef 1616 ★★★).
-- 🎓 **Certifications**: Verified credentials from IBM, Meta, Infosys, VDart, and HackerRank.
-- 📬 **Contact Form**: Interactive form with validation and real-time toast notification feedback.
-- 📄 **Resume Access**: One-click direct resume preview and download.
-- 🔥 **Recruiter-Friendly Design**: Fast load times, clean typography, and direct contact options.
-- 🚀 **Performance Optimized**: Sub-second page rendering and optimized asset delivery.
+<p>
+I'm <b>Vigneshwaran S</b>, a <b>Python Full-Stack Developer</b> focused on building
+modern web applications and practical software solutions.
+</p>
 
----
+<p>
+I enjoy working across the full development lifecycle — from designing responsive
+user interfaces to developing backend APIs, integrating services, and deploying
+production-ready applications.
+</p>
 
-## 🛠 Tech Stack
+<h3>💡 Currently Focused On</h3>
 
-### Frontend
-- React
-- JavaScript / JSX
-- Vite
-- Tailwind CSS
-- Framer Motion
-
-### Backend
-- Python
-- FastAPI
-- REST APIs
-
-### Services
-- Resend API
-
-### Deployment
-- Vercel
+<ul>
+  <li>🐍 Python & FastAPI backend development</li>
+  <li>⚛️ React & JavaScript frontend development</li>
+  <li>🔌 REST API development and integration</li>
+  <li>🏗️ Backend architecture and application design</li>
+  <li>☁️ Deployment and production workflows</li>
+  <li>🤖 AI-powered applications and developer tools</li>
+  <li>📈 Problem solving and software engineering</li>
+</ul>
 
 ---
 
-## 🐍 Python Backend
+<h2>🌐 Live Portfolio</h2>
 
-The portfolio utilizes a Python FastAPI serverless backend (`api/index.py`) for handling backend API functionality and transactional contact form emails:
+<p>
+  <a href="https://vigneshwaran-dev.vercel.app/">
+    <img src="https://img.shields.io/badge/🚀%20View%20Live%20Portfolio-Visit%20Now-000000?style=for-the-badge" />
+  </a>
+</p>
 
-- **Framework**: FastAPI
-- **Architecture**: REST API Serverless Endpoint
-- **Email Integration**: Resend Python SDK
-- **Security**: Environment-based secret management (`RESEND_API_KEY`)
+<p>The portfolio includes:</p>
 
-### API Endpoints
-
-- `GET /api/health` — Confirms Python FastAPI backend status and health.
-- `POST /api/send` — Receives contact submissions from the React frontend and dispatches emails via Resend.
+<ul>
+  <li>👨‍💻 About Me</li>
+  <li>🛠️ Skills & Technologies</li>
+  <li>💼 Experience</li>
+  <li>🚀 Projects</li>
+  <li>🏆 Achievements</li>
+  <li>🎓 Certifications</li>
+  <li>📄 Resume</li>
+  <li>📬 Contact</li>
+</ul>
 
 ---
 
-## 📂 Project Structure
+<h2>🏛️ Architecture</h2>
 
-```text
+<pre>
+┌──────────────────────────┐
+│     React + JSX          │
+│        Frontend          │
+└────────────┬─────────────┘
+             │
+             │ REST API
+             ▼
+┌──────────────────────────┐
+│    Python FastAPI        │
+│        Backend           │
+└────────────┬─────────────┘
+             │
+       ┌─────┴─────┐
+       ▼           ▼
+┌────────────┐ ┌────────────┐
+│ Resend API │ │   Vercel   │
+│   Email    │ │ Deployment │
+└────────────┘ └────────────┘
+</pre>
+
+---
+
+<h2>✨ Features</h2>
+
+<ul>
+  <li>🎨 <b>Modern Premium UI</b> — Clean, polished, and responsive portfolio design.</li>
+  <li>🌗 <b>Dark & Light Theme</b> — Theme switching with persistent user preference.</li>
+  <li>📱 <b>Fully Responsive</b> — Optimized for mobile, tablet, laptop, and desktop.</li>
+  <li>⚡ <b>Smooth Animations</b> — Interactive transitions using Framer Motion.</li>
+  <li>💼 <b>Project Showcase</b> — Real-world applications and development projects.</li>
+  <li>🛠️ <b>Technical Skills</b> — Languages, frameworks, libraries, and developer tools.</li>
+  <li>💼 <b>Experience Timeline</b> — Professional development experience.</li>
+  <li>🏆 <b>Achievements</b> — Competitive programming and technical achievements.</li>
+  <li>🎓 <b>Certifications</b> — Professional and technical certifications.</li>
+  <li>📄 <b>Resume Integration</b> — Direct resume preview and download.</li>
+  <li>📬 <b>Contact Form</b> — Backend-powered contact form with Resend email delivery.</li>
+  <li>🔐 <b>Secure Configuration</b> — Secrets managed through environment variables.</li>
+  <li>🚀 <b>Vercel Deployment</b> — Production deployment with serverless backend support.</li>
+</ul>
+
+---
+
+<h2>🛠️ Tech Stack</h2>
+
+<h3>🎨 Frontend</h3>
+
+<table>
+<tr>
+<th>Technology</th>
+<th>Purpose</th>
+</tr>
+<tr>
+<td>React</td>
+<td>UI development</td>
+</tr>
+<tr>
+<td>JavaScript / JSX</td>
+<td>Application logic</td>
+</tr>
+<tr>
+<td>Vite</td>
+<td>Frontend tooling & build system</td>
+</tr>
+<tr>
+<td>Tailwind CSS</td>
+<td>Styling</td>
+</tr>
+<tr>
+<td>Framer Motion</td>
+<td>Animations & interactions</td>
+</tr>
+</table>
+
+<h3>🐍 Backend</h3>
+
+<table>
+<tr>
+<th>Technology</th>
+<th>Purpose</th>
+</tr>
+<tr>
+<td>Python</td>
+<td>Backend programming</td>
+</tr>
+<tr>
+<td>FastAPI</td>
+<td>REST API framework</td>
+</tr>
+<tr>
+<td>Uvicorn</td>
+<td>ASGI development server</td>
+</tr>
+</table>
+
+<h3>🔌 Services & Deployment</h3>
+
+<table>
+<tr>
+<th>Technology</th>
+<th>Purpose</th>
+</tr>
+<tr>
+<td>Resend</td>
+<td>Transactional email delivery</td>
+</tr>
+<tr>
+<td>Vercel</td>
+<td>Production deployment</td>
+</tr>
+</table>
+
+---
+
+<h2>🐍 Python Backend</h2>
+
+<p>
+The portfolio uses a <b>Python FastAPI backend</b> for backend functionality
+and contact form processing.
+</p>
+
+<h3>Backend Responsibilities</h3>
+
+<ul>
+  <li>REST API handling</li>
+  <li>Contact form processing</li>
+  <li>Request validation</li>
+  <li>Email delivery through Resend</li>
+  <li>Environment-based secret management</li>
+  <li>Serverless deployment through Vercel</li>
+</ul>
+
+<h3>API Endpoints</h3>
+
+<table>
+<tr>
+<th>Method</th>
+<th>Endpoint</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/health</code></td>
+<td>Checks backend health</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/send</code></td>
+<td>Processes contact form submissions</td>
+</tr>
+</table>
+
+---
+
+<h2>📂 Project Structure</h2>
+
+<pre>
 Portfolio/
+│
 ├── api/
-│   └── index.py               # Python FastAPI backend (/api/send & /api/health)
+│   └── index.py
+│
 ├── src/
-│   ├── components/            # React JSX UI components
-│   ├── context/               # Theme context provider
-│   ├── index.css              # Custom styling & Tailwind CSS setup
-│   ├── App.jsx                # Main App wrapper & smooth scroll
-│   └── main.jsx               # React DOM entry point
-├── public/                    # Static assets & PDF resume
-├── index.html                 # Entry HTML file
-├── package.json               # Frontend dependencies
-├── requirements.txt           # Python backend dependencies (fastapi, resend, uvicorn)
-├── vercel.json                # Vercel serverless rewrites for FastAPI
-└── vite.config.js             # Vite build configuration
-```
+│   ├── components/
+│   ├── context/
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+│
+├── public/
+│   └── assets & resume
+│
+├── index.html
+├── package.json
+├── requirements.txt
+├── vercel.json
+└── vite.config.js
+</pre>
 
 ---
 
-## ⚙️ Local Development
+<h2>⚙️ Getting Started</h2>
 
-### 1. Frontend
+<h3>Prerequisites</h3>
 
-```bash
-# Install dependencies
+<ul>
+  <li>Node.js</li>
+  <li>npm</li>
+  <li>Python 3.10+</li>
+  <li>Git</li>
+</ul>
+
+<h3>1️⃣ Clone the Repository</h3>
+
+<pre>
+git clone https://github.com/Vikki-2006/Portfolio.git
+cd Portfolio
+</pre>
+
+<h3>2️⃣ Install Frontend Dependencies</h3>
+
+<pre>
 npm install
+</pre>
 
-# Start Vite dev server
+<h3>3️⃣ Configure Environment Variables</h3>
+
+<pre>
+RESEND_API_KEY=your_resend_api_key
+</pre>
+
+<p>
+⚠️ Never commit API keys or sensitive credentials to GitHub.
+</p>
+
+<h3>4️⃣ Start the Frontend</h3>
+
+<pre>
 npm run dev
-```
+</pre>
 
-### 2. Backend (Optional)
+<h3>5️⃣ Start the FastAPI Backend</h3>
 
-```bash
-# Install Python requirements
+<pre>
 pip install -r requirements.txt
-
-# Start FastAPI local server
 uvicorn api.index:app --reload --port 8000
-```
+</pre>
 
 ---
 
-## 📄 License
+<h2>🚀 Deployment</h2>
 
-&copy; 2026 Vigneshwaran S. All rights reserved.
+<p>
+The portfolio is deployed using <b>Vercel</b>.
+</p>
+
+<ul>
+  <li>⚛️ React + JavaScript frontend</li>
+  <li>⚡ Vite build system</li>
+  <li>🐍 Python FastAPI backend</li>
+  <li>📡 REST API architecture</li>
+  <li>📧 Resend email integration</li>
+  <li>☁️ Vercel deployment</li>
+</ul>
+
+<p>
+🌐 <b>Production:</b>
+<a href="https://vigneshwaran-dev.vercel.app/">
+vigneshwaran-dev.vercel.app
+</a>
+</p>
+
+---
+
+
+
+<h2>📄 License</h2>
+
+<p>
+© 2026 <b>Vigneshwaran S</b>. All rights reserved.
+</p>
+
+<p align="center">
+  ⭐ If you find this portfolio interesting, feel free to explore the repository!
+</p>
