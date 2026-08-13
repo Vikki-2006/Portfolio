@@ -52,12 +52,12 @@ const projectsData: Project[] = [
     title: 'Premium Developer Portfolio',
     category: 'PERSONAL PORTFOLIO',
     description: [
-      'Designed and developed a modern, responsive portfolio using React, TypeScript, and Tailwind CSS.',
+      'Designed and developed a modern, responsive portfolio built with React, Tailwind CSS, and Vite, featuring clean UI and interactive components.',
       'Implemented premium glassmorphism UI, smooth Framer Motion animations, and interactive components.',
       'Optimized for performance, accessibility, SEO, and responsive layouts across all devices.',
       'Showcases projects, skills, achievements, certifications, and contact information in a professional way.'
     ],
-    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vite'],
+    tags: ['Python', 'FastAPI', 'React', 'Tailwind CSS', 'Framer Motion', 'Vite'],
     githubUrl: 'https://github.com/Vikki-2006',
     demoUrl: 'https://vigneshwaran-dev.vercel.app/',
     placeholderType: 'portfolio'

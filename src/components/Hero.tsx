@@ -127,7 +127,7 @@ const Hero = memo(function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="flex flex-wrap justify-center lg:justify-start gap-2 mt-4 text-[var(--text-secondary)] font-semibold text-sm sm:text-base"
             >
-              <span>Full-Stack Developer • Building Intelligent Software</span>
+              <span>Python Full-Stack Developer • Building Intelligent Software</span>
             </motion.div>
 
             {/* Introduction */}
@@ -138,7 +138,7 @@ const Hero = memo(function Hero() {
               className="mt-8 text-[var(--text-primary-muted)] text-base sm:text-lg leading-relaxed max-w-3xl font-medium"
               style={{ textAlign: 'justify', textJustify: 'inter-word' }}
             >
-              Passionate Full-Stack Software Engineer with expertise in designing and developing scalable, AI-powered web applications from frontend to backend. Proficient in <span className="text-[var(--purple)]">React</span>, <span className="text-[var(--purple)]">TypeScript</span>, <span className="text-[var(--purple)]">FastAPI</span>, <span className="text-[var(--purple)]">Python</span>, and <span className="text-[var(--purple)]">PostgreSQL</span>, with a strong foundation in software engineering, Data Structures & Algorithms, REST APIs, and clean, maintainable code. Currently seeking Software Engineer Internship and Full-Time opportunities.
+              Passionate Python Full-Stack Software Engineer with expertise in designing and developing scalable, AI-powered web applications from frontend to backend. Proficient in <span className="text-[var(--purple)]">Python</span>, <span className="text-[var(--purple)]">FastAPI</span>, <span className="text-[var(--purple)]">React</span>, <span className="text-[var(--purple)]">PostgreSQL</span>, and <span className="text-[var(--purple)]">REST APIs</span>, with a strong foundation in software engineering, Data Structures & Algorithms, and clean, maintainable code. Currently seeking Software Engineer Internship and Full-Time opportunities.
             </motion.p>
 
             {/* Action Buttons */}

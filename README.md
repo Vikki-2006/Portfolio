@@ -4,8 +4,9 @@
 
 A modern, responsive developer portfolio showcasing my projects, skills, achievements, certifications, and software engineering journey.
 
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38BDF8?style=for-the-badge&logo=tailwind-css)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-000000?style=for-the-badge&logo=framer)
@@ -35,16 +36,18 @@ A modern, responsive developer portfolio showcasing my projects, skills, achieve
 
 ## 🛠 Tech Stack
 
+### Core / Backend
+- Python
+- FastAPI
+- Flask
+- REST APIs
+
 ### Frontend
 - React
-- TypeScript
 - Vite
+- JavaScript
 - Tailwind CSS
 - Framer Motion
-
-### Backend
-- FastAPI
-- Python
 
 ### Database
 - PostgreSQL
