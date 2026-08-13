@@ -3,14 +3,7 @@ import { Briefcase, Calendar, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionContainer from './SectionContainer';
 
-interface InternshipDetails {
-  role: string;
-  company: string;
-  duration: string;
-  points: string[];
-}
-
-const internshipData: InternshipDetails = {
+const internshipData = {
   role: 'Full Stack Development Intern',
   company: 'VDart Academy',
   duration: 'June 2025 - July 2025',

@@ -3,7 +3,6 @@ import { Mail, MapPin, FileText, ArrowRight, User, MessageSquare, Check, Loader2
 import { motion } from 'framer-motion';
 import SectionContainer from './SectionContainer';
 import Toast from './Toast';
-import type { ToastData, ToastType } from './Toast';
 
 // ─── Contact info cards ─────────────────────────────────────────────────────
 const contactCards = [
@@ -23,10 +22,8 @@ const contactCards = [
 ];
 
 // ─── Validation ──────────────────────────────────────────────────────────────
-interface FormErrors { name?: string; email?: string; subject?: string; message?: string; }
-
-function validateForm(form: { name: string; email: string; subject: string; message: string }): FormErrors {
-  const errors: FormErrors = {};
+function validateForm(form) {
+  const errors = {};
   if (!form.name.trim()) { errors.name = 'Full name is required.'; }
   else if (form.name.trim().length < 2) { errors.name = 'Name must be at least 2 characters.'; }
   if (!form.email.trim()) { errors.email = 'Email address is required.'; }
@@ -41,22 +38,22 @@ function validateForm(form: { name: string; email: string; subject: string; mess
 // ─── Main Contact component ──────────────────────────────────────────────────
 const Contact = memo(function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [toast, setToast] = useState<ToastData | null>(null);
+  const [errors, setErrors] = useState({});
+  const [toast, setToast] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
 
-  const showToast = (type: ToastType, title: string, description?: string) => {
+  const showToast = (type, title, description) => {
     setToast({ type, title, description });
   };
 
-  const handleChange = (field: keyof typeof form) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (field) =>
+    (e) => {
       setForm(prev => ({ ...prev, [field]: e.target.value }));
       if (errors[field]) setErrors(prev => ({ ...prev, [field]: undefined }));
     };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm(form);
     if (Object.keys(validationErrors).length > 0) { setErrors(validationErrors); return; }
@@ -74,7 +71,7 @@ const Contact = memo(function Contact() {
         body: JSON.stringify(form),
       });
 
-      let result: any = null;
+      let result = null;
       let textResponse = '';
       const contentType = response.headers.get('content-type');
 
@@ -107,7 +104,7 @@ const Contact = memo(function Contact() {
       setForm({ name: '', email: '', subject: '', message: '' });
       showToast('success', 'Message sent successfully.');
       setTimeout(() => setIsSent(false), 4000);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Submission error:', error);
       showToast('error', 'Failed to send message. Please try again.');
     } finally {
@@ -116,7 +113,7 @@ const Contact = memo(function Contact() {
   };
 
   // Input class — uses CSS variables, not hardcoded dark Tailwind colours
-  const inputClass = (field: keyof FormErrors) =>
+  const inputClass = (field) =>
     `contact-input w-full pl-11 pr-4 py-3 rounded-2xl text-xs sm:text-sm outline-none ${
       errors[field] ? 'contact-input--error' : ''
     }`;

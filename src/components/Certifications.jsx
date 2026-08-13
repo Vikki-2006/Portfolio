@@ -8,16 +8,7 @@ import SectionContainer from './SectionContainer';
 import ibmLogo from '../assets/ibm_logo.svg';
 import vdartAcademyLogo from '../assets/vdart_academy.png';
 
-interface Certification {
-  title: string;
-  issuer: string;
-  logo: string | React.ComponentType<any>; // Can be imported path string or React Component
-  desc: string;
-  themeColor: string;
-  link: string;
-}
-
-const certificationsData: Certification[] = [
+const certificationsData = [
   {
     title: 'Getting Started with AI',
     issuer: 'IBM SkillsBuild',
@@ -68,11 +59,11 @@ const certificationsData: Certification[] = [
   }
 ];
 
-function ProviderLogo({ logo, issuer }: { logo: any; issuer: string }) {
+function ProviderLogo({ logo, issuer }) {
   const [hasError, setHasError] = useState(false);
 
   // Helper to extract clean initials (e.g., "IBM SkillsBuild" -> "IS", "VDart Academy" -> "VA")
-  const getInitials = (name: string) => {
+  const getInitials = (name) => {
     return name
       .split(' ')
       .map((word) => word[0])

@@ -47,7 +47,7 @@ export default function Navbar() {
       threshold: 0
     };
 
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+    const observerCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setActiveSection(entry.target.id);

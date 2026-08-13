@@ -1,18 +1,10 @@
 import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 
-type Theme = 'light' | 'dark';
+const ThemeContext = createContext(undefined);
 
-interface ThemeContextType {
-  theme: Theme;
-  toggleTheme: () => void;
-  isReady: boolean;
-}
-
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const savedTheme = localStorage.getItem('theme') as Theme | null;
+export const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme;
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
@@ -45,7 +37,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (isTransitioning.current) return;
     isTransitioning.current = true;
 
-    const nextTheme: Theme = theme === 'dark' ? 'light' : 'dark';
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
     const root = document.documentElement;
 
     const changeTheme = () => {
@@ -64,13 +56,13 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-    if (prefersReducedMotion || isMobile || !(document as any).startViewTransition) {
+    if (prefersReducedMotion || isMobile || !document.startViewTransition) {
       // Direct instant theme swap for mobile or reduced motion (CSS transitions handle visual change)
       changeTheme();
       isTransitioning.current = false;
     } else {
       // Premium View Transition crossfade for desktop
-      const transition = (document as any).startViewTransition(() => {
+      const transition = document.startViewTransition(() => {
         changeTheme();
       });
 

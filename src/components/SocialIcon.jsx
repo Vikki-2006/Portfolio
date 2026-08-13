@@ -1,13 +1,7 @@
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { SiLeetcode, SiCodechef, SiHackerrank } from 'react-icons/si';
 
-interface SocialIconProps {
-  href: string;
-  network: 'github' | 'linkedin' | 'leetcode' | 'codechef' | 'hackerrank' | 'x';
-  title: string;
-}
-
-export default function SocialIcon({ href, network, title }: SocialIconProps) {
+export default function SocialIcon({ href, network, title }) {
   const getIcon = () => {
     const iconClass = "w-[20px] h-[20px]";
     switch (network) {

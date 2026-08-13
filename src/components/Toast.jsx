@@ -3,20 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
-export type ToastType = 'success' | 'error';
-
-export interface ToastData {
-  type: ToastType;
-  title: string;
-  description?: string;
-}
-
-interface ToastProps {
-  toast: ToastData | null;
-  onClose: () => void;
-}
-
-const Toast = memo(function Toast({ toast, onClose }: ToastProps) {
+const Toast = memo(function Toast({ toast, onClose }) {
   const { theme } = useTheme();
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(100);

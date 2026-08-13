@@ -3,18 +3,7 @@ import { Trophy } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionContainer from './SectionContainer';
 
-interface Achievement {
-  id: string;
-  title: string;
-  platform: string;
-  subtitle?: string;
-  icon: string | React.ComponentType<{ className?: string }>;
-  bullets: string[];
-  link?: string;
-  logoHoverStyles?: string;
-}
-
-const achievementsData: Achievement[] = [
+const achievementsData = [
   {
     id: 'lc',
     title: 'LeetCode Problem Solving',

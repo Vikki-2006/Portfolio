@@ -159,7 +159,7 @@ const Background = memo(function Background() {
               height: `${star.size}px`,
               '--star-duration': `${star.duration}s`,
               '--star-delay': `${star.delay}s`
-            } as React.CSSProperties}
+            }}
           />
         ))}
       </div>

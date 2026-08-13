@@ -34,8 +34,8 @@ export default function App() {
       touchMultiplier: 1.5,
     });
 
-    let rafId: number;
-    function raf(time: number) {
+    let rafId;
+    function raf(time) {
       lenis.raf(time);
       rafId = requestAnimationFrame(raf);
     }

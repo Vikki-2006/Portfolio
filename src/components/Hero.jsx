@@ -4,21 +4,7 @@ import profile from '@/assets/profile.png';
 import { motion } from 'framer-motion';
 import SocialIcon from './SocialIcon';
 
-interface ParticleConfig {
-  size: number;
-  color: string;
-  glowColor: string;
-  offset: number;
-  duration: number; // orbit duration (15s to 35s)
-  direction: 'cw' | 'ccw';
-  floatDuration: number;
-  floatDelay: number;
-  twinkleDuration: number;
-  twinkleDelay: number;
-  angle: number;
-}
-
-const ORBITING_PARTICLES: ParticleConfig[] = [
+const ORBITING_PARTICLES = [
   // Mobile active (0 - 9: total 10 particles)
   // Purple (7), Pink (2), White (1)
   { size: 1.5, color: '#A855F7', glowColor: 'rgba(168, 85, 247, var(--purple-glow-opacity))', offset: 2, duration: 24, direction: 'cw', floatDuration: 5.2, floatDelay: 0.2, twinkleDuration: 3.2, twinkleDelay: 0.5, angle: 15 },
@@ -54,7 +40,7 @@ const ORBITING_PARTICLES: ParticleConfig[] = [
 ];
 
 const Hero = memo(function Hero() {
-  const heroRef = useRef<HTMLElement>(null);
+  const heroRef = useRef(null);
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
