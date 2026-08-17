@@ -547,6 +547,432 @@ html[data-theme="light"] .portfolio-card:hover {
   border-color: rgba(124, 58, 237, 0.20);
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   PREMIUM PROJECT CARDS — Editorial layout
+   All hover effects use GPU-friendly transform/opacity only.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Base card ─────────────────────────────────────────────────────────────── */
+.proj-card {
+  transition:
+    transform     320ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow    320ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    border-color  320ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.proj-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(124, 58, 237, 0.22) !important;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(124, 58, 237, 0.12),
+    0 0 32px rgba(124, 58, 237, 0.08) !important;
+}
+
+html[data-theme="light"] .proj-card {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow:
+    0 4px 24px rgba(15, 23, 42, 0.08),
+    0 1px 4px rgba(15, 23, 42, 0.05) !important;
+}
+
+html[data-theme="light"] .proj-card:hover {
+  box-shadow:
+    0 12px 40px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(124, 58, 237, 0.14) !important;
+}
+
+/* ── Thumbnail wrapper ─────────────────────────────────────────────────────── */
+.proj-thumb-wrap {
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+
+/* ── Inner zoom scaler (scoped to thumbnail hover only) ────────────────────── */
+.proj-thumb-scale {
+  transition: transform 280ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+  transform-origin: center center;
+}
+
+.proj-thumb-wrap:hover .proj-thumb-scale,
+.proj-thumb-wrap:focus-visible .proj-thumb-scale {
+  transform: scale(1.04);
+}
+
+/* ── Dark overlay — shown on thumbnail hover only ─────────────────────────── */
+.proj-thumb-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at center, rgba(124, 58, 237, 0.25) 0%, rgba(5, 5, 10, 0.65) 100%);
+  transition: opacity 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.proj-thumb-wrap:hover .proj-thumb-veil,
+.proj-thumb-wrap:focus-visible .proj-thumb-veil {
+  opacity: 1;
+}
+
+/* ── "View Project" label — centered inside thumbnail, hidden until hover ── */
+.proj-view-label {
+  opacity: 0;
+  transform: translateY(4px) scale(0.95);
+  transition:
+    opacity    250ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform  250ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: opacity, transform;
+  background: linear-gradient(135deg, #7C3AED 0%, #DB2777 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.45), 0 0 12px rgba(236, 72, 153, 0.25);
+}
+
+.proj-thumb-wrap:hover .proj-view-label,
+.proj-thumb-wrap:focus-visible .proj-view-label {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ── Project title — colour shift on hover ─────────────────────────────────── */
+.proj-title {
+  transition: color 280ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.proj-card:hover .proj-title {
+  color: #A78BFA;
+}
+
+html[data-theme="light"] .proj-card:hover .proj-title {
+  color: #6D28D9;
+}
+
+/* ── Number badge ──────────────────────────────────────────────────────────── */
+.proj-num-badge {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ── Uniform Project Grid (3 columns on desktop, 2 on tablet, 1 on mobile) ── */
+.proj-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+@media (min-width: 640px) {
+  .proj-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .proj-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+/* ── Secondary (Codebase) button — Clean Neutral with Subtle Hover ─────────── */
+.proj-btn-secondary {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: rgba(212, 212, 216, 0.9);
+  text-decoration: none;
+  transition:
+    background-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color     200ms cubic-bezier(0.22, 1, 0.36, 1),
+    color            200ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform        200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow       200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.proj-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.20);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.25),
+    0 0 8px rgba(255, 255, 255, 0.04);
+}
+
+.proj-btn-secondary:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 100ms;
+}
+
+html[data-theme="light"] .proj-btn-secondary {
+  background: #FFFFFF !important;
+  border-color: #D4D4D8 !important;
+  color: #18181B !important;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06) !important;
+}
+
+html[data-theme="light"] .proj-btn-secondary:hover {
+  background: #F4F4F5 !important;
+  border-color: #A1A1AA !important;
+  color: #18181B !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* ── Primary (Live Demo) button — Premium Animated Outline + Light Sweep ───── */
+.proj-btn-primary {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border-radius: 0.75rem; /* rounded-xl (12px) */
+  font-weight: 600;
+  font-size: 0.75rem; /* text-xs */
+  letter-spacing: 0.025em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  transition:
+    transform  240ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Dark theme normal state */
+html[data-theme="dark"] .proj-btn-primary {
+  background:
+    linear-gradient(rgba(14, 12, 22, 0.85), rgba(14, 12, 22, 0.85)) padding-box,
+    linear-gradient(135deg, rgba(124, 58, 237, 0.55) 0%, rgba(219, 39, 119, 0.55) 100%) border-box;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* Light theme normal state */
+html[data-theme="light"] .proj-btn-primary {
+  background:
+    linear-gradient(#FFFFFF, #FFFFFF) padding-box,
+    linear-gradient(135deg, rgba(109, 40, 217, 0.55) 0%, rgba(219, 39, 119, 0.55) 100%) border-box;
+  color: #6D28D9 !important;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+}
+
+/* Soft Purple → Pink light sweep traveling across button on hover */
+.proj-btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  pointer-events: none;
+  transform: translateX(-100%);
+  will-change: transform;
+  transition: transform 550ms cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1;
+}
+
+html[data-theme="dark"] .proj-btn-primary::before {
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(124, 58, 237, 0.12) 25%,
+    rgba(219, 39, 119, 0.22) 50%,
+    rgba(124, 58, 237, 0.12) 75%,
+    transparent 100%
+  );
+}
+
+html[data-theme="light"] .proj-btn-primary::before {
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(109, 40, 217, 0.08) 25%,
+    rgba(219, 39, 119, 0.14) 50%,
+    rgba(109, 40, 217, 0.08) 75%,
+    transparent 100%
+  );
+}
+
+.proj-btn-primary .proj-demo-icon {
+  will-change: transform;
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Hover state: 1px lift + light sweep + brighter gradient border + subtle soft glow */
+.proj-btn-primary:hover {
+  transform: translateY(-1px) !important;
+}
+
+.proj-btn-primary:hover::before {
+  transform: translateX(100%);
+}
+
+.proj-btn-primary:hover .proj-demo-icon {
+  transform: translate(2px, -1px);
+}
+
+html[data-theme="dark"] .proj-btn-primary:hover {
+  background:
+    linear-gradient(rgba(20, 16, 32, 0.9), rgba(20, 16, 32, 0.9)) padding-box,
+    linear-gradient(135deg, rgba(167, 139, 250, 0.95) 0%, rgba(244, 114, 182, 0.95) 100%) border-box !important;
+  color: #FFFFFF !important;
+  box-shadow:
+    0 4px 16px rgba(124, 58, 237, 0.28),
+    0 0 10px rgba(219, 39, 119, 0.16) !important;
+}
+
+html[data-theme="light"] .proj-btn-primary:hover {
+  background:
+    linear-gradient(#FAFAFA, #FAFAFA) padding-box,
+    linear-gradient(135deg, rgba(109, 40, 217, 0.9) 0%, rgba(219, 39, 119, 0.9) 100%) border-box !important;
+  color: #5B21B6 !important;
+  box-shadow:
+    0 4px 14px rgba(109, 40, 217, 0.18),
+    0 0 8px rgba(219, 39, 119, 0.12) !important;
+}
+
+.proj-btn-primary:active {
+  transform: translateY(0) scale(0.98) !important;
+  transition-duration: 100ms;
+}
+
+/* ═══════════════════════════════════════════════════════
+   PREMIUM TECH STACK BENTO GRID
+   Compact futuristic bento cards with polished tech chips.
+   ═══════════════════════════════════════════════════════ */
+
+.skills-bento-card {
+  position: relative;
+  background: rgba(18, 16, 26, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem; /* rounded-2xl (20px) */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    transform    220ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow   220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.skills-bento-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(167, 139, 250, 0.32);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    0 0 20px rgba(124, 58, 237, 0.12);
+}
+
+/* Light Theme Bento Card */
+html[data-theme="light"] .skills-bento-card {
+  background: #FFFFFF !important;
+  border-color: #E4E4E7 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+}
+
+html[data-theme="light"] .skills-bento-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(124, 58, 237, 0.35) !important;
+  box-shadow:
+    0 8px 20px rgba(124, 58, 237, 0.08),
+    0 2px 6px rgba(15, 23, 42, 0.04) !important;
+}
+
+/* Category Badge inside Card Header */
+.skill-cat-icon-badge {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(124, 58, 237, 0.12);
+  border: 1px solid rgba(124, 58, 237, 0.22);
+  color: #A78BFA;
+  flex-shrink: 0;
+  transition:
+    background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color     220ms cubic-bezier(0.22, 1, 0.36, 1),
+    color            220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.skills-bento-card:hover .skill-cat-icon-badge {
+  background: rgba(124, 58, 237, 0.20);
+  border-color: rgba(167, 139, 250, 0.40);
+  color: #C084FC;
+}
+
+html[data-theme="light"] .skill-cat-icon-badge {
+  background: rgba(124, 58, 237, 0.08);
+  border-color: rgba(124, 58, 237, 0.18);
+  color: #6D28D9;
+}
+
+html[data-theme="light"] .skills-bento-card:hover .skill-cat-icon-badge {
+  background: rgba(124, 58, 237, 0.14);
+  border-color: rgba(124, 58, 237, 0.30);
+  color: #5B21B6;
+}
+
+/* Mini Tech Chip */
+.skill-tech-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 0.625rem; /* rounded-lg (10px) */
+  font-size: 0.75rem; /* text-xs */
+  font-weight: 500;
+  letter-spacing: 0.015em;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: rgba(244, 244, 245, 0.92);
+  user-select: none;
+  cursor: default;
+  transition:
+    background-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color     180ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform        180ms cubic-bezier(0.22, 1, 0.36, 1),
+    color            180ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow       180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.skill-tech-chip:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(167, 139, 250, 0.28);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+html[data-theme="light"] .skill-tech-chip {
+  background: #F4F4F5 !important;
+  border-color: #E4E4E7 !important;
+  color: #27272A !important;
+}
+
+html[data-theme="light"] .skill-tech-chip:hover {
+  background: #ECECF0 !important;
+  border-color: rgba(124, 58, 237, 0.3) !important;
+  color: #18181B !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06) !important;
+}
+
 /* Section underline — same gradient both themes, just different size in light */
 .section-underline {
   width: 4rem;
@@ -579,11 +1005,11 @@ html[data-theme="light"] nav {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition:
-    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    border-color     250ms cubic-bezier(0.4, 0, 0.2, 1),
-    color            250ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow       250ms cubic-bezier(0.4, 0, 0.2, 1),
-    transform        250ms cubic-bezier(0.4, 0, 0.2, 1);
+    background-color 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color     250ms cubic-bezier(0.22, 1, 0.36, 1),
+    color            250ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow       250ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform        250ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .premium-glass-button:hover {
@@ -610,6 +1036,9 @@ html[data-theme="light"] .premium-glass-button:hover {
 
 /* Social Icon Button styling */
 .social-icon-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -621,15 +1050,35 @@ html[data-theme="light"] .premium-glass-button:hover {
   color: var(--text-secondary);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.social-icon-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: rgba(139, 92, 246, 0.1);
+  opacity: 0;
+  z-index: -1;
+  pointer-events: none;
+  will-change: opacity;
+  transition: opacity 260ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html[data-theme="dark"] .social-icon-btn:hover {
   border-color: rgba(139, 92, 246, 0.3) !important;
-  background-color: rgba(139, 92, 246, 0.1) !important;
   color: #FFFFFF !important;
   box-shadow: 0 0 15px rgba(139, 92, 246, 0.2) !important;
   transform: scale(1.05) !important;
+}
+
+html[data-theme="dark"] .social-icon-btn:hover::after {
+  opacity: 1;
 }
 
 html[data-theme="light"] .social-icon-btn {
@@ -639,17 +1088,24 @@ html[data-theme="light"] .social-icon-btn {
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
 }
 
+html[data-theme="light"] .social-icon-btn::after {
+  background-color: rgba(139, 92, 246, 0.08);
+}
+
 html[data-theme="light"] .social-icon-btn:hover {
   border-color: #8B5CF6 !important;
-  background-color: rgba(139, 92, 246, 0.08) !important;
   color: #7C3AED !important;
   box-shadow: 0 0 12px rgba(139, 92, 246, 0.15) !important;
   transform: scale(1.05) translateY(-2px) !important;
 }
 
+html[data-theme="light"] .social-icon-btn:hover::after {
+  opacity: 1;
+}
+
 /* ═══════════════════════════════════════════════════════
-   PREMIUM BUTTON STYLES
-   Unified premium CTA styles for all primary/secondary buttons.
+   PREMIUM BUTTON STYLES (ORIGINAL PURPLE TO PINK GRADIENT)
+   Unified CTA styles with smooth moving gradient shift.
    ═══════════════════════════════════════════════════════ */
 
 /* Primary Gradient CTA Button */
@@ -666,45 +1122,39 @@ html[data-theme="light"] .social-icon-btn:hover {
   letter-spacing: 0.025em; /* slight tracking-wide */
   text-decoration: none;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.1); /* thin semi-transparent border */
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #FFFFFF !important;
   
   /* Gradient Shift Setup */
   background-size: 200% auto;
   background-position: left center;
-  color: #FFFFFF !important;
   
-  /* Transition: smooth 250–300ms ease */
+  /* Transition: smooth GPU ease */
   transition: 
-    transform 280ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
-    background-position 280ms cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 280ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-position 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 280ms cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
 html[data-theme="dark"] .portfolio-btn-primary,
 html[data-theme="dark"] .hero-btn-primary {
-  /* Toned down soft gradient */
   background-image: linear-gradient(135deg, #6D28D9 0%, #B61C7A 50%, #6D28D9 100%) !important;
-  /* Soft shadow only (no neon bloom) */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1) !important;
   border-color: rgba(255, 255, 255, 0.08) !important;
 }
 
 html[data-theme="light"] .portfolio-btn-primary,
 html[data-theme="light"] .hero-btn-primary {
-  /* Soft gradient for light mode */
   background-image: linear-gradient(135deg, #5B21B6 0%, #BE185D 50%, #5B21B6 100%) !important;
-  /* Soft shadow only */
   box-shadow: 0 4px 12px rgba(109, 40, 217, 0.1), 0 1px 3px rgba(109, 40, 217, 0.05) !important;
   border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
 .portfolio-btn-primary:hover,
 .hero-btn-primary:hover {
-  transform: translateY(-2px) !important; /* Slight lift */
-  background-position: right center !important; /* Gradient shift */
+  transform: translateY(-2px) !important;
+  background-position: right center !important;
 }
 
 html[data-theme="dark"] .portfolio-btn-primary:hover,
@@ -721,7 +1171,7 @@ html[data-theme="light"] .hero-btn-primary:hover {
 
 .portfolio-btn-primary:active,
 .hero-btn-primary:active {
-  transform: scale(0.98) translateY(0) !important; /* Scale to 0.98, natural compression */
+  transform: scale(0.98) translateY(0) !important;
 }
 
 html[data-theme="dark"] .portfolio-btn-primary:active,
@@ -748,16 +1198,30 @@ html[data-theme="light"] .hero-btn-primary:active {
   letter-spacing: 0.025em;
   text-decoration: none;
   cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   
-  /* Transition: smooth 250–300ms ease */
+  /* Transition: smooth GPU ease */
   transition: 
-    transform 280ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 280ms cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 280ms cubic-bezier(0.4, 0, 0.2, 1),
-    color 280ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 280ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.portfolio-btn-secondary::after,
+.hero-btn-secondary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  z-index: -1;
+  pointer-events: none;
+  will-change: opacity;
+  transition: opacity 280ms cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
 html[data-theme="dark"] .portfolio-btn-secondary,
@@ -768,13 +1232,22 @@ html[data-theme="dark"] .hero-btn-secondary {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
 }
 
+html[data-theme="dark"] .portfolio-btn-secondary::after,
+html[data-theme="dark"] .hero-btn-secondary::after {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
 html[data-theme="dark"] .portfolio-btn-secondary:hover,
 html[data-theme="dark"] .hero-btn-secondary:hover {
-  background-color: rgba(255, 255, 255, 0.06) !important;
-  border-color: rgba(139, 92, 246, 0.4) !important; /* subtle border highlight on hover */
+  border-color: rgba(139, 92, 246, 0.4) !important;
   color: #FFFFFF !important;
-  transform: translateY(-2px) !important; /* Slight lift */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important; /* very soft shadow */
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+}
+
+html[data-theme="dark"] .portfolio-btn-secondary:hover::after,
+html[data-theme="dark"] .hero-btn-secondary:hover::after {
+  opacity: 1;
 }
 
 html[data-theme="light"] .portfolio-btn-secondary,
@@ -785,13 +1258,22 @@ html[data-theme="light"] .hero-btn-secondary {
   box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
 }
 
+html[data-theme="light"] .portfolio-btn-secondary::after,
+html[data-theme="light"] .hero-btn-secondary::after {
+  background-color: rgba(124, 58, 237, 0.03);
+}
+
 html[data-theme="light"] .portfolio-btn-secondary:hover,
 html[data-theme="light"] .hero-btn-secondary:hover {
-  background-color: rgba(124, 58, 237, 0.03) !important;
-  border-color: rgba(124, 58, 237, 0.4) !important; /* subtle border highlight */
+  border-color: rgba(124, 58, 237, 0.4) !important;
   color: #7C3AED !important;
-  transform: translateY(-2px) !important; /* Slight lift */
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.06) !important; /* soft shadow */
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.06) !important;
+}
+
+html[data-theme="light"] .portfolio-btn-secondary:hover::after,
+html[data-theme="light"] .hero-btn-secondary:hover::after {
+  opacity: 1;
 }
 
 .portfolio-btn-secondary:active,
@@ -805,7 +1287,7 @@ html[data-theme="light"] .hero-btn-secondary:hover {
   border-radius: 16px !important;
 }
 
-/* Icon slide animation on hover (統一 3–4px translation) */
+/* Icon slide animation on hover */
 .portfolio-btn-primary svg,
 .portfolio-btn-primary .arrow-icon,
 .portfolio-btn-primary .file-icon,
@@ -818,7 +1300,7 @@ html[data-theme="light"] .hero-btn-secondary:hover {
 .hero-btn-secondary svg,
 .hero-btn-secondary .arrow-icon,
 .hero-btn-secondary .file-icon {
-  transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1) !important;
   will-change: transform;
 }
 
@@ -834,7 +1316,7 @@ html[data-theme="light"] .hero-btn-secondary:hover {
 .hero-btn-secondary:hover svg,
 .hero-btn-secondary:hover .arrow-icon,
 .hero-btn-secondary:hover .file-icon {
-  transform: translateX(4px) !important; /* Slide 3-4px to the right */
+  transform: translateX(4px) !important;
 }
 
 /* Theme Toggle Button custom styles */

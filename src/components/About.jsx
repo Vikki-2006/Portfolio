@@ -78,7 +78,7 @@ const About = memo(function About() {
                   <div className="mt-6 inline-flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-[var(--tag-bg)] border border-[var(--tag-border)]">
                     <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wide">CGPA</span>
                     <span className="w-1.5 h-1.5 rounded-full bg-zinc-400"></span>
-                    <span className="text-sm font-bold text-zinc-100">7.06 / 10</span>
+                    <span className="text-sm font-bold text-zinc-100">7.2 / 10</span>
                   </div>
                 </div>
               </div>

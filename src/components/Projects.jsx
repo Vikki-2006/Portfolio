@@ -1,372 +1,350 @@
 import { memo } from 'react';
-import { ExternalLink, Trash2, LayoutGrid, Terminal, Sparkles } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionContainer from './SectionContainer';
 
+// Real project first-page screenshots
+import smartParkingImg from '../assets/projects/smart-parking.webp';
+import doccraftImg from '../assets/projects/doccraft.webp';
+import atscopeImg from '../assets/projects/atscope.webp';
+import shieldblockImg from '../assets/projects/shieldblock.webp';
+import compresslyImg from '../assets/projects/compressly.webp';
+import vexoCommerceImg from '../assets/projects/vexo-commerce.webp';
+
+/* ─────────────────────────────────────────────────────────────────────────
+   GitHub Icon
+──────────────────────────────────────────────────────────────────────────── */
 const GithubIcon = ({ className }) => (
   <svg viewBox="0 0 24 24" className={`${className} fill-current`} xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
   </svg>
 );
 
+/* ─────────────────────────────────────────────────────────────────────────
+   Project data
+──────────────────────────────────────────────────────────────────────────── */
 const projectsData = [
   {
     id: '01',
-    title: 'Smart Waste Collection System Using IoT and AI',
-    category: 'IoT & Full Stack Development',
-    description: [
-      'Engineered an IoT system using ESP8266 and ultrasonic sensors to monitor bin fill levels and stream real-time data to Firebase.',
-      'Built a Flask backend with dashboard visualization for live monitoring, alert triggering, and cloud-based data management.',
-      'Integrated AI-driven route optimization using Google Maps API to reduce collection trips and improve operational efficiency.'
+    title: 'Smart Parking System',
+    category: 'FULL STACK • IoT',
+    accentFrom: '#7C3AED',
+    accentTo: '#4F46E5',
+    image: smartParkingImg,
+    description:
+      'Intelligent web-based smart parking platform for automated slot allocation, QR-based vehicle management, real-time parking monitoring, and admin dashboard.',
+    features: [
+      'Automated slot allocation with real-time availability',
+      'QR-code based vehicle entry & exit management',
+      'Admin dashboard with live monitoring & analytics',
     ],
-    tags: ['Python', 'Flask', 'Firebase', 'ESP8266', 'HC-SR04', 'Google Maps API'],
-    githubUrl: 'https://github.com/Vikki-2006/smart-waste-system',
-    placeholderType: 'iot'
+    tags: ['Python', 'Flask', 'PostgreSQL', 'Neon', 'JavaScript', 'QR Code'],
+    githubUrl: 'https://github.com/Vikki-2006/smart-parking-system',
+    demoUrl: 'https://smartpark-control.vercel.app',
   },
   {
     id: '02',
-    title: 'AI Developer Assistant CLI',
-    category: 'AI & CLI Application',
-    description: [
-      "Developed a modular AI-powered command-line developer assistant integrating Google's Gemini API to help developers generate code, explain concepts, debug programs, and create technical documentation.",
-      "Designed a clean, extensible architecture with reusable Python modules, configuration management, Markdown rendering, conversation history, and interactive CLI workflows.",
-      "Implemented secure environment-based API key management, customizable prompts, session persistence, and a production-ready project structure following software engineering best practices."
+    title: 'DocCraft',
+    category: 'PDF TOOLKIT',
+    accentFrom: '#EC4899',
+    accentTo: '#8B5CF6',
+    image: doccraftImg,
+    description:
+      'Modern PDF toolkit for merging, splitting, converting, rotating, and watermarking PDFs with a polished desktop workstation interface.',
+    features: [
+      'Merge, split, rotate & watermark PDFs',
+      'Desktop workstation CustomTkinter UI',
+      'Web companion with PDF live preview',
     ],
-    tags: ['Python', 'Google Gemini API', 'Markdown', 'CLI'],
-    githubUrl: 'https://github.com/Vikki-2006/ai-developer-assistant',
-    placeholderType: 'cli'
+    tags: ['Python', 'CustomTkinter', 'HTML', 'CSS', 'JavaScript'],
+    githubUrl: 'https://github.com/Vikki-2006/Doc-craft',
+    demoUrl: 'https://doccraft-tool.vercel.app',
   },
   {
     id: '03',
-    title: 'Premium Developer Portfolio',
-    category: 'PERSONAL PORTFOLIO',
-    description: [
-      'Designed and developed a modern, responsive portfolio using React, JavaScript, and Tailwind CSS.',
-      'Implemented premium glassmorphism UI, smooth Framer Motion animations, and interactive components.',
-      'Optimized for performance, accessibility, SEO, and responsive layouts across all devices.',
-      'Showcases projects, skills, achievements, certifications, and contact information in a professional way.'
+    title: 'ATScope',
+    category: 'AI SAAS PLATFORM',
+    accentFrom: '#06B6D4',
+    accentTo: '#7C3AED',
+    image: atscopeImg,
+    description:
+      'Production-grade AI Resume Analyzer and ATS Optimization SaaS platform with resume scoring, keyword analysis, and actionable optimization insights.',
+    features: [
+      'AI-powered ATS scoring & keyword analysis',
+      'Optimization insights with recommendations',
+      'Modern SaaS UI — Tailwind CSS & Alpine.js',
     ],
-    tags: ['React', 'JavaScript', 'Tailwind CSS', 'Framer Motion', 'Vite'],
-    githubUrl: 'https://github.com/Vikki-2006',
-    demoUrl: 'https://vigneshwaran-dev.vercel.app/',
-    placeholderType: 'portfolio'
-  }
+    tags: ['FastAPI', 'spaCy', 'scikit-learn', 'Chart.js', 'Alpine.js', 'Tailwind CSS'],
+    githubUrl: 'https://github.com/Vikki-2006/ATScope',
+    demoUrl: 'https://atscope-analyzer.vercel.app',
+  },
+  {
+    id: '04',
+    title: 'ShieldBlock Pro',
+    category: 'BROWSER EXTENSION',
+    accentFrom: '#10B981',
+    accentTo: '#059669',
+    image: shieldblockImg,
+    description:
+      'Modern Chrome/Brave ad-blocking extension built with Manifest V3, focused on blocking unwanted content and providing a clean browsing experience.',
+    features: [
+      'Manifest V3 compliant ad & tracker blocking',
+      'Lightweight with minimal overhead & live stats',
+      'Chrome & Brave compatible dashboard UI',
+    ],
+    tags: ['JavaScript', 'CSS', 'HTML', 'Manifest V3'],
+    githubUrl: 'https://github.com/Vikki-2006/ShieldBlock-Pro',
+    demoUrl: null,
+  },
+  {
+    id: '05',
+    title: 'Compressly',
+    category: 'VIDEO PLATFORM',
+    accentFrom: '#F59E0B',
+    accentTo: '#EF4444',
+    image: compresslyImg,
+    description:
+      'Modern video compression platform with local processing, FFmpeg integration, real-time progress tracking, and a premium React interface.',
+    features: [
+      'Video compression via local FFmpeg engine',
+      'Real-time progress tracking with live feedback',
+      'Premium React UI with Docker containerization',
+    ],
+    tags: ['FastAPI', 'React', 'FFmpeg', 'SQLite', 'Docker', 'Tailwind CSS'],
+    githubUrl: 'https://github.com/Vikki-2006/Compressly',
+    demoUrl: 'https://compressly-tool.vercel.app',
+  },
+  {
+    id: '06',
+    title: 'VEXO-Commerce',
+    category: 'E-COMMERCE PLATFORM',
+    accentFrom: '#8B5CF6',
+    accentTo: '#EC4899',
+    image: vexoCommerceImg,
+    description:
+      'Production-ready full-stack e-commerce platform featuring JWT authentication, user accounts, product catalog, categories, wishlist, and modern responsive UI.',
+    features: [
+      'JWT authentication & secure user accounts',
+      'Product catalog with categories, search & wishlist',
+      'Full CRUD with PostgreSQL + SQLAlchemy ORM',
+    ],
+    tags: ['FastAPI', 'Jinja2', 'PostgreSQL', 'SQLAlchemy', 'Python'],
+    githubUrl: 'https://github.com/Vikki-2006/VEXO-Commerce',
+    demoUrl: 'https://vexo-commerce.vercel.app',
+  },
 ];
 
-// Modern CSS/SVG Mockup placeholders instead of AI illustrations or empty grids
-function ProjectScreenshotPlaceholder({ type }) {
-  if (type === 'cli') {
-    return (
-      <div className="w-full h-48 bg-gradient-to-b from-[#13131A] to-[#0A0A0E] border-b border-zinc-900 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-zinc-800 transition-all select-none">
-        {/* Ambient radial glows */}
-        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-28 h-28 bg-purple-500/10 rounded-full blur-2xl pointer-events-none"></div>
-        <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-28 h-28 bg-pink-500/10 rounded-full blur-2xl pointer-events-none"></div>
+/* ─────────────────────────────────────────────────────────────────────────
+   ProjectCard — Uniform 3x2 Grid Card
+──────────────────────────────────────────────────────────────────────────── */
+function ProjectCard({ project, index }) {
+  const hasDemo = Boolean(project.demoUrl);
 
-        {/* Terminal/CLI Mockup */}
-        <div className="w-full h-full bg-zinc-950/75 border border-zinc-800/60 rounded-xl flex flex-col overflow-hidden shadow-xl md:backdrop-blur-sm relative z-10">
-          {/* Title Bar */}
-          <div className="flex items-center justify-between px-3 py-1.5 border-b border-zinc-900/60 bg-zinc-950/40">
-            <div className="flex items-center gap-1.5">
-              <div className="w-1.5 h-1.5 rounded-full bg-red-500/60"></div>
-              <div className="w-1.5 h-1.5 rounded-full bg-yellow-500/60"></div>
-              <div className="w-1.5 h-1.5 rounded-full bg-green-500/60"></div>
-              <span className="text-[8px] text-zinc-500 font-mono ml-2 flex items-center gap-1">
-                <Terminal className="w-2.5 h-2.5 text-violet-400" />
-                gemini-cli-assistant
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="px-1.5 py-0.5 rounded bg-zinc-900 border border-zinc-800/60 text-[7px] font-mono text-zinc-500 flex items-center gap-0.5">
-                <span className="w-1 h-1 rounded-full bg-emerald-500"></span>
-                active
-              </span>
-            </div>
-          </div>
-
-          {/* Body with Split View */}
-          <div className="flex-grow grid grid-cols-2 gap-2 p-2.5 font-mono text-[8px] leading-normal overflow-hidden">
-            {/* Left Terminal Prompt & Answer */}
-            <div className="flex flex-col justify-between border-r border-zinc-900/60 pr-2">
-              <div className="space-y-1.5">
-                <div className="flex items-start gap-1">
-                  <span className="text-pink-500 font-bold">$</span>
-                  <span className="text-zinc-200">gemini-cli explain search</span>
-                </div>
-                <div className="text-zinc-400 space-y-1 pl-1.5 border-l border-zinc-800/80">
-                  <div className="flex items-center gap-1 text-[7px] text-violet-400 font-semibold">
-                    <Sparkles className="w-2 h-2 text-violet-400 animate-pulse" />
-                    <span>Gemini:</span>
-                  </div>
-                  <p className="text-[7px] leading-normal text-zinc-500">
-                    Binary search splits the list in halves. Code generated...
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center gap-1 text-[7px] text-violet-400 font-bold">
-                <span>Python 3.10</span>
-              </div>
-            </div>
-
-            {/* Right Editor Pane */}
-            <div className="pl-1 flex flex-col justify-between">
-              <div className="space-y-1">
-                <div className="flex items-center justify-between text-[7px] text-zinc-500 pb-0.5 border-b border-zinc-900/40">
-                  <span>binary_search.py</span>
-                  <span className="text-violet-400 font-bold">Generated</span>
-                </div>
-                {/* Syntax highlighted lines */}
-                <div className="space-y-0.5 font-mono text-[7px] text-zinc-300">
-                  <div>
-                    <span className="text-pink-500">def</span> <span className="text-blue-400">search</span><span className="text-zinc-400">(arr, k):</span>
-                  </div>
-                  <div className="pl-2.5 text-zinc-500">
-                    low, high = 0, len(arr)-1
-                  </div>
-                  <div className="pl-2.5">
-                    <span className="text-pink-500">while</span> low &lt;= high:
-                  </div>
-                  <div className="pl-4.5 text-zinc-500">
-                    mid = (low + high)//2
-                  </div>
-                  <div className="pl-4.5">
-                    <span className="text-pink-500">if</span> arr[mid] == k:
-                  </div>
-                  <div className="pl-6.5">
-                    <span className="text-pink-500">return</span> mid
-                  </div>
-                </div>
-              </div>
-
-              {/* Editor status */}
-              <div className="flex items-center justify-between text-[6px] text-zinc-650 pt-0.5">
-                <span>markdown-doc</span>
-                <span>Ln 1, Col 1</span>
-              </div>
-            </div>
-          </div>
-        </div>
+  const thumbnailContent = (
+    <>
+      {/* Actual Project First Page Screenshot */}
+      <div className="proj-thumb-scale w-full h-full">
+        <img
+          src={project.image}
+          alt={`${project.title} live demo preview`}
+          loading="lazy"
+          className="w-full h-full object-cover object-top select-none pointer-events-none"
+        />
       </div>
-    );
-  }
 
-  if (type === 'iot') {
-    return (
-      <div className="w-full h-48 bg-gradient-to-b from-[#13131A] to-[#0A0A0E] border-b border-zinc-900 flex items-center justify-center relative overflow-hidden group-hover:border-zinc-800 transition-all select-none">
-        {/* Radar concentric circles */}
-        <div className="absolute w-40 h-40 rounded-full border border-violet-500/10 flex items-center justify-center">
-          <div className="absolute w-28 h-28 rounded-full border border-violet-500/10 flex items-center justify-center">
-            <div className="absolute w-16 h-16 rounded-full border border-violet-500/20 flex items-center justify-center"></div>
+      {/* Hover overlay with centered "View Project" (only for projects with live demo) */}
+      {hasDemo && (
+        <div className="proj-thumb-veil">
+          <div className="proj-view-label flex items-center justify-center px-4 py-2 rounded-full text-xs font-semibold select-none">
+            <span>View Project</span>
           </div>
         </div>
-        {/* Animated sensor sweep bar */}
-        <div className="absolute inset-0 bg-gradient-to-r from-violet-600/0 via-violet-600/5 to-violet-600/0 w-1/2 -skew-x-12 animate-pulse"></div>
-        
-        {/* Center UI representation */}
-        <div className="relative z-10 flex flex-col items-center gap-2.5">
-          <div className="w-14 h-14 rounded-full bg-zinc-900 border border-violet-500/30 flex items-center justify-center shadow-lg shadow-violet-500/5">
-            <Trash2 className="w-6 h-6 text-violet-400" />
-          </div>
-          <span className="text-[11px] font-mono tracking-widest uppercase text-zinc-500 font-semibold">Sensor Monitor Widget</span>
-        </div>
-      </div>
-    );
-  }
+      )}
 
-  if (type === 'kanban') {
-    return (
-      <div className="w-full h-48 bg-gradient-to-b from-[#13131A] to-[#0A0A0E] border-b border-zinc-900 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-zinc-800 transition-all select-none">
-        
-        {/* Simple Kanban Column headers */}
-        <div className="grid grid-cols-3 gap-2.5">
-          <div className="h-6 rounded bg-zinc-900 border border-zinc-800/80 flex items-center justify-between px-2 text-[9px] font-mono text-zinc-500">
-            <span>TODO</span>
-            <span className="w-2.5 h-2.5 rounded-full bg-zinc-800 flex items-center justify-center text-[7px] text-zinc-400">2</span>
-          </div>
-          <div className="h-6 rounded bg-zinc-900 border border-zinc-800/80 flex items-center justify-between px-2 text-[9px] font-mono text-violet-400">
-            <span>IN PROGRESS</span>
-            <span className="w-2.5 h-2.5 rounded-full bg-violet-950/60 border border-violet-800/40 flex items-center justify-center text-[7px] text-violet-400">1</span>
-          </div>
-          <div className="h-6 rounded bg-zinc-900 border border-zinc-800/80 flex items-center justify-between px-2 text-[9px] font-mono text-emerald-400">
-            <span>DONE</span>
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-950/60 border border-emerald-800/40 flex items-center justify-center text-[7px] text-emerald-400">4</span>
-          </div>
-        </div>
+      {/* Project Number badge in top-left */}
+      <span
+        className="proj-num-badge absolute top-2.5 left-2.5 z-20 px-2 py-0.5 rounded-full text-[10px] font-bold font-mono"
+        style={{
+          background: 'rgba(8,6,14,0.85)',
+          border: `1px solid ${project.accentFrom}44`,
+          color: project.accentFrom,
+          backdropFilter: 'blur(6px)',
+        }}
+      >
+        {project.id}
+      </span>
 
-        {/* Floating cards */}
-        <div className="grid grid-cols-3 gap-2.5 items-start mt-2 flex-grow">
-          <div className="space-y-1.5">
-            <div className="h-10 rounded bg-zinc-900/60 border border-zinc-800/50 p-1.5 flex flex-col justify-between">
-              <div className="h-1 w-2/3 bg-zinc-700 rounded"></div>
-              <div className="h-1 w-1/2 bg-zinc-800 rounded"></div>
-            </div>
-            <div className="h-10 rounded bg-zinc-900/60 border border-zinc-800/50 p-1.5 flex flex-col justify-between">
-              <div className="h-1 w-3/4 bg-zinc-700 rounded"></div>
-              <div className="h-1 w-1/3 bg-zinc-800 rounded"></div>
-            </div>
-          </div>
-          <div>
-            <div className="h-12 rounded bg-zinc-900/80 border border-violet-500/10 p-1.5 flex flex-col justify-between relative shadow-md shadow-violet-500/5">
-              <div className="absolute top-0 right-0 w-1.5 h-1.5 bg-violet-500 rounded-bl-sm"></div>
-              <div className="h-1 w-4/5 bg-violet-400/55 rounded"></div>
-              <div className="h-1 w-1/2 bg-zinc-700 rounded"></div>
-              <div className="flex gap-1">
-                <span className="px-1 py-0.5 rounded bg-violet-950/80 text-[6px] font-semibold text-violet-400">API</span>
-                <span className="px-1 py-0.5 rounded bg-zinc-800 text-[6px] font-semibold text-zinc-500">JWT</span>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="h-10 rounded bg-zinc-900/60 border border-zinc-800/50 p-1.5 flex flex-col justify-between opacity-60">
-              <div className="h-1 w-2/3 bg-zinc-700 rounded"></div>
-              <div className="h-1 w-1/2 bg-zinc-800 rounded"></div>
-            </div>
-          </div>
-        </div>
+      {/* Accent top gradient line */}
+      <div
+        className="absolute top-0 left-0 right-0 h-px pointer-events-none z-20"
+        style={{
+          background: `linear-gradient(90deg, transparent, ${project.accentFrom}80, ${project.accentTo}80, transparent)`,
+        }}
+      />
+    </>
+  );
 
-        {/* Center UI Layout Overlay Label */}
-        <div className="absolute bottom-2 right-2 flex items-center gap-1.5 px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-[10px] font-mono text-zinc-400 shadow-lg">
-          <LayoutGrid className="w-3.5 h-3.5 text-violet-500" />
-          <span>Task Board UI</span>
-        </div>
-
-      </div>
-    );
-  }
-
-  // Portfolio type browser mockup
   return (
-    <div className="w-full h-48 bg-gradient-to-b from-[#13131A] to-[#0A0A0E] border-b border-zinc-900 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-zinc-800 transition-all select-none">
-      {/* Browser Header Bar */}
-      <div className="flex items-center gap-1.5 border-b border-zinc-900/50 pb-2">
-        <div className="w-1.5 h-1.5 rounded-full bg-red-500/60"></div>
-        <div className="w-1.5 h-1.5 rounded-full bg-yellow-500/60"></div>
-        <div className="w-1.5 h-1.5 rounded-full bg-green-500/60"></div>
-        <div className="h-4 rounded bg-zinc-900/80 border border-zinc-800/40 text-[7px] text-zinc-500 font-mono flex items-center px-3 ml-2 w-1/2">
-          localhost:5173
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.45, delay: index * 0.06, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="proj-card rounded-2xl overflow-hidden flex flex-col relative group h-full"
+      aria-label={`Project: ${project.title}`}
+      style={{
+        background: 'rgba(12,10,18,0.75)',
+        border: '1px solid rgba(255,255,255,0.065)',
+        boxShadow: '0 4px 24px rgba(0,0,0,0.35)',
+        backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
+      }}
+    >
+      {/* ── 1. Thumbnail (Strict 16:9 Aspect Ratio) ────────────────────────── */}
+      {hasDemo ? (
+        <a
+          href={project.demoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          aria-label={`Open ${project.title} live demo`}
+          className="proj-thumb-wrap relative block w-full overflow-hidden flex-shrink-0 aspect-video bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-violet-500 cursor-pointer"
+          style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}
+        >
+          {thumbnailContent}
+        </a>
+      ) : (
+        <div
+          className="proj-thumb-wrap relative block w-full overflow-hidden flex-shrink-0 aspect-video bg-zinc-900"
+          style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}
+        >
+          {thumbnailContent}
         </div>
-      </div>
-      
-      {/* Hero Mockup Visual */}
-      <div className="flex items-center justify-between gap-4 mt-3 flex-grow">
-        <div className="space-y-1.5 flex-grow">
-          <div className="h-2 w-3/4 bg-violet-400/40 rounded"></div>
-          <div className="h-1.5 w-11/12 bg-zinc-700 rounded"></div>
-          <div className="h-1.5 w-5/6 bg-zinc-800 rounded"></div>
-          <div className="flex gap-1.5 mt-2">
-            <div className="h-3.5 w-10 bg-violet-600/80 rounded-sm"></div>
-            <div className="h-3.5 w-10 bg-zinc-900 border border-zinc-800 rounded-sm"></div>
+      )}
+
+      {/* ── 2. Card Body ──────────────────────────────────────────────────── */}
+      <div className="p-5 flex flex-col flex-grow justify-between">
+        {/* Upper Content Area */}
+        <div className="flex flex-col">
+          {/* Category */}
+          <span
+            className="text-[10px] font-bold uppercase tracking-wider mb-1.5 block"
+            style={{ color: project.accentFrom }}
+          >
+            {project.id} • {project.category}
+          </span>
+
+          {/* Title */}
+          <h3 className="text-lg font-bold text-zinc-100 leading-snug mb-2 proj-title">
+            {project.title}
+          </h3>
+
+          {/* Description */}
+          <p className="text-xs text-zinc-400 leading-relaxed mb-3 min-h-[3rem]">
+            {project.description}
+          </p>
+
+          {/* 3 Key Features */}
+          <ul
+            className="space-y-1.5 border-t pt-3 mb-4 min-h-[4.5rem]"
+            style={{ borderColor: 'rgba(255,255,255,0.06)' }}
+          >
+            {project.features.map((feat, fi) => (
+              <li key={fi} className="flex items-start gap-2">
+                <span
+                  className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0"
+                  style={{ background: project.accentFrom }}
+                  aria-hidden="true"
+                />
+                <span className="text-[11px] text-zinc-300 leading-relaxed">{feat}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Lower Content Area (Tech Badges + Bottom Action Buttons) */}
+        <div className="flex flex-col mt-auto pt-2">
+          {/* Tech badges */}
+          <div className="flex flex-wrap gap-1.5 mb-4 min-h-[2.25rem] items-center">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-2 py-0.5 rounded-md text-[9px] font-semibold"
+                style={{
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  color: 'rgba(212,212,216,0.85)',
+                }}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Bottom Actions — Aligned at bottom */}
+          <div className={`grid gap-2.5 ${project.demoUrl ? 'grid-cols-2' : 'grid-cols-1'}`}>
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              id={`proj-gh-${project.id}`}
+              className="proj-btn-secondary flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-xs font-semibold"
+            >
+              <GithubIcon className="w-3.5 h-3.5" />
+              <span>Codebase</span>
+            </a>
+            {project.demoUrl && (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                id={`proj-demo-${project.id}`}
+                className="proj-btn-primary flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-xs font-semibold"
+              >
+                <ExternalLink className="w-3.5 h-3.5 proj-demo-icon" />
+                <span>Live Demo</span>
+              </a>
+            )}
           </div>
         </div>
-        {/* Circle profile image mockup */}
-        <div className="w-14 h-14 rounded-full border border-violet-500/20 bg-zinc-900/60 flex items-center justify-center relative flex-shrink-0">
-          <div className="w-10 h-10 rounded-full border border-pink-500/20 bg-zinc-800/60"></div>
-        </div>
       </div>
-    </div>
+
+      {/* Card glow overlay */}
+      <div
+        className="proj-card-glow absolute inset-0 rounded-2xl pointer-events-none"
+        style={{ boxShadow: `0 0 0 0 ${project.accentFrom}00` }}
+      />
+    </motion.article>
   );
 }
 
+/* ─────────────────────────────────────────────────────────────────────────
+   Projects Section Container
+──────────────────────────────────────────────────────────────────────────── */
 const Projects = memo(function Projects() {
   return (
     <SectionContainer id="projects">
-      {/* Section Header */}
-      <div className="mb-10 text-left">
+      {/* Section header */}
+      <motion.div
+        className="mb-12 text-left"
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.5 }}
+      >
         <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)]">My Creations</h2>
-        <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl tracking-tight">Featured Projects</p>
-        <div className="section-underline"></div>
+        <p className="mt-2.5 text-3xl font-bold text-zinc-100 sm:text-4xl tracking-tight">Featured Projects</p>
+        <div className="section-underline" />
+      </motion.div>
+
+      {/* Clean 3x2 Grid — All 6 Cards Exactly Identical */}
+      <div className="proj-grid">
+        {projectsData.map((project, index) => (
+          <ProjectCard key={project.id} project={project} index={index} />
+        ))}
       </div>
-
-      {/* Projects Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {projectsData.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.45, delay: index * 0.08 }}
-              className="glass-panel portfolio-card rounded-2xl overflow-hidden border border-zinc-800 flex flex-col justify-between shadow-lg relative group transition-all"
-            >
-              
-              <div>
-                {/* Mockup Placeholder screenshot */}
-                <ProjectScreenshotPlaceholder type={project.placeholderType} />
-
-                <div className="p-6">
-                  {/* Category Title */}
-                  <span className="text-[10px] font-bold text-violet-500 uppercase tracking-widest block mb-2">{project.category}</span>
-                  
-                  {/* Project Title */}
-                  <h3 className="text-lg font-bold text-zinc-100 leading-snug group-hover:text-violet-400 transition-colors duration-300">
-                    {project.title}
-                  </h3>
-
-                  {/* Bullet points description */}
-                  <ul className="mt-4 space-y-2 text-zinc-300 text-xs sm:text-sm leading-relaxed border-t border-zinc-800/80 pt-4 font-medium">
-                    {project.description.map((bullet, bIndex) => (
-                      <li key={bIndex} className="flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-violet-600 mt-1.5 flex-shrink-0"></span>
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              {/* Tags & Action Buttons */}
-              <div className="p-6 pt-0 mt-auto">
-                
-                {/* Technology chips */}
-                <div className="flex flex-wrap gap-1.5 mb-6">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 rounded bg-[var(--tag-bg)] border border-[var(--tag-border)] text-[10px] font-bold text-[var(--tag-text)]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Footer Buttons */}
-                <div className="grid grid-cols-2 gap-3.5">
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="portfolio-btn-secondary w-full py-2.5 text-xs"
-                  >
-                    <GithubIcon className="w-4.5 h-4.5" />
-                    Codebase
-                  </a>
-                  
-                  {project.demoUrl ? (
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="portfolio-btn-primary w-full py-2.5 text-xs"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      Live Demo
-                    </a>
-                  ) : (
-                    <button
-                      disabled
-                      className="portfolio-btn-secondary w-full py-2.5 text-xs opacity-50 cursor-not-allowed select-none"
-                      title="Live deployment is not active"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      Live Demo
-                    </button>
-                  )}
-                </div>
-
-              </div>
-
-            </motion.div>
-          ))}
-        </div>
     </SectionContainer>
   );
 });

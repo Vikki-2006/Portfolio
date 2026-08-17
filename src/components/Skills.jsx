@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { motion } from 'framer-motion';
-import { useTheme } from '../context/ThemeContext';
+import { Code2, Layout, Server, Wrench, Database } from 'lucide-react';
 import SectionContainer from './SectionContainer';
 
 // Custom 4K High-Resolution crisp SVG brand logos
@@ -40,6 +40,13 @@ const ReactLogo = ({ className, style }) => (
   </svg>
 );
 
+const JavaScriptLogo = ({ className, style }) => (
+  <svg viewBox="0 0 24 24" className={className} style={style} xmlns="http://www.w3.org/2000/svg">
+    <rect width="20" height="20" x="2" y="2" fill="#F7DF1E" rx="3" />
+    <path d="M17.18 15.68c-.28-.43-.72-.73-1.34-.87-.4-.1-.85-.15-1.2-.18-.3-.02-.53-.06-.6-.1-.13-.08-.18-.2-.18-.37 0-.15.06-.27.2-.35.15-.09.38-.13.68-.13.3 0 .54.06.66.18s.22.36.3.69l1.8-.35c-.14-.65-.47-1.16-.96-1.47a2.6 2.6 0 0 0-1.63-.44c-.75 0-1.36.2-1.78.6s-.62.94-.62 1.57c0 .54.16.98.47 1.28.32.3.83.5 1.51.65.6.13 1 .23 1.23.3.36.12.53.33.53.63 0 .34-.23.57-.68.67-.3.07-.66.08-1.02.04-.47-.05-.8-.22-.98-.5-.14-.2-.25-.56-.3-.98l-1.82.35c.1 1 .47 1.7 1.07 2.1s1.42.6 2.45.6c.9 0 1.63-.23 2.14-.68s.77-1.07.77-1.85c.02-.7-.2-1.2-.64-1.63z" fill="#000000"/>
+  </svg>
+);
+
 const Html5Logo = ({ className, style }) => (
   <svg viewBox="0 0 24 24" className={className} style={style} xmlns="http://www.w3.org/2000/svg">
     <path d="M2.8 2l1.6 18.2L12 22l7.6-1.8L21.2 2H2.8zm14.3 6.6H9.7l.2 2h7l-.6 6.3-4.3 1.2-4.3-1.2-.3-3.1h2l.1 1.5 2.5.7 2.5-.7.3-3H6.8l-.6-6.3h11.2l-.3 2.9z" fill="#E34F26"/>
@@ -49,13 +56,6 @@ const Html5Logo = ({ className, style }) => (
 const Css3Logo = ({ className, style }) => (
   <svg viewBox="0 0 24 24" className={className} style={style} xmlns="http://www.w3.org/2000/svg">
     <path d="M2.8 2l1.6 18.2L12 22l7.6-1.8L21.2 2H2.8zm14.3 6.6H8.2l.2 2h8.5l-.6 6.3-4.3 1.2-4.3-1.2-.3-3.1h2l.1 1.5 2.5.7 2.5-.7.3-3H6.4l-.6-6.3h11.6l-.3 2.9z" fill="#1572B6"/>
-  </svg>
-);
-
-const JavaScriptLogo = ({ className, style }) => (
-  <svg viewBox="0 0 24 24" className={className} style={style} xmlns="http://www.w3.org/2000/svg">
-    <rect width="20" height="20" x="2" y="2" fill="#F7DF1E" rx="3" />
-    <path d="M17.18 15.68c-.28-.43-.72-.73-1.34-.87-.4-.1-.85-.15-1.2-.18-.3-.02-.53-.06-.6-.1-.13-.08-.18-.2-.18-.37 0-.15.06-.27.2-.35.15-.09.38-.13.68-.13.3 0 .54.06.66.18s.22.36.3.69l1.8-.35c-.14-.65-.47-1.16-.96-1.47a2.6 2.6 0 0 0-1.63-.44c-.75 0-1.36.2-1.78.6s-.62.94-.62 1.57c0 .54.16.98.47 1.28.32.3.83.5 1.51.65.6.13 1 .23 1.23.3.36.12.53.33.53.63 0 .34-.23.57-.68.67-.3.07-.66.08-1.02.04-.47-.05-.8-.22-.98-.5-.14-.2-.25-.56-.3-.98l-1.82.35c.1 1 .47 1.7 1.07 2.1s1.42.6 2.45.6c.9 0 1.63-.23 2.14-.68s.77-1.07.77-1.85c.02-.7-.2-1.2-.64-1.63z" fill="#000000"/>
   </svg>
 );
 
@@ -124,6 +124,18 @@ const GoogleColabLogo = ({ className, style }) => (
   </svg>
 );
 
+const PostgreSqlLogo = ({ className, style }) => (
+  <svg viewBox="0 0 24 24" className={className} style={style} xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c2.4 0 4.6-.85 6.33-2.27l-2.01-2.01C15.04 18.44 13.58 19 12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7c3.15 0 5.81 2.07 6.69 4.93l2.88-.96C20.25 4.54 16.46 2 12 2zm1 6v5.59l4.24 4.24 1.41-1.41L15 12.59V8h-2z" fill="#336791"/>
+  </svg>
+);
+
+const SqliteLogo = ({ className, style }) => (
+  <svg viewBox="0 0 24 24" className={className} style={style} xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6zm4 4h-2v-6h2v6zm0-8h-2V7h2v2z" fill="#003B57"/>
+  </svg>
+);
+
 const OpenaiLogo = ({ className, style }) => (
   <svg viewBox="0 0 24 24" className={className} style={style} xmlns="http://www.w3.org/2000/svg">
     <path d="M21.7 10.7a6.2 6.2 0 0 0-3.6-4.6c.3-.9.3-1.9-.1-2.8-.7-1.5-2.2-2.3-3.8-2.1-.9.1-1.7.6-2.3 1.3a6.2 6.2 0 0 0-4.6 3.6c-.9-.3-1.9-.3-2.8.1-1.5.7-2.3 2.2-2.1 3.8.1.9.6 1.7 1.3 2.3a6.2 6.2 0 0 0 3.6 4.6c-.3.9-.3 1.9.1 2.8.7 1.5 2.2 2.3 3.8 2.1.9-.1 1.7-.6 2.3-1.3a6.2 6.2 0 0 0 4.6-3.6c.9.3 1.9.3 2.8-.1 1.5-.7 2.3-2.2 2.1-3.8-.1-.9-.6-1.7-1.3-2.3zm-10-8.2c1.1 0 2.2.8 2.4 1.9l-.1 1a5 5 0 0 0-4.4 2.5l-1.3-.7a3.8 3.8 0 0 1 3.4-4.7zm-6.2 4c.6-.9 1.6-1.5 2.7-1.4l.7 1a5 5 0 0 0-.1 5.1l-1 .1a3.8 3.8 0 0 1-2.3-4.8zm1.5 8.2c-.6-.9-.8-2-0.5-3l1-.1a5 5 0 0 0 4.3 2.6l-.1 1a3.8 3.8 0 0 1-4.7-.5zm9.5 5.5c-1.1 0-2.2-.8-2.4-1.9l.1-1a5 5 0 0 0 4.4-2.5l1.3.7a3.8 3.8 0 0 1-3.4 4.7zm6.2-4c-.6.9-1.6 1.5-2.7 1.4l-.7-1a5 5 0 0 0 .1-5.1l1-.1a3.8 3.8 0 0 1 2.3 4.8zm-1.5-8.2c.6.9.8 2 .5 3l-1 .1a5 5 0 0 0-4.3-2.6l.1-1a3.8 3.8 0 0 1 4.7.5zm-4.4 3.7a2.2 2.2 0 1 1-4.4 0 2.2 2.2 0 0 1 4.4 0z" fill="#10A37F"/>
@@ -145,51 +157,70 @@ const GeminiLogo = ({ className, style }) => (
 
 const skillsData = [
   {
+    id: 'languages',
     title: 'Programming Languages',
     subtitle: 'Core Foundations',
+    icon: Code2,
+    gridSpan: 'lg:col-span-4 md:col-span-1',
     items: [
       { name: 'Python', icon: PythonLogo },
       { name: 'Java', icon: JavaLogo },
       { name: 'C', icon: CLogo },
       { name: 'C++', icon: CPlusPlusLogo },
-    ],
-    glowColor: 'rgba(124, 58, 237, 0.16)' // Purple
+    ]
   },
   {
+    id: 'frontend',
     title: 'Frontend Development',
-    subtitle: 'UI & Interactive Interfaces',
+    subtitle: 'UI & Interactive Experiences',
+    icon: Layout,
+    gridSpan: 'lg:col-span-4 md:col-span-1',
     items: [
       { name: 'React', icon: ReactLogo },
+      { name: 'JavaScript', icon: JavaScriptLogo },
       { name: 'HTML5', icon: Html5Logo },
       { name: 'CSS3', icon: Css3Logo },
-      { name: 'JavaScript', icon: JavaScriptLogo },
       { name: 'Vite', icon: ViteLogo },
-    ],
-    glowColor: 'rgba(236, 72, 153, 0.16)' // Pink
+    ]
   },
   {
+    id: 'backend',
     title: 'Backend Development',
-    subtitle: 'Services & APIs',
+    subtitle: 'Scalable Services & Systems',
+    icon: Server,
+    gridSpan: 'lg:col-span-4 md:col-span-1',
     items: [
       { name: 'FastAPI', icon: FastapiLogo },
       { name: 'Flask', icon: FlaskLogo },
       { name: 'REST APIs', icon: RestApiLogo },
-    ],
-    glowColor: 'rgba(139, 92, 246, 0.16)' // Violet
+    ]
   },
   {
+    id: 'tools',
     title: 'Developer Tools',
-    subtitle: 'APIs, CLIs & Editors',
+    subtitle: 'Workflow, Versioning & Environment',
+    icon: Wrench,
+    gridSpan: 'lg:col-span-7 md:col-span-1',
     items: [
       { name: 'Git', icon: GitLogo },
       { name: 'GitHub', icon: GithubLogo },
       { name: 'VS Code', icon: VscodeLogo },
       { name: 'Postman', icon: PostmanLogo },
       { name: 'Google Colab', icon: GoogleColabLogo },
+    ]
+  },
+  {
+    id: 'databases-ai',
+    title: 'Databases & AI / APIs',
+    subtitle: 'Data Stores & Intelligent APIs',
+    icon: Database,
+    gridSpan: 'lg:col-span-5 md:col-span-2 lg:col-span-5',
+    items: [
+      { name: 'PostgreSQL', icon: PostgreSqlLogo },
+      { name: 'SQLite', icon: SqliteLogo },
       { name: 'OpenAI API', icon: OpenaiLogo },
       { name: 'Gemini API', icon: GeminiLogo },
-    ],
-    glowColor: 'rgba(244, 63, 94, 0.16)' // Rose
+    ]
   }
 ];
 
@@ -197,123 +228,59 @@ const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.08
+      staggerChildren: 0.06
     }
   }
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 15 },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.45,
-      ease: [0.16, 1, 0.3, 1]
+      duration: 0.35,
+      ease: [0.22, 1, 0.36, 1]
     }
   }
 };
 
 function SkillCard({ category }) {
-  const { theme } = useTheme();
-
-  // Bypassing React rendering cycles for mouse-follow movements by writing directly to CSS custom properties
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
-    e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
-  };
+  const CategoryIcon = category.icon;
 
   return (
-    <div
-      onMouseMove={handleMouseMove}
-      className="portfolio-card relative p-[2px] rounded-[24px] select-none cursor-pointer h-full group bg-[rgba(255,255,255,0.08)] hover:bg-gradient-to-br hover:from-[#7C3AED] hover:to-[#EC4899] hover:active-gradient-border hover:shadow-[0_12px_40px_rgba(0,0,0,0.35),0_0_35px_rgba(124,58,237,0.18)]"
-      style={{
-        backfaceVisibility: "hidden"
-      }}
-    >
-      {/* Soft pink corner accent glow on hover (top right) */}
-      <div 
-        className="absolute inset-0 rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0"
-        style={{
-          background: "radial-gradient(120px circle at top right, rgba(236,72,153,0.12), transparent)"
-        }}
-      />
-
-      {/* Centered Small Top Accent Line - Only visible on hover */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-[2.5px] bg-gradient-to-r from-[#7C3AED] to-[#EC4899] rounded-full shadow-[0_0_8px_#7C3AED] z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-
-      {/* Inner Card Container: Matches the requested dark glass backdrop exactly with NO background changes on active */}
-      <div 
-        className="relative rounded-[22.5px] md:backdrop-blur-2xl p-6 sm:p-8 h-full flex flex-col justify-between z-10 overflow-hidden transition-all duration-300 border border-[var(--border-color)] bg-[var(--card-bg)] hover:bg-[var(--card-hover-bg)]"
-      >
-        
-        {/* Mouse Follow Glow Overlay - GPU rendered using CSS custom properties */}
-        <div 
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0"
-          style={{
-            background: theme === 'dark'
-              ? `radial-gradient(300px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), ${category.glowColor}, transparent 80%)`
-              : `radial-gradient(300px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(124, 58, 237, 0.04), transparent 80%)`
-          }}
-        />
-
-        {/* Abstract floating particles inside card */}
-        <div className={`absolute inset-0 pointer-events-none z-0 overflow-hidden transition-opacity duration-300 ${theme === 'dark' ? 'opacity-30 group-hover:opacity-60' : 'opacity-[0.08] group-hover:opacity-[0.15]'}`}>
-          <div 
-            className={`absolute top-[25%] left-[35%] w-1.5 h-1.5 rounded-full blur-[0.5px] skill-float-p-1 ${theme === 'dark' ? 'bg-violet-400' : 'bg-zinc-400'}`}
-          />
-          <div 
-            className={`absolute bottom-[35%] right-[25%] w-[2px] h-[2px] rounded-full blur-[0.5px] skill-float-p-2 ${theme === 'dark' ? 'bg-pink-400' : 'bg-zinc-400'}`}
-          />
-          <div 
-            className={`absolute top-[65%] left-[20%] w-1.5 h-1.5 rounded-full blur-[0.5px] skill-float-p-3 ${theme === 'dark' ? 'bg-indigo-400' : 'bg-zinc-400'}`}
-          />
+    <div className="skills-bento-card p-5 sm:p-6 h-full flex flex-col justify-between">
+      {/* Top Header: Category Icon + Title + Subtitle */}
+      <div>
+        <div className="flex items-center gap-3 mb-4">
+          <div className="skill-cat-icon-badge">
+            <CategoryIcon className="w-4 h-4" />
+          </div>
+          <div>
+            <h3 className="text-xs sm:text-sm font-bold text-zinc-100 uppercase tracking-wider font-sans leading-tight">
+              {category.title}
+            </h3>
+            <p className="text-zinc-500 text-[11px] font-medium tracking-wide mt-0.5 font-sans">
+              {category.subtitle}
+            </p>
+          </div>
         </div>
 
-        <div className="flex flex-col h-full justify-between gap-6">
-          
-          {/* Top Block: Category Details */}
-          <div className="relative z-10">
-            
-            {/* Elegant Minimal Accent Bar + Title + Subtitle */}
-            <div className="flex items-center gap-4.5">
-              <div className="w-[4px] h-11 rounded-full bg-gradient-to-b from-violet-500 to-pink-500 flex-shrink-0" />
-              <div>
-                <h3 className="text-lg sm:text-xl font-bold text-zinc-100 leading-tight font-sans">{category.title}</h3>
-                <p className="text-zinc-500 text-xs mt-1.5 uppercase tracking-wider font-semibold font-sans">{category.subtitle}</p>
+        {/* Mini Tech Chips */}
+        <div className="flex flex-wrap gap-2 pt-1">
+          {category.items.map((tech) => {
+            const TechIcon = tech.icon;
+            return (
+              <div
+                key={tech.name}
+                className="skill-tech-chip"
+              >
+                <TechIcon className="w-3.5 h-3.5 flex-shrink-0" />
+                <span>{tech.name}</span>
               </div>
-            </div>
-
-          </div>
-
-          {/* Divider Line */}
-          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent relative z-10" />
-
-          {/* Bottom Chips Container with Official Colored Icons */}
-          <div className="flex flex-wrap gap-2.5 relative z-10 mt-auto">
-            {category.items.map((tech, techIndex) => {
-              const TechIcon = tech.icon;
-              return (
-                <motion.div
-                  key={techIndex}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--tag-border)] bg-[var(--tag-bg)] text-[var(--tag-text)] hover:bg-[var(--tag-hover-bg)] hover:text-[var(--tag-hover-text)] hover:border-[var(--tag-hover-border)] hover:shadow-[var(--tag-hover-shadow)] text-xs font-semibold select-none cursor-default transition-all duration-300 font-sans"
-                >
-                  <TechIcon 
-                    className="w-3.5 h-3.5 filter saturate-[1.1]" 
-                  />
-                  <span>{tech.name}</span>
-                </motion.div>
-              );
-            })}
-          </div>
-
+            );
+          })}
         </div>
-
       </div>
     </div>
   );
@@ -321,31 +288,30 @@ function SkillCard({ category }) {
 
 const Skills = memo(function Skills() {
   return (
-    <SectionContainer id="skills">
-      {/* Dynamic particles in background — hidden in light theme via CSS */}
-      <div className="skills-ambient-blob absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none z-0" />
-
+    <SectionContainer id="skills" className="py-[60px] sm:py-[75px]">
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
+        viewport={{ once: true, margin: "-60px" }}
         className="relative z-10"
       >
         {/* Section Header */}
-        <motion.div variants={cardVariants} className="mb-10 text-left">
+        <motion.div variants={cardVariants} className="mb-8 text-left">
           <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--purple)] font-sans">MY SKILLS</h2>
           <p className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl font-sans tracking-tight">Technologies I Work With</p>
           <div className="section-underline"></div>
         </motion.div>
 
-        {/* 2x2 Grid Layout - Equal heights, spacious gaps */}
-        <div className="skills-grid gap-6">
-          {skillsData.map((category, catIndex) => (
-            <motion.div key={catIndex} variants={cardVariants}>
-              <SkillCard 
-                category={category} 
-              />
+        {/* Premium Tech Stack Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 sm:gap-5">
+          {skillsData.map((category) => (
+            <motion.div
+              key={category.id}
+              variants={cardVariants}
+              className={`${category.gridSpan} flex flex-col`}
+            >
+              <SkillCard category={category} />
             </motion.div>
           ))}
         </div>
