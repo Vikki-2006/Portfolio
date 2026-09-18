@@ -168,7 +168,6 @@ function ProjectCard({ project, index }) {
           background: 'rgba(8,6,14,0.85)',
           border: `1px solid ${project.accentFrom}44`,
           color: project.accentFrom,
-          backdropFilter: 'blur(6px)',
         }}
       >
         {project.id}
@@ -196,8 +195,6 @@ function ProjectCard({ project, index }) {
         background: 'rgba(12,10,18,0.75)',
         border: '1px solid rgba(255,255,255,0.065)',
         boxShadow: '0 4px 24px rgba(0,0,0,0.35)',
-        backdropFilter: 'blur(8px)',
-        WebkitBackdropFilter: 'blur(8px)',
       }}
     >
       {/* ── 1. Thumbnail (Strict 16:9 Aspect Ratio) ────────────────────────── */}

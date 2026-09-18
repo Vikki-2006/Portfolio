@@ -27,7 +27,7 @@ const Background = memo(function Background() {
       >
         {/* 1. Large soft purple ambient glow from the top-left */}
         <div 
-          className="absolute rounded-full blur-[60px] md:blur-[140px] w-[500px] h-[500px] md:w-[1000px] md:h-[1000px] pointer-events-none"
+          className="absolute rounded-full background-blur-layer blur-[60px] md:blur-[140px] w-[500px] h-[500px] md:w-[1000px] md:h-[1000px] pointer-events-none"
           style={{
             background: 'radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 70%)',
             left: '-20%',
@@ -37,7 +37,7 @@ const Background = memo(function Background() {
 
         {/* 2. Large soft pink ambient glow from the top-right */}
         <div 
-          className="absolute rounded-full blur-[60px] md:blur-[140px] w-[500px] h-[500px] md:w-[1000px] md:h-[1000px] pointer-events-none"
+          className="absolute rounded-full background-blur-layer blur-[60px] md:blur-[140px] w-[500px] h-[500px] md:w-[1000px] md:h-[1000px] pointer-events-none"
           style={{
             background: 'radial-gradient(circle, rgba(236, 72, 153, 0.10) 0%, transparent 70%)',
             right: '-20%',
@@ -47,7 +47,7 @@ const Background = memo(function Background() {
 
         {/* 3. Very subtle blue glow behind the profile image */}
         <div 
-          className="absolute rounded-full blur-[50px] md:blur-[120px] w-[350px] h-[350px] md:w-[700px] md:h-[700px] pointer-events-none"
+          className="absolute rounded-full background-blur-layer blur-[50px] md:blur-[120px] w-[350px] h-[350px] md:w-[700px] md:h-[700px] pointer-events-none"
           style={{
             background: 'radial-gradient(circle, rgba(99, 102, 241, 0.14) 0%, transparent 70%)',
             right: '8%',
@@ -90,7 +90,7 @@ const Background = memo(function Background() {
       >
         {/* 1. Large soft purple ambient glow from the top-left */}
         <div 
-          className="absolute rounded-full blur-[60px] md:blur-[140px] w-[500px] h-[500px] md:w-[1000px] md:h-[1000px] pointer-events-none"
+          className="absolute rounded-full background-blur-layer blur-[60px] md:blur-[140px] w-[500px] h-[500px] md:w-[1000px] md:h-[1000px] pointer-events-none"
           style={{
             background: 'radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%)',
             left: '-20%',
@@ -100,7 +100,7 @@ const Background = memo(function Background() {
 
         {/* 2. Large soft pink ambient glow from the top-right */}
         <div 
-          className="absolute rounded-full blur-[60px] md:blur-[140px] w-[500px] h-[500px] md:w-[1000px] md:h-[1000px] pointer-events-none"
+          className="absolute rounded-full background-blur-layer blur-[60px] md:blur-[140px] w-[500px] h-[500px] md:w-[1000px] md:h-[1000px] pointer-events-none"
           style={{
             background: 'radial-gradient(circle, rgba(236, 72, 153, 0.03) 0%, transparent 70%)',
             right: '-20%',
@@ -110,7 +110,7 @@ const Background = memo(function Background() {
 
         {/* 3. Very subtle blue glow behind the profile image */}
         <div 
-          className="absolute rounded-full blur-[50px] md:blur-[120px] w-[350px] h-[350px] md:w-[700px] md:h-[700px] pointer-events-none"
+          className="absolute rounded-full background-blur-layer blur-[50px] md:blur-[120px] w-[350px] h-[350px] md:w-[700px] md:h-[700px] pointer-events-none"
           style={{
             background: 'radial-gradient(circle, rgba(99, 102, 241, 0.04) 0%, transparent 70%)',
             right: '8%',

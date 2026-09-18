@@ -136,10 +136,14 @@ const Hero = memo(function Hero() {
             >
               <a
                 href="#projects"
-                className="hero-btn-primary px-7 py-3.5 text-sm"
+                className="hero-cta-split"
+                aria-label="Explore My Projects"
               >
-                Explore My Projects
-                <ArrowRight className="arrow-icon w-4 h-4" />
+                <span className="hero-cta-label">Explore My Projects</span>
+                <span className="hero-cta-divider" aria-hidden="true" />
+                <span className="hero-cta-arrow" aria-hidden="true">
+                  <ArrowRight className="hero-cta-arrow-icon" />
+                </span>
               </a>
               <a
                 href="/resume/Vigneshwaran_S_Resume.pdf"
@@ -241,7 +245,7 @@ const Hero = memo(function Hero() {
                 >
                   {ORBITING_PARTICLES.map((p, idx) => {
                     let responsiveness = "absolute";
-                    if (idx >= 10 && idx < 16) {
+                    if (idx >= 5 && idx < 16) {
                       responsiveness = "absolute hidden sm:block";
                     } else if (idx >= 16) {
                       responsiveness = "absolute hidden lg:block";

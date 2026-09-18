@@ -1108,83 +1108,214 @@ html[data-theme="light"] .social-icon-btn:hover::after {
    Unified CTA styles with smooth moving gradient shift.
    ═══════════════════════════════════════════════════════ */
 
-/* Primary Gradient CTA Button */
-.portfolio-btn-primary,
-.hero-btn-primary {
+/* ─────────────────────────────────────────────────────────────────────────
+   HERO CTA — Split Arrow Button  "Explore My Projects  |  →"
+   Premium, GPU-friendly. Uses only transform / opacity / box-shadow.
+   .portfolio-btn-primary (Contact page) is NOT touched.
+──────────────────────────────────────────────────────────────────────────── */
+
+.hero-cta-split {
   position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+  /* Subtle outer border */
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  /* GPU-only transitions */
+  transition:
+    transform   240ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow  240ms cubic-bezier(0.22, 1, 0.36, 1);
+  /* Focus ring reset */
+  outline: none;
+}
+
+/* ── Dark theme default ─────────────────────────────────────────── */
+html[data-theme="dark"] .hero-cta-split {
+  background: linear-gradient(135deg,
+    #5B21B6 0%,
+    #7C3AED 35%,
+    #A21CAF 70%,
+    #BE185D 100%);
+  box-shadow:
+    0 2px 10px rgba(109, 40, 217, 0.25),
+    0 1px 3px  rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+}
+
+/* ── Light theme default ─────────────────────────────────────────── */
+html[data-theme="light"] .hero-cta-split {
+  background: linear-gradient(135deg,
+    #4C1D95 0%,
+    #6D28D9 35%,
+    #9333EA 70%,
+    #BE185D 100%);
+  box-shadow:
+    0 2px 10px rgba(109, 40, 217, 0.20),
+    0 1px 3px  rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ── Label area ─────────────────────────────────────────────────── */
+.hero-cta-label {
+  display: inline-flex;
+  align-items: center;
+  flex: 1;                                    /* fill available width — arrow stays at far right */
+  padding: 0.75rem 1.25rem 0.75rem 1.5rem;   /* top right bottom left */
+  font-size: 0.875rem;                        /* 14px — text-sm */
+  font-weight: 600;
+  letter-spacing: 0.020em;
+  color: #FFFFFF;
+  white-space: nowrap;
+  line-height: 1;
+  /* No individual transition — parent handles transform/shadow */
+}
+
+/* ── Vertical divider ───────────────────────────────────────────── */
+.hero-cta-divider {
+  display: block;
+  width: 1px;
+  align-self: stretch;
+  background: rgba(255, 255, 255, 0.18);
+  flex-shrink: 0;
+  transition: background 240ms ease;
+}
+
+/* ── Arrow pill ─────────────────────────────────────────────────── */
+.hero-cta-arrow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  border-radius: 14px; /* 12–14px rounded corners */
-  font-weight: 600; /* Semibold weight */
-  font-size: 0.875rem; /* text-sm default */
-  letter-spacing: 0.025em; /* slight tracking-wide */
-  text-decoration: none;
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #FFFFFF !important;
-  
-  /* Gradient Shift Setup */
-  background-size: 200% auto;
-  background-position: left center;
-  
-  /* Transition: smooth GPU ease */
-  transition: 
-    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1),
-    background-position 280ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 280ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  padding: 0 1.125rem;
+  /* Very subtle extra darkness over the gradient for visual separation */
+  background: rgba(0, 0, 0, 0.10);
+  transition:
+    background 240ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-html[data-theme="dark"] .portfolio-btn-primary,
-html[data-theme="dark"] .hero-btn-primary {
-  background-image: linear-gradient(135deg, #6D28D9 0%, #B61C7A 50%, #6D28D9 100%) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1) !important;
-  border-color: rgba(255, 255, 255, 0.08) !important;
+/* ── Arrow icon ─────────────────────────────────────────────────── */
+.hero-cta-arrow-icon {
+  width:  16px;
+  height: 16px;
+  color: #FFFFFF;
+  flex-shrink: 0;
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
-html[data-theme="light"] .portfolio-btn-primary,
-html[data-theme="light"] .hero-btn-primary {
-  background-image: linear-gradient(135deg, #5B21B6 0%, #BE185D 50%, #5B21B6 100%) !important;
-  box-shadow: 0 4px 12px rgba(109, 40, 217, 0.1), 0 1px 3px rgba(109, 40, 217, 0.05) !important;
-  border-color: rgba(0, 0, 0, 0.08) !important;
+/* ── Hover ───────────────────────────────────────────────────────── */
+.hero-cta-split:hover {
+  transform: translateY(-1.5px);
 }
 
-.portfolio-btn-primary:hover,
-.hero-btn-primary:hover {
-  transform: translateY(-2px) !important;
-  background-position: right center !important;
+html[data-theme="dark"] .hero-cta-split:hover {
+  box-shadow:
+    0 6px 20px rgba(109, 40, 217, 0.35),
+    0 2px 6px  rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
-html[data-theme="dark"] .portfolio-btn-primary:hover,
-html[data-theme="dark"] .hero-btn-primary:hover {
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.15) !important;
-  border-color: rgba(255, 255, 255, 0.15) !important;
+html[data-theme="light"] .hero-cta-split:hover {
+  box-shadow:
+    0 6px 20px rgba(109, 40, 217, 0.28),
+    0 2px 6px  rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.14);
 }
 
-html[data-theme="light"] .portfolio-btn-primary:hover,
-html[data-theme="light"] .hero-btn-primary:hover {
-  box-shadow: 0 6px 18px rgba(109, 40, 217, 0.15), 0 2px 6px rgba(109, 40, 217, 0.08) !important;
-  border-color: rgba(0, 0, 0, 0.12) !important;
+/* Arrow slides right on hover */
+.hero-cta-split:hover .hero-cta-arrow-icon {
+  transform: translateX(4px);
 }
 
-.portfolio-btn-primary:active,
-.hero-btn-primary:active {
-  transform: scale(0.98) translateY(0) !important;
+/* Divider brightens very slightly on hover */
+.hero-cta-split:hover .hero-cta-divider {
+  background: rgba(255, 255, 255, 0.26);
 }
 
-html[data-theme="dark"] .portfolio-btn-primary:active,
-html[data-theme="dark"] .hero-btn-primary:active {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) !important;
+/* Arrow pill subtle highlight on hover */
+.hero-cta-split:hover .hero-cta-arrow {
+  background: rgba(255, 255, 255, 0.08);
 }
 
-html[data-theme="light"] .portfolio-btn-primary:active,
-html[data-theme="light"] .hero-btn-primary:active {
-  box-shadow: 0 2px 6px rgba(109, 40, 217, 0.08) !important;
+/* ── Active / press ─────────────────────────────────────────────── */
+.hero-cta-split:active {
+  transform: scale(0.97) translateY(0);
+  transition-duration: 80ms;
 }
 
-/* Secondary Button (Dark style with border highlight) */
+html[data-theme="dark"] .hero-cta-split:active {
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+html[data-theme="light"] .hero-cta-split:active {
+  box-shadow:
+    0 1px 4px rgba(109, 40, 217, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+}
+
+/* ── Focus-visible keyboard ring ─────────────────────────────────── */
+.hero-cta-split:focus-visible {
+  outline: 2px solid #A78BFA;
+  outline-offset: 3px;
+  transform: translateY(-1.5px);
+}
+
+/* ── prefers-reduced-motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta-split,
+  .hero-cta-arrow-icon,
+  .hero-cta-divider,
+  .hero-cta-arrow {
+    transition: none !important;
+  }
+  .hero-cta-split:hover,
+  .hero-cta-split:active {
+    transform: none !important;
+  }
+  .hero-cta-split:hover .hero-cta-arrow-icon {
+    transform: none !important;
+  }
+}
+
+/* ── Mobile override (max-width: 768px) ─────────────────────────── */
+/* Keep gradient + split design, strip heavy shadow, no hover transform
+   (touch has no hover), keep active press. */
+@media (max-width: 768px) {
+  html[data-theme="dark"] .hero-cta-split {
+    box-shadow:
+      0 2px 6px rgba(109, 40, 217, 0.18),
+      0 1px 2px rgba(0, 0, 0, 0.12);
+  }
+  html[data-theme="light"] .hero-cta-split {
+    box-shadow:
+      0 2px 6px rgba(109, 40, 217, 0.14),
+      0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+  /* Touch devices have no true hover; remove translateY to prevent
+     sticky-hover stuck-state on tap (iOS / Android common bug) */
+  .hero-cta-split:hover {
+    transform: none;
+  }
+  .hero-cta-split:hover .hero-cta-arrow-icon {
+    transform: none;
+  }
+  /* Keep active press on mobile */
+  .hero-cta-split:active {
+    transform: scale(0.97);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Secondary Button (View Resume + any other secondary CTA)
+   Shared by: .portfolio-btn-secondary  /  .hero-btn-secondary
+──────────────────────────────────────────────────────────────────────────── */
 .portfolio-btn-secondary,
 .hero-btn-secondary {
   position: relative;
@@ -1200,15 +1331,11 @@ html[data-theme="light"] .hero-btn-primary:active {
   cursor: pointer;
   overflow: hidden;
   isolation: isolate;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  
-  /* Transition: smooth GPU ease */
-  transition: 
-    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1),
+  transition:
+    transform    280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow   280ms cubic-bezier(0.22, 1, 0.36, 1),
     border-color 280ms cubic-bezier(0.22, 1, 0.36, 1),
-    color 280ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+    color        280ms cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
 .portfolio-btn-secondary::after,
@@ -1281,22 +1408,14 @@ html[data-theme="light"] .hero-btn-secondary:hover::after {
   transform: scale(0.98) translateY(0) !important;
 }
 
-/* Hero section buttons rounded override */
-.hero-btn-primary,
+/* Hero section rounded + icon transitions (secondary only — primary is now hero-cta-split) */
 .hero-btn-secondary {
   border-radius: 16px !important;
 }
 
-/* Icon slide animation on hover */
-.portfolio-btn-primary svg,
-.portfolio-btn-primary .arrow-icon,
-.portfolio-btn-primary .file-icon,
 .portfolio-btn-secondary svg,
 .portfolio-btn-secondary .arrow-icon,
 .portfolio-btn-secondary .file-icon,
-.hero-btn-primary svg,
-.hero-btn-primary .arrow-icon,
-.hero-btn-primary .file-icon,
 .hero-btn-secondary svg,
 .hero-btn-secondary .arrow-icon,
 .hero-btn-secondary .file-icon {
@@ -1304,18 +1423,90 @@ html[data-theme="light"] .hero-btn-secondary:hover::after {
   will-change: transform;
 }
 
-.portfolio-btn-primary:hover svg,
-.portfolio-btn-primary:hover .arrow-icon,
-.portfolio-btn-primary:hover .file-icon,
 .portfolio-btn-secondary:hover svg,
 .portfolio-btn-secondary:hover .arrow-icon,
 .portfolio-btn-secondary:hover .file-icon,
-.hero-btn-primary:hover svg,
-.hero-btn-primary:hover .arrow-icon,
-.hero-btn-primary:hover .file-icon,
 .hero-btn-secondary:hover svg,
 .hero-btn-secondary:hover .arrow-icon,
 .hero-btn-secondary:hover .file-icon {
+  transform: translateX(4px) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Primary Portfolio Button (.portfolio-btn-primary — Contact page, etc.)
+──────────────────────────────────────────────────────────────────────────── */
+.portfolio-btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #FFFFFF !important;
+  background-size: 200% auto;
+  background-position: left center;
+  transition:
+    transform          280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow         280ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-position 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color       280ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+html[data-theme="dark"] .portfolio-btn-primary {
+  background-image: linear-gradient(135deg, #6D28D9 0%, #B61C7A 50%, #6D28D9 100%) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="light"] .portfolio-btn-primary {
+  background-image: linear-gradient(135deg, #5B21B6 0%, #BE185D 50%, #5B21B6 100%) !important;
+  box-shadow: 0 4px 12px rgba(109, 40, 217, 0.1), 0 1px 3px rgba(109, 40, 217, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+.portfolio-btn-primary:hover {
+  transform: translateY(-2px) !important;
+  background-position: right center !important;
+}
+
+html[data-theme="dark"] .portfolio-btn-primary:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+html[data-theme="light"] .portfolio-btn-primary:hover {
+  box-shadow: 0 6px 18px rgba(109, 40, 217, 0.15), 0 2px 6px rgba(109, 40, 217, 0.08) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.portfolio-btn-primary:active {
+  transform: scale(0.98) translateY(0) !important;
+}
+
+html[data-theme="dark"] .portfolio-btn-primary:active {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) !important;
+}
+
+html[data-theme="light"] .portfolio-btn-primary:active {
+  box-shadow: 0 2px 6px rgba(109, 40, 217, 0.08) !important;
+}
+
+.portfolio-btn-primary svg,
+.portfolio-btn-primary .arrow-icon,
+.portfolio-btn-primary .file-icon {
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  will-change: transform;
+}
+
+.portfolio-btn-primary:hover svg,
+.portfolio-btn-primary:hover .arrow-icon,
+.portfolio-btn-primary:hover .file-icon {
   transform: translateX(4px) !important;
 }
 
@@ -2507,6 +2698,7 @@ html, body {
   .contact-form-card,
   .contact-info-card,
   .premium-glass-button,
+  .skills-bento-card,
   .social-icon-btn,
   .theme-toggle-btn {
     backdrop-filter: none !important;
@@ -2518,10 +2710,16 @@ html, body {
 @media (max-width: 768px) {
   .profile-border-ring {
     filter: none !important;
+    will-change: auto !important;
   }
 }
 
-/* Mobile theme transition - 140ms fast CSS transitions for background-color, color, border-color */
+/* Mobile theme transition — near-instant to prevent the CSS transition storm.
+   ROOT CAUSE FIX: 'a' and 'button' are excluded on mobile.
+   A portfolio page can have 100+ links and buttons. When ALL of them
+   simultaneously transition background-color + color + border-color,
+   the browser's compositor is overwhelmed — causing the visible freeze.
+   CSS variables update instantly, so snapping colors is not noticeable. */
 @media (max-width: 768px) {
   html.theme-ready body,
   html.theme-ready #root,
@@ -2536,13 +2734,17 @@ html, body {
   html.theme-ready .section-underline,
   html.theme-ready input,
   html.theme-ready textarea,
-  html.theme-ready select,
+  html.theme-ready select {
+    transition:
+      background-color 80ms ease,
+      color            80ms ease,
+      border-color     80ms ease !important;
+  }
+
+  /* Buttons and anchors: snap instantly on mobile — no transition storm */
   html.theme-ready button,
   html.theme-ready a {
-    transition:
-      background-color 140ms ease,
-      color            140ms ease,
-      border-color     140ms ease !important;
+    transition: none !important;
   }
 }
 
@@ -2589,3 +2791,63 @@ html, body {
   }
 }
 
+/* ═══════════════════════════════════════════════════════
+   MOBILE PERFORMANCE OVERRIDES (Additional)
+   All rules scoped to max-width: 768px.
+   Desktop and tablet experience is fully preserved.
+   ═══════════════════════════════════════════════════════ */
+
+/* Background ambient glow blurs — reduce from 60px/50px to 25px on mobile.
+   The .background-blur-layer class is added to each expensive radial-gradient
+   blur div inside Background.jsx as a pure CSS hook. */
+@media (max-width: 768px) {
+  .background-blur-layer {
+    filter: blur(25px) !important;
+  }
+}
+
+/* Profile ring bloom & arc — lighten compositing cost on mobile */
+@media (max-width: 768px) {
+  .profile-border-ring__bloom {
+    filter: blur(3px) !important;
+    opacity: 0.20 !important;
+  }
+  .profile-border-ring__arc {
+    filter: blur(0.3px) !important;
+  }
+}
+
+/* Contact ambient blob — reduce from blur(120px) to blur(40px) on mobile.
+   120px is an extremely large composited layer on mobile GPUs. */
+@media (max-width: 768px) {
+  .contact-ambient-blob {
+    filter: blur(40px) !important;
+  }
+}
+
+/* Theme toggle — remove will-change on mobile to free GPU compositor layers */
+@media (max-width: 768px) {
+  .theme-toggle-btn {
+    will-change: auto !important;
+  }
+  .theme-toggle-icon {
+    will-change: auto !important;
+  }
+}
+
+/* Footer — replace transition-all with explicit cheap properties on mobile */
+@media (max-width: 768px) {
+  footer {
+    transition:
+      background-color 80ms ease,
+      border-color     80ms ease !important;
+  }
+}
+
+/* Star twinkle — no will-change on mobile (will-change is already gated
+   at min-width:769px in the main block; this is a safety override) */
+@media (max-width: 768px) {
+  .star-twinkle {
+    will-change: auto !important;
+  }
+}
