@@ -1,12 +1,5 @@
 
-
-
-
-
-
-
- 
- <h1 align="center">👋 Vigneshwaran S | Python Full-Stack Developer</h1>
+<h1 align="center">👋 Vigneshwaran S | Python Full-Stack Developer</h1>
 
 <p align="center">
   <b>Building modern, scalable, and user-focused web applications with Python, FastAPI, React, and JavaScript.</b>
